@@ -1,17 +1,6 @@
 import { withFaust, getWpHostname } from '@faustwp/core';
-import nextMDX from '@next/mdx'
-import { remarkPlugins } from './mdx/remark.mjs'
-import { rehypePlugins } from './mdx/rehype.mjs'
-import { recmaPlugins } from './mdx/recma.mjs'
-
-const withMDX = nextMDX({
-    options: {
-        remarkPlugins,
-        rehypePlugins,
-        recmaPlugins,
-        providerImportSource: '@mdx-js/react',
-    },
-})
+import withMarkdoc from '@markdoc/next.js'
+import withSearch from './markdoc/search.mjs'
 
 const nextConfig = {
     reactStrictMode: true,
@@ -25,4 +14,4 @@ const nextConfig = {
     },
 };
 
-export default withFaust( withMDX( nextConfig ) );
+export default withFaust( withSearch( withMarkdoc({ schemaPath: './src/markdoc' })(nextConfig) ) );

@@ -1,10 +1,35 @@
-const { fontFamily } = require("tailwindcss/defaultTheme")
+const defaultTheme = require("tailwindcss/defaultTheme")
+const { fontFamily } = defaultTheme;
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ['./{src,mdx}/**/*.{js,mjs,jsx,mdx,tsx,ts}'],
-    darkMode: [ 'class' ],
+    content: [
+      './components/**/*.{js,mjs,jsx,mdx,tsx,ts}',
+      './components/*.{js,mjs,jsx,mdx,tsx,ts}',
+      './components/ui/**/*.{js,mjs,jsx,mdx,tsx,ts}',
+      './components/ui/*.{js,mjs,jsx,mdx,tsx,ts}',
+      './pages/**/*.{js,mjs,jsx,mdx,tsx,ts}',
+      './pages/*.{js,mjs,jsx,mdx,tsx,ts}',
+      './wp-templates/**/*.{js,mjs,jsx,mdx,tsx,ts}',
+      './wp-templates/*.{js,mjs,jsx,mdx,tsx,ts}',
+    ],
+    darkMode: 'class',
     theme: {
+      fontSize: {
+        xs: ['0.75rem', { lineHeight: '1rem' }],
+        sm: ['0.875rem', { lineHeight: '1.5rem' }],
+        base: ['1rem', { lineHeight: '2rem' }],
+        lg: ['1.125rem', { lineHeight: '1.75rem' }],
+        xl: ['1.25rem', { lineHeight: '2rem' }],
+        '2xl': ['1.5rem', { lineHeight: '2.5rem' }],
+        '3xl': ['2rem', { lineHeight: '2.5rem' }],
+        '4xl': ['2.5rem', { lineHeight: '3rem' }],
+        '5xl': ['3rem', { lineHeight: '3.5rem' }],
+        '6xl': ['3.75rem', { lineHeight: '1' }],
+        '7xl': ['4.5rem', { lineHeight: '1' }],
+        '8xl': ['6rem', { lineHeight: '1' }],
+        '9xl': ['8rem', { lineHeight: '1' }],
+      },
       container: {
         center: true,
         padding: "2rem",
@@ -12,38 +37,10 @@ module.exports = {
           "2xl": "1400px",
         },
       },
-      fontSize: {
-        '2xs': ['0.75rem', { lineHeight: '1.25rem' }],
-        xs: ['0.8125rem', { lineHeight: '1.5rem' }],
-        sm: ['0.875rem', { lineHeight: '1.5rem' }],
-        base: ['1rem', { lineHeight: '1.75rem' }],
-        lg: ['1.125rem', { lineHeight: '1.75rem' }],
-        xl: ['1.25rem', { lineHeight: '1.75rem' }],
-        '2xl': ['1.5rem', { lineHeight: '2rem' }],
-        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
-        '5xl': ['3rem', { lineHeight: '1' }],
-        '6xl': ['3.75rem', { lineHeight: '1' }],
-        '7xl': ['4.5rem', { lineHeight: '1' }],
-        '8xl': ['6rem', { lineHeight: '1' }],
-        '9xl': ['8rem', { lineHeight: '1' }],
-      },
-      typography: require('./typography'),
       extend: {
-        boxShadow: {
-          glow: '0 0 4px rgb(0 0 0 / 0.1)',
-        },
-        maxWidth: {
-          lg: '33rem',
-          '2xl': '40rem',
-          '3xl': '50rem',
-          '5xl': '66rem',
-        },
-        opacity: {
-          1: '0.01',
-          2.5: '0.025',
-          7.5: '0.075',
-          15: '0.15',
+        fontFamily: {
+          sans: ['Inter', ...defaultTheme.fontFamily.sans],
+          display: ['Lexend', ...defaultTheme.fontFamily.sans],
         },
         colors: {
           border: "hsl(var(--border))",
@@ -80,13 +77,8 @@ module.exports = {
             foreground: "hsl(var(--card-foreground))",
           },
         },
-        borderRadius: {
-          lg: `var(--radius)`,
-          md: `calc(var(--radius) - 2px)`,
-          sm: "calc(var(--radius) - 4px)",
-        },
-        fontFamily: {
-          sans: ["var(--font-sans)", ...fontFamily.sans],
+        maxWidth: {
+          '8xl': '88rem',
         },
         keyframes: {
           "accordion-down": {
@@ -104,9 +96,6 @@ module.exports = {
         },
       },
     },
-    plugins: [
-        require('@tailwindcss/typography'), 
-        require("tailwindcss-animate")
-    ],
+    plugins: [require('@tailwindcss/typography')],
   }
   
