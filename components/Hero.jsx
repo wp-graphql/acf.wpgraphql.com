@@ -44,15 +44,7 @@ export function Hero() {
       <div className="py-16 sm:px-2 lg:relative lg:px-0 lg:py-20">
         <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 lg:max-w-8xl lg:grid-cols-2 lg:px-8 xl:gap-x-16 xl:px-12">
           <div className="relative z-10 md:text-center lg:text-left">
-            <Image
-              className="absolute bottom-full right-full -mb-56 -mr-72 opacity-50"
-              src={blurIndigoImage}
-              alt=""
-              width={530}
-              height={530}
-              unoptimized
-              priority
-            />
+            
             <div className="relative">
               <p className="inline bg-gradient-to-r from-orange-300 via-orange-600 to-orange-300 bg-clip-text font-display text-5xl tracking-tight text-transparent">
                 WPGraphQL for <br/> Advanced Custom Fields
@@ -70,24 +62,7 @@ export function Hero() {
           </div>
           <div className="relative lg:static xl:pl-10">
             <div className="relative">
-              <Image
-                className="absolute -right-64 -top-64"
-                src={blurCyanImage}
-                alt=""
-                width={530}
-                height={530}
-                unoptimized
-                priority
-              />
-              <Image
-                className="absolute -bottom-40 -right-44"
-                src={blurIndigoImage}
-                alt=""
-                width={567}
-                height={567}
-                unoptimized
-                priority
-              />
+              
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-orange-300 via-orange-300/70 to-orange-300 opacity-10 blur-lg" />
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-orange-300 via-orange-300/70 to-orange-300 opacity-10" />
               <div className="relative rounded-2xl bg-[#0A101F]/80 ring-1 ring-white/10 backdrop-blur">
