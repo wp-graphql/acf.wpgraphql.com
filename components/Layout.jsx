@@ -146,19 +146,15 @@ export function Layout({ data, children, toc, title }) {
   } ) : [];
   let isHomePage = data?.node?.uri === '/'
   let allLinks = navigation?.flatMap((section) => section.links) ?? []
-  let linkPath = (href) => {
-    let url = new URL(href);
-    return url.pathname;
-  }
   let linkIndex = allLinks.findIndex((link) => {
-    return linkPath(link.href) === data?.node?.uri
+    return link.href === data?.node?.uri
   })
   let previousPage = allLinks[linkIndex - 1]
 
 
   let nextPage = allLinks[linkIndex + 1]
   let section = allLinks.find((section) =>
-    section.links.find((link) => linkPath(link.href) === data?.node?.uri)
+    section.links.find((link) => link.href === data?.node?.uri)
   )
   let currentSection = useTableOfContents(tableOfContents)
 
