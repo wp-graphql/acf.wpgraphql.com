@@ -9,8 +9,7 @@ fragment NavigationFragment on RootQuery {
       id
       label
       title: label
-      url
-      href: url
+      href: uri
       parentId
     }
   }
