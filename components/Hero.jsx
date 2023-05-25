@@ -16,8 +16,8 @@ query GetPostWithAcfFields($id: ID!) {
     ...on NodeWithTitle {
       title
     }
-    ...on WithAcfFieldGroup {
-      acfFieldGroup {
+    ...on WithAcfMyFieldGroup {
+      myFieldGroup {
         textField
         numberField
       }
