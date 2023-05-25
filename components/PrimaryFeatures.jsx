@@ -58,14 +58,14 @@ export function PrimaryFeatures() {
     <section
       id="features"
       aria-label="Features of WPGraphQL for ACF"
-      className="relative overflow-hidden bg-slate-800 pb-28 pt-20 sm:py-32"
+      className="relative overflow-hidden bg-slate-300  dark:bg-slate-800 pb-28 pt-20 sm:py-32"
     >
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
-          <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h2 className="font-display text-3xl tracking-tight text-gray dark:text-white sm:text-4xl md:text-5xl">
             Model Your Data with Advanced Custom Fields. <br/>Query it with GraphQL.
           </h2>
-          <p className="mt-6 text-lg tracking-tight text-blue-100">
+          <p className="mt-6 text-lg tracking-tight text-gray dark:text-white">
             Use ACF to create Custom Post Types, Custom Taxonomies, Field Groups and fields using the ACF admin UIs, PHP or JSON. <br/> Access the data using GraphQL.
           </p>
         </div>
@@ -82,10 +82,10 @@ export function PrimaryFeatures() {
                     <div
                       key={feature.title}
                       className={clsx(
-                        'group relative rounded-full px-4 py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6',
+                        'group relative rounded-full px-4 my-2  py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6',
                         selectedIndex === featureIndex
-                          ? 'bg-white lg:bg-white/10 lg:ring-1 lg:ring-inset lg:ring-white/10'
-                          : 'hover:bg-white/10 lg:hover:bg-white/5'
+                          ? 'bg-slate-600 dark:bg-slate-800 lg:dark:bg-slate-700 lg:ring-1 lg:ring-inset lg:ring-white/10 group-hover:text-white '
+                          : 'hover:bg-slate-600 dark:hover:bg-slate-800 lg:dark:hover:bg-slate-700 bg-gray-100 group-hover:text-white'
                       )}
                     >
                       <h3>
@@ -93,8 +93,8 @@ export function PrimaryFeatures() {
                           className={clsx(
                             'font-display text-lg [&:not(:focus-visible)]:focus:outline-none',
                             selectedIndex === featureIndex
-                              ? 'text-blue-600 lg:text-white'
-                              : 'text-blue-100 hover:text-white lg:text-white'
+                              ? 'text-white dark:text-slate-200 hover:text-white group-hover:text-white dark:hover:text-slate-300 lg:dark:hover:text-slate-200'
+                              : 'text-slate-800 hover:text-white group-hover:text-white dark:hover:text-slate-200'
                           )}
                         >
                           <span className="absolute inset-0 rounded-full lg:rounded-l-xl lg:rounded-r-none" />
@@ -103,10 +103,10 @@ export function PrimaryFeatures() {
                       </h3>
                       <p
                         className={clsx(
-                          'mt-2 hidden text-sm lg:block',
+                          'mt-2 hidden text-sm lg:block group-hover:text-white  dark:group-hover:text-slate-200',
                           selectedIndex === featureIndex
-                            ? 'text-white'
-                            : 'text-blue-100 group-hover:text-white'
+                            ? 'text-slate-800 lg:text-white dark:text-slate-200'
+                            : 'text-slate-800'
                         )}
                       >
                         {feature.description}
@@ -119,12 +119,12 @@ export function PrimaryFeatures() {
                 {features.map((feature) => (
                   <Tab.Panel key={feature.title} unmount={false}>
                     <div className="relative sm:px-6 lg:hidden">
-                      <div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] bg-white/10 ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl" />
-                      <p className="relative mx-auto max-w-2xl text-base text-white sm:text-center">
+                      <div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] bg-slate-200 dark:bg-slate-700 lg:bg-white/10 ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl" />
+                      <p className="relative mx-auto max-w-2xl text-base text-slate-800 dark:text-white sm:text-center">
                         {feature.description}
                       </p>
                     </div>
-                    <div className="mt-10 w-[45rem] overflow-hidden rounded-xl bg-slate-50 shadow-xl shadow-blue-900/20 sm:w-auto lg:mt-0 lg:w-[67.8125rem]">
+                    <div className="mt-20 w-[45rem] overflow-hidden rounded-xl bg-slate-50 shadow-xl shadow-blue-900/20 sm:w-auto lg:mt-0 lg:w-[67.8125rem]">
                       <Image
                         className="w-full"
                         src={feature.image}
