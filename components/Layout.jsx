@@ -12,6 +12,7 @@ import { ThemeSelector } from '@/components/ThemeSelector'
 import { gql } from '@apollo/client'
 import { flatListToHierarchical } from '@faustwp/core'
 import { collectHeadings } from '@/lib/utils'
+import { PrimaryFeatures } from './PrimaryFeatures'
 
 function GitHubIcon(props) {
   return (
@@ -174,9 +175,14 @@ export function Layout({ data, children, toc, title }) {
     <>
       <Header navigation={navigation} />
 
-      {isHomePage && <Hero />}
-
-      <div className="relative mx-auto flex max-w-8xl justify-center sm:px-2 lg:px-8 xl:px-12">
+      {
+      isHomePage ? 
+        <>
+          <Hero />
+          <PrimaryFeatures />
+        </> 
+      : 
+        <div className="relative mx-auto flex max-w-8xl justify-center sm:px-2 lg:px-8 xl:px-12">
         <div className="hidden lg:relative lg:block lg:flex-none">
           <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden" />
           <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
@@ -290,6 +296,9 @@ export function Layout({ data, children, toc, title }) {
           </nav>
         </div>
       </div>
+      }
+
+      
     </>
   )
 }
