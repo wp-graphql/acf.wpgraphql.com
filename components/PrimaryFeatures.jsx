@@ -58,7 +58,7 @@ export function PrimaryFeatures() {
     <section
       id="features"
       aria-label="Features of WPGraphQL for ACF"
-      className="relative overflow-hidden bg-slate-300  dark:bg-slate-800 pb-28 pt-20 sm:py-32"
+      className="relative overflow-hidden bg-slate-200  dark:bg-slate-800 pb-28 pt-20 sm:py-32"
     >
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">

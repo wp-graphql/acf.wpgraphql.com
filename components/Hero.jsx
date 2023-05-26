@@ -1,11 +1,8 @@
 import { Fragment } from 'react'
-import Image from 'next/image'
 import clsx from 'clsx'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 
 import { Button } from '@/components/Button'
-import blurCyanImage from '@/images/blur-cyan.png'
-import blurIndigoImage from '@/images/blur-indigo.png'
 
 const codeLanguage = 'graphql'
 const code = `
@@ -40,17 +37,17 @@ function TrafficLightsIcon(props) {
 
 export function Hero() {
   return (
-    <div className="overflow-hidden bg-slate-900 dark:-mb-32 dark:mt-[-4.5rem] dark:pb-32 dark:pt-[4.5rem] dark:lg:mt-[-4.75rem] dark:lg:pt-[4.75rem]">
+    <div className="overflow-hidden bg-white dark:bg-slate-900 dark:-mb-32 dark:mt-[-4.5rem] dark:pb-32 dark:pt-[4.5rem] dark:lg:mt-[-4.75rem] dark:lg:pt-[4.75rem]">
       <div className="py-16 sm:px-2 lg:relative lg:px-0 lg:py-20">
         <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 lg:max-w-8xl lg:grid-cols-2 lg:px-8 xl:gap-x-16 xl:px-12">
           <div className="relative z-10 md:text-center lg:text-left">
             
             <div className="relative">
-              <p className="inline bg-gradient-to-r from-orange-300 via-orange-600 to-orange-300 bg-clip-text font-display text-5xl tracking-tight text-transparent">
+              <p className="inline bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600 dark:from-orange-300 dark:via-orange-600 dark:to-orange-300 bg-clip-text font-display text-5xl tracking-tight text-transparent">
                 WPGraphQL for <br/> Advanced Custom Fields
               </p>
-              <p className="mt-3 text-2xl tracking-tight text-slate-300">
-                WPGraphQL for ACF allows you to use ACF to create post types, taxonomies, field groups and fields and exposes them to the WPGraphQL Schema for use in decoupled front ends.
+              <p className="mt-3 text-2xl tracking-tight text-gray-600 dark:text-slate-300">
+              WPGraphQL for ACF is a free, open source WordPress plugin that exposes ACF Field Groups and Fields to the WPGraphQL Schema, enabling powerful decoupled solutions with modern frontends.
               </p>
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
                 <Button href="/introduction/">Get started</Button>
@@ -65,7 +62,7 @@ export function Hero() {
               
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-orange-300 via-orange-300/70 to-orange-300 opacity-10 blur-lg" />
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-orange-300 via-orange-300/70 to-orange-300 opacity-10" />
-              <div className="relative rounded-2xl bg-[#0A101F]/80 ring-1 ring-white/10 backdrop-blur">
+              <div className="relative rounded-2xl bg-slate-900 dark:bg-[#0A101F]/80 ring-1 ring-white/10 backdrop-blur">
                 <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-orange-300/0 via-orange-300/70 to-orange-300/0" />
                 <div className="absolute -bottom-px left-11 right-20 h-px bg-gradient-to-r from-orange-400/0 via-orange-400 to-orange-400/0" />
                 <div className="pl-4 pt-4">

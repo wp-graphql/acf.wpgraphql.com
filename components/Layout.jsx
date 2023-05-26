@@ -13,6 +13,7 @@ import { gql } from '@apollo/client'
 import { flatListToHierarchical } from '@faustwp/core'
 import { collectHeadings } from '@/lib/utils'
 import { PrimaryFeatures } from './PrimaryFeatures'
+import { Faqs } from './Faqs'
 
 function GitHubIcon(props) {
   return (
@@ -180,6 +181,7 @@ export function Layout({ data, children, toc, title }) {
         <>
           <Hero />
           <PrimaryFeatures />
+          <Faqs />
         </> 
       : 
         <div className="relative mx-auto flex max-w-8xl justify-center sm:px-2 lg:px-8 xl:px-12">
