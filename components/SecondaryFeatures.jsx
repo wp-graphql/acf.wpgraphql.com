@@ -146,7 +146,7 @@ export function SecondaryFeatures() {
             Couple your data needs with your components
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-700 dark:text-slate-100">
-            Each ACF Field Group is represented by a GraphQL Type. And each "Location" where a field group is assigned implements a "WithAcf*" Interface. 
+            Each ACF Field Group is represented by a GraphQL Type. And each \"Location\" where a field group is assigned implements a \"WithAcf*\" Interface. 
             This allows ACF Field Groups to be easily coupled with components and re-used.
           </p>
         </div>
