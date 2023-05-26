@@ -12,7 +12,7 @@ const features = [
     name: 'Model your data',
     summary: 'Create ACF Field Groups',
     description:
-      'Each ACF Field Group that is set to "show_in_graphql" will be added to the GraphQL Schema and will have a corresponding GraphQL Object type and will implement the "AcfFieldGroup" interface.',
+      'Each ACF Field Group that is set to \"show_in_graphql\" will be added to the GraphQL Schema and will have a corresponding GraphQL Object type and will implement the \"AcfFieldGroup\" interface.',
     image: screenshotProfitLoss,
   },
   {
