@@ -12,7 +12,7 @@ const features = [
     name: 'Model your data',
     summary: 'Create ACF Field Groups',
     description:
-      'Each ACF Field Group that is set to \"show_in_graphql\" will be added to the GraphQL Schema and will have a corresponding GraphQL Object type and will implement the \"AcfFieldGroup\" interface.',
+      'Each ACF Field Group that is set to show_in_graphql will be added to the GraphQL Schema and will have a corresponding GraphQL Object type and will implement the AcfFieldGroup interface.',
     image: screenshotProfitLoss,
   },
   {
@@ -146,7 +146,7 @@ export function SecondaryFeatures() {
             Couple your data needs with your components
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-700 dark:text-slate-100">
-            Each ACF Field Group is represented by a GraphQL Type. And each \"Location\" where a field group is assigned implements a \"WithAcf*\" Interface. 
+            Each ACF Field Group is represented by a GraphQL Type. And each Location where a field group is assigned implements a WithAcf* Interface. 
             This allows ACF Field Groups to be easily coupled with components and re-used.
           </p>
         </div>
