@@ -1,7 +1,4 @@
-import Image from 'next/image'
-
 import { Container } from '@/components/Container'
-import backgroundImage from '@/images/background-faqs.jpg'
 import Link from 'next/link'
 
 const faqs = [
@@ -68,7 +65,7 @@ export function Faqs() {
     <section
       id="faq"
       aria-labelledby="faq-title"
-      className="relative overflow-hidden bg-slate-50 dark:bg-slate-900 py-20 sm:py-32"
+      className="relative overflow-hidden bg-slate-100 dark:bg-slate-800 py-20 sm:py-32"
     >
       
       <Container className="relative">

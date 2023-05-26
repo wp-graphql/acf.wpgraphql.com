@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
-import { Layout, LayoutFragment } from "@/components/Layout";
+import { FieldTypesList } from "../components/FieldTypesList";
+import { LayoutArchive, LayoutFragment } from "../components/LayoutArchive";
 
 const ArchiveFieldType = props => {
 
@@ -13,36 +14,24 @@ const ArchiveFieldType = props => {
 
     let toc = [];
 
-    let content = node?.content ? 
-    unified()
-        .use(rehypeParse, {
-            fragment: true,
-        })
-        .use(() => {
-            return (tree) => {
-                toc = tree.children;
-                visit(tree, 'element', (node) => {
-                    if ( node.tagName === 'h2' || node.tagName === 'h3' ) {
-                        let title = getNodeText(node);
-                        let id = slugify(title)
-                        node.properties.id = id;
-                    }
-                });
-            }
-        })
-        .use(rehypeStringify)
-        .processSync(node.content)
-    : null;
+    
 
     return(
-        <Layout 
-            title="ArchiveFieldType" 
+        <LayoutArchive 
+            title={data?.node?.label ? data.node.label : 'WPGraphQL for ACF'} 
             data={data} 
             navigation={data?.navigation?.nodes}
             toc={toc}
         >
-            <pre>{JSON.stringify(props, null, 2)}</pre>
-        </Layout>
+            <FieldTypesList data={data} />
+            {/* { data?.node?.contentNodes && data.node.contentNodes.nodes.map( (node, i) => {
+                return (
+                    <div key={node.id}>
+                        <Link className="text-blue-500 hover:text-blue-700" href={node.uri}>{node.title}</Link>
+                    </div>
+                )
+            })} */}
+        </LayoutArchive>
     )
 };
 
@@ -51,6 +40,27 @@ query GetArchiveFieldType($uri: String!) {
     node: nodeByUri(uri: $uri) {
         __typename
         uri
+        ... on ContentType {
+            name
+            label
+            description
+            contentNodes(first: 100, where: {orderby: {field: TITLE, order: ASC}}) {
+                nodes {
+                    __typename
+                    uri
+                    id
+                    ... on FieldType {
+                        title
+                        featuredImage {
+                            node {
+                                sourceUrl
+                                altText
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     ...LayoutFragment
 }

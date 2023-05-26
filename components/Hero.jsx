@@ -50,7 +50,7 @@ export function Hero() {
               WPGraphQL for ACF is a free, open source WordPress plugin that exposes ACF Field Groups and Fields to the WPGraphQL Schema, enabling powerful decoupled solutions with modern frontends.
               </p>
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-                <Button href="/introduction/">Get started</Button>
+                <Button href="/installation-and-activation/">Get started</Button>
                 <Button href="https://github.com/wp-graphql/wpgraphql-acf" variant="secondary">
                   View on GitHub
                 </Button>
