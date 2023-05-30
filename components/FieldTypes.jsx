@@ -166,7 +166,7 @@ export function FieldTypes({ data }) {
            Support for a plethora of ACF Field Types
         </h2>
         <p className="mt-2 text-lg dark:text-gray-200 text-gray-600 sm:text-center">
-          WPGraphQL for ACF has built-in support for ACF (FREE & PRO) field types, including repeaters, flexible content, clone fields, and more. It also supports most field types of ACF Extended (FREE & PRO). For field types that aren't natively supported, we've created an API that allows developers to add support for it.
+          WPGraphQL for ACF has built-in support for ACF (FREE & PRO) field types, including repeaters, flexible content, clone fields, and more. It also supports most field types of ACF Extended (FREE & PRO). For field types that are not natively supported, we have created an API that allows developers to add support for them.
         </p>
 
         <FieldTypeGrid fieldTypes={data?.fieldTypes} />
