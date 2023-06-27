@@ -7,7 +7,6 @@ import { Container } from '@/components/Container'
 import { gql } from '@apollo/client'
 
 const FeatureTabsLeft = (layout) => {
-  console.log( { layout })
   const { features } = layout;
   let [tabOrientation, setTabOrientation] = useState('horizontal')
 
@@ -34,12 +33,8 @@ const FeatureTabsLeft = (layout) => {
     >
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
-          <h2 className="font-display text-3xl tracking-tight text-gray dark:text-white sm:text-4xl md:text-5xl">
-            Model Your Data with Advanced Custom Fields. <br/>Query it with GraphQL.
-          </h2>
-          <p className="mt-6 text-lg tracking-tight text-gray dark:text-white">
-            Use ACF to create Custom Post Types, Custom Taxonomies, Field Groups and fields using the ACF admin UIs, PHP or JSON. <br/> Access the data using GraphQL.
-          </p>
+          <h2 className="font-display text-3xl tracking-tight text-gray dark:text-white sm:text-4xl md:text-5xl" dangerouslySetInnerHTML={{__html:layout.name}} />
+          <p className="mt-6 text-lg tracking-tight text-gray dark:text-white" dangerouslySetInnerHTML={{__html:layout.descripton}} />
         </div>
         <Tab.Group
           as="div"
