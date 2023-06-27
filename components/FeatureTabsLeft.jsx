@@ -92,7 +92,7 @@ const FeatureTabsLeft = (layout) => {
                       </p>
                     </div>
                     <div className="mt-20 w-[45rem] overflow-hidden rounded-xl bg-slate-50 shadow-xl shadow-blue-900/20 sm:w-auto lg:mt-0 lg:w-[67.8125rem]">
-                      <Image
+                      { feature?.featureImage && <Image
                         className="w-full"
                         src={feature.featureImage.node.sourceUrl}
                         alt={feature.featureImage.node.altText}
@@ -100,7 +100,7 @@ const FeatureTabsLeft = (layout) => {
                         height={feature?.featureImage?.node?.mediaDetails?.height || '732'}
                         priority
                         sizes="(min-width: 1024px) 67.8125rem, (min-width: 640px) 100vw, 45rem"
-                      />
+                      /> }
                     </div>
                   </Tab.Panel>
                 ))}

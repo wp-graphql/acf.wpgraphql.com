@@ -3,36 +3,8 @@ import { Tab } from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import screenshotContacts from '@/images/placeholder.svg'
-import screenshotInventory from '@/images/placeholder.svg'
-import screenshotProfitLoss from '@/images/placeholder.svg'
 import { gql } from '@apollo/client'
 
-// const features = [
-//   {
-//     name: 'Model your data',
-//     summary: 'Create ACF Field Groups',
-//     description:
-//       'Each ACF Field Group that is set to show_in_graphql will be added to the GraphQL Schema and will have a corresponding GraphQL Object type and will implement the AcfFieldGroup interface.',
-//     image: screenshotProfitLoss,
-//   },
-//   {
-//     name: 'Fetch your data',
-//     summary:
-//       'Use GraphQL Queries and Fragments',
-//     description:
-//       'WPGraphQL for ACF adds GraphQL Object Types and Interfaces for each field group. This enables each Component to specify the exact data it needs using GraphQL Queries and Fragments.',
-//     image: screenshotInventory,
-//   },
-//   {
-//     name: 'Render your data',
-//     summary:
-//       'Use the data from GraphQL in your front-end',
-//     description:
-//       'Components can use the data from GraphQL to render the data in the front-end. You can use any front-end framework you like, or no framework at all.',
-//     image: screenshotContacts,
-//   },
-// ]
 
 function Feature({ feature, isActive, className, ...props }) {
   return (
@@ -65,7 +37,7 @@ function FeaturesMobile({ features }) {
           <div className="relative mt-10 pb-10">
             <div className="absolute -inset-x-4 bottom-0 top-8  sm:-inset-x-6" />
             <div className="relative mx-auto w-[30.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
-              
+            
               { feature.featureImage && <Image
                   className="w-full"
                   src={feature.featureImage.node.sourceUrl}
