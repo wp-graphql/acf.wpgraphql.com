@@ -3,27 +3,7 @@ import clsx from 'clsx'
 import Highlight, { defaultProps } from 'prism-react-renderer'
 
 import { Button } from '@/components/Button'
-
-const codeLanguage = 'graphql'
-const code = `
-query GetPostWithAcfFields($id: ID!) {
-  nodeByUri(uri: $id) {
-    __typename
-    uri
-    ...on NodeWithTitle {
-      title
-    }
-    ...on WithAcfMyFieldGroup {
-      myFieldGroup {
-        textField
-        numberField
-      }
-    }
-}`
-
-const tabs = [
-  { name: 'query-acf-fields.gql', isActive: true }
-]
+import { gql } from '@apollo/client'
 
 function TrafficLightsIcon(props) {
   return (
@@ -35,7 +15,7 @@ function TrafficLightsIcon(props) {
   )
 }
 
-export function Hero() {
+const HomepageLayoutsLayoutsHero = ( hero ) => {
   return (
     <div className="overflow-hidden bg-white dark:bg-slate-900 dark:-mb-32 dark:mt-[-4.5rem] dark:pb-32 dark:pt-[4.5rem] dark:lg:mt-[-4.75rem] dark:lg:pt-[4.75rem]">
       <div className="py-16 sm:px-2 lg:relative lg:px-0 lg:py-20">
@@ -44,15 +24,15 @@ export function Hero() {
             
             <div className="relative">
               <p className="inline bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600 dark:from-orange-300 dark:via-orange-600 dark:to-orange-300 bg-clip-text font-display text-5xl tracking-tight text-transparent">
-                WPGraphQL for <br/> Advanced Custom Fields
+                {hero.title || 'WPGraphQL for ACF'}
               </p>
               <p className="mt-3 text-2xl tracking-tight text-gray-600 dark:text-slate-300">
-              WPGraphQL for ACF is a free, open source WordPress plugin that exposes ACF Field Groups and Fields to the WPGraphQL Schema, enabling powerful decoupled solutions with modern frontends.
+                { hero.description || 'WPGraphQL for ACF is a free, open source WordPress plugin that exposes ACF Field Groups and Fields to the WPGraphQL Schema, enabling powerful decoupled solutions with modern frontends.' }
               </p>
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-                <Button href="/installation-and-activation/">Get started</Button>
-                <Button href="https://github.com/wp-graphql/wpgraphql-acf" variant="secondary">
-                  View on GitHub
+                <Button href={ hero.getStartedLink.contentNode.link || '/installation-and-activation/' }>{ hero.getStartedLink.linkText || 'Get started'}</Button>
+                <Button href={ hero.githubLink.url || 'https://github.com/wp-graphql/wpgraphql-acf'} variant="secondary">
+                { hero.githubLink.linkText || 'View on GitHub'}
                 </Button>
               </div>
             </div>
@@ -68,26 +48,14 @@ export function Hero() {
                 <div className="pl-4 pt-4">
                   <TrafficLightsIcon className="h-2.5 w-auto stroke-slate-500/30" />
                   <div className="mt-4 flex space-x-2 text-xs">
-                    {tabs.map((tab) => (
                       <div
-                        key={tab.name}
-                        className={clsx(
-                          'flex h-6 rounded-full',
-                          tab.isActive
-                            ? 'bg-gradient-to-r from-orange-400/30 via-orange-400 to-orange-400/30 p-px font-medium text-orange-300'
-                            : 'text-slate-500'
-                        )}
-                      >
+                        key={hero?.codeFileName || 'query-acf-fields.gql'}
+                        className='flex h-6 rounded-full bg-gradient-to-r from-orange-400/30 via-orange-400 to-orange-400/30 p-px font-medium text-orange-300'>
                         <div
-                          className={clsx(
-                            'flex items-center rounded-full px-2.5',
-                            tab.isActive && 'bg-slate-800'
-                          )}
-                        >
-                          {tab.name}
+                          className='flex items-center rounded-full px-2.5 bg-slate-800' >
+                          {hero?.codeFileName || null}
                         </div>
                       </div>
-                    ))}
                   </div>
                   <div className="mt-6 flex items-start px-1 text-sm">
                     <div
@@ -95,7 +63,7 @@ export function Hero() {
                       className="select-none border-r border-slate-300/5 pr-4 font-mono text-slate-600"
                     >
                       {Array.from({
-                        length: code.split('\n').length,
+                        length: hero?.codeSample && hero.codeSample.split('\n').length,
                       }).map((_, index) => (
                         <Fragment key={index}>
                           {(index + 1).toString().padStart(2, '0')}
@@ -105,8 +73,8 @@ export function Hero() {
                     </div>
                     <Highlight
                       {...defaultProps}
-                      code={code}
-                      language={codeLanguage}
+                      code={hero?.codeSample || null}
+                      language={`graphql`}
                       theme={undefined}
                     >
                       {({
@@ -148,3 +116,36 @@ export function Hero() {
     </div>
   )
 }
+
+const ACFE_AdvancedLink = gql`
+  fragment AcfeAdvancedLink on ACFE_AdvancedLink {
+    linkText
+    shouldOpenInNewWindow
+    ... on ACFE_AdvancedLink_Url {
+      url
+    }
+    ... on ACFE_AdvancedLink_ContentNode {
+      contentNode {
+        uri
+      }
+    }
+  }
+`;
+
+HomepageLayoutsLayoutsHero.fragment = gql`
+fragment HomepageLayoutsLayoutsHero on LayoutHero_Fields {
+  title
+  description
+  getStartedLink {
+    ...AcfeAdvancedLink
+  }
+  githubLink {
+    ...AcfeAdvancedLink
+  }
+  codeSample
+  codeFileName
+}
+${ACFE_AdvancedLink}
+`;
+
+export default HomepageLayoutsLayoutsHero;

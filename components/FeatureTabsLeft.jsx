@@ -3,40 +3,12 @@ import Image from 'next/image'
 import { Tab } from '@headlessui/react'
 import clsx from 'clsx'
 
-import { Container } from '@/components/Container'  
-import screenshotAcfPostTypes from '@/images/screenshots/acfPostTypes.png'
-import screenshotAcfFieldGroup from '@/images/screenshots/acfFieldGroup.png'
-import screenshotAcfPro from '@/images/screenshots/acfPro.png'
-import screenshotAcfExtended from '@/images/screenshots/acfExtended.png'
+import { Container } from '@/components/Container'
+import { gql } from '@apollo/client'
 
-const features = [
-  {
-    title: 'ACF Field Groups and Fields',
-    description: "All ACF Field Groups set to \"show in graphql\" are available added to the GraphQL Schema sharing an \"AcfFieldGroup\" Interface.",
-    image: screenshotAcfFieldGroup,
-  },
-  {
-    title: 'Custom Post Types and Taxonomies',
-    description:
-      "Use ACF to create custom post types and taxonomies and query them and their associated field groups with GraphQL.",
-    image: screenshotAcfPostTypes,
-  },
-  
-  {
-    title: 'Support for ACF Free & PRO',
-    description:
-      "WPGraphQL for ACF supports both ACF Free and ACF PRO. ACF PRO features such as Repeater, Flexible Content, Gallery, Clone, and more are supported.",
-    image: screenshotAcfPro,
-  },
-  {
-    title: 'Support for ACF Extended (Free & PRO)',
-    description:
-      'WPGraphQL for ACF supports ACF Extended, which adds additional field types to ACF, such as Currency, Country and more.',
-    image: screenshotAcfExtended,
-  },
-]
-
-export function PrimaryFeatures() {
+const FeatureTabsLeft = (layout) => {
+  console.log( { layout })
+  const { features } = layout;
   let [tabOrientation, setTabOrientation] = useState('horizontal')
 
   useEffect(() => {
@@ -80,7 +52,7 @@ export function PrimaryFeatures() {
                 <Tab.List className="relative z-10 flex gap-x-4 whitespace-nowrap px-4 sm:mx-auto sm:px-0 lg:mx-0 lg:block lg:gap-x-0 lg:gap-y-1 lg:whitespace-normal">
                   {features.map((feature, featureIndex) => (
                     <div
-                      key={feature.title}
+                      key={feature.name}
                       className={clsx(
                         'group relative rounded-full px-4 my-2  py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6',
                         selectedIndex === featureIndex
@@ -98,7 +70,7 @@ export function PrimaryFeatures() {
                           )}
                         >
                           <span className="absolute inset-0 rounded-full lg:rounded-l-xl lg:rounded-r-none" />
-                          {feature.title}
+                          {feature.name}
                         </Tab>
                       </h3>
                       <p
@@ -109,7 +81,7 @@ export function PrimaryFeatures() {
                             : 'text-slate-800'
                         )}
                       >
-                        {feature.description}
+                        {feature.featureDescription}
                       </p>
                     </div>
                   ))}
@@ -117,18 +89,20 @@ export function PrimaryFeatures() {
               </div>
               <Tab.Panels className="lg:col-span-7">
                 {features.map((feature) => (
-                  <Tab.Panel key={feature.title} unmount={false}>
+                  <Tab.Panel key={feature.name} unmount={false}>
                     <div className="relative sm:px-6 lg:hidden">
                       <div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] bg-slate-200 dark:bg-slate-700 lg:bg-white/10 ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl" />
                       <p className="relative mx-auto max-w-2xl text-base text-slate-800 dark:text-white sm:text-center">
-                        {feature.description}
+                        {feature.featureDescription}
                       </p>
                     </div>
                     <div className="mt-20 w-[45rem] overflow-hidden rounded-xl bg-slate-50 shadow-xl shadow-blue-900/20 sm:w-auto lg:mt-0 lg:w-[67.8125rem]">
                       <Image
                         className="w-full"
-                        src={feature.image}
-                        alt=""
+                        src={feature.featureImage.node.sourceUrl}
+                        alt={feature.featureImage.node.altText}
+                        width={feature?.featureImage?.node?.mediaDetails?.width || '1087'}
+                        height={feature?.featureImage?.node?.mediaDetails?.height || '732'}
                         priority
                         sizes="(min-width: 1024px) 67.8125rem, (min-width: 640px) 100vw, 45rem"
                       />
@@ -143,3 +117,27 @@ export function PrimaryFeatures() {
     </section>
   )
 }
+
+FeatureTabsLeft.fragment = gql`
+fragment FeatureTabsLeft on LayoutFeatureTabs_Fields {
+  layout
+  name
+  description
+  features {
+    name
+    featureDescription
+    featureImage {
+      node {
+        altText
+        sourceUrl
+        mediaDetails {
+          width
+          height
+        }
+      }
+    }
+  }
+}
+`;
+
+export default FeatureTabsLeft;

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
 
-import { Hero } from '@/components/Hero'
+import { Hero } from '@/components/HomepageLayoutsLayoutsHero'
 import { Logo } from '@/components/Logo'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Navigation, NavigationFragment } from '@/components/Navigation'
@@ -12,9 +12,8 @@ import { ThemeSelector } from '@/components/ThemeSelector'
 import { gql } from '@apollo/client'
 import { flatListToHierarchical } from '@faustwp/core'
 import { collectHeadings } from '@/lib/utils'
-import { PrimaryFeatures } from './PrimaryFeatures'
-import { Faqs } from './Faqs'
-import { SecondaryFeatures } from './SecondaryFeatures'
+import { PrimaryFeatures } from './FeatureTabsLeft'
+import { SecondaryFeatures } from './FeatureTabsTop'
 
 function GitHubIcon(props) {
   return (

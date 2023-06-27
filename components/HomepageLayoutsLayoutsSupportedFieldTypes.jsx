@@ -3,12 +3,13 @@ import clsx from 'clsx'
 import {
   useInView,
 } from 'framer-motion'
+import Link from 'next/link'
 
 import { Container } from '@/components/Container'
 import Image from 'next/image'
 import { gql } from '@apollo/client'
 
-function FieldType({ title, featuredImage, className, ...props }) {
+function FieldType({ title, uri, featuredImage, className, ...props }) {
   let animationDelay = useMemo(() => {
     let possibleAnimationDelays = ['0s', '0.1s', '0.2s', '0.3s', '0.4s', '0.5s']
     return possibleAnimationDelays[
@@ -25,22 +26,24 @@ function FieldType({ title, featuredImage, className, ...props }) {
       style={{ animationDelay }}
       {...props}
     >
-      <div className="text-gray-900">
-        {
-        featuredImage?.node?.sourceUrl && (
-            <Image
-                src={featuredImage?.node?.sourceUrl}
-                alt={featuredImage?.node?.altText || title}
-                width={200}
-                height={200}
-                className='mx-auto'
-            />
-        )
-        }
-        <p className="mt-4 text-lg font-semibold leading-6">
-          {title}
-        </p>
-      </div>
+      <Link href={uri}>
+        <div className="text-gray-900">
+          {
+          featuredImage?.node?.sourceUrl && (
+              <Image
+                  src={featuredImage?.node?.sourceUrl}
+                  alt={featuredImage?.node?.altText || title}
+                  width={200}
+                  height={200}
+                  className='mx-auto'
+              />
+          )
+          }
+          <p className="mt-4 text-lg font-semibold leading-6">
+            {title}
+          </p>
+        </div>
+      </Link>
       
     </figure>
   )
@@ -87,6 +90,7 @@ function FieldTypeColumn({
       style={{ '--marquee-duration': duration }}
     >
       {fieldTypes.concat(fieldTypes).map((fieldType, fieldTypeIndex) => (
+        
         <FieldType
           key={fieldTypeIndex}
           aria-hidden={fieldTypeIndex >= fieldTypes.length}
@@ -100,11 +104,9 @@ function FieldTypeColumn({
 
 function FieldTypeGrid({ fieldTypes }) {
 
-
-
   let containerRef = useRef()
   let isInView = useInView(containerRef, { once: true, amount: 0.4 })
-  let columns = fieldTypes?.nodes && fieldTypes.nodes.length > 0 ? splitArray(fieldTypes.nodes, 3) : null;
+  let columns = fieldTypes && fieldTypes.length > 0 ? splitArray(fieldTypes, 3) : null;
 
   if ( ! columns) {
     return null;
@@ -151,7 +153,7 @@ function FieldTypeGrid({ fieldTypes }) {
   )
 }
 
-export function FieldTypes({ data }) {
+const HomepageLayoutsLayoutsSupportedFieldTypes = ( data ) => {
   return (
     <section
       id="reviews"
@@ -163,30 +165,37 @@ export function FieldTypes({ data }) {
           id="reviews-title"
           className="text-3xl font-medium tracking-tight mb-5 dark:text-gray-100 text-gray-900 sm:text-center"
         >
-           Support for a plethora of ACF Field Types
+           { data.title }
         </h2>
-        <p className="mt-2 text-lg dark:text-gray-200 text-gray-600 sm:text-center">
-          WPGraphQL for ACF has built-in support for ACF (FREE & PRO) field types, including repeaters, flexible content, clone fields, and more. It also supports most field types of ACF Extended (FREE & PRO). For field types that are not natively supported, we have created an API that allows developers to add support for them.
-        </p>
+        <p className="mt-2 text-lg dark:text-gray-200 text-gray-600 sm:text-center" dangerouslySetInnerHTML={{__html: data.description}}/>
 
-        <FieldTypeGrid fieldTypes={data?.fieldTypes} />
+        <FieldTypeGrid fieldTypes={data?.fieldTypes?.nodes} />
       </Container>
     </section>
   )
 }
 
-export const FieldTypesFragment = gql`
-    fragment FieldTypesFragment on RootQuery {
-        fieldTypes(first: 100) {
-            nodes {
-                title
-                featuredImage {
-                    node {
-                        sourceUrl
-                        altText
-                    }
-                }
+HomepageLayoutsLayoutsSupportedFieldTypes.fragment = gql`
+  fragment HomepageLayoutsLayoutsSupportedFieldTypes on LayoutSupportedFieldTypes_Fields {
+    title
+    description
+    fieldTypes(first:100) {
+      nodes {
+        __typename
+        ... on FieldType {
+          title
+          uri
+          featuredImage {
+            node {
+              id
+              sourceUrl
+              altText
             }
+          }
         }
+      }
     }
+  }
 `
+
+export default HomepageLayoutsLayoutsSupportedFieldTypes;

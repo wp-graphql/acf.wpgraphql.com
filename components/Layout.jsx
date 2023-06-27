@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
 
-import { Hero } from '@/components/Hero'
 import { Logo } from '@/components/Logo'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Navigation, NavigationFragment } from '@/components/Navigation'
@@ -12,10 +11,6 @@ import { ThemeSelector } from '@/components/ThemeSelector'
 import { gql } from '@apollo/client'
 import { flatListToHierarchical } from '@faustwp/core'
 import { collectHeadings } from '@/lib/utils'
-import { PrimaryFeatures } from './PrimaryFeatures'
-import { Faqs } from './Faqs'
-import { SecondaryFeatures } from './SecondaryFeatures'
-import { FieldTypes } from './FieldTypes'
 
 function GitHubIcon(props) {
   return (
@@ -178,16 +173,6 @@ export function Layout({ data, children, toc, title }) {
     <>
       <Header navigation={navigation} />
 
-      {
-      isHomePage ? 
-        <>
-          <Hero />
-          <PrimaryFeatures />
-          <SecondaryFeatures />
-          <FieldTypes data={data} />
-          <Faqs />
-        </> 
-      : 
         <div className="relative mx-auto flex max-w-8xl justify-center sm:px-2 lg:px-8 xl:px-12">
         <div className="hidden lg:relative lg:block lg:flex-none">
           <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden" />
@@ -302,7 +287,6 @@ export function Layout({ data, children, toc, title }) {
           </nav>
         </div>
       </div>
-      }      
     </>
   )
 }

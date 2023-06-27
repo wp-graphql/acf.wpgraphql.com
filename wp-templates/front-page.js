@@ -1,19 +1,27 @@
 import { gql } from "@apollo/client"
 import { LayoutFrontPage } from "@/components/LayoutFrontPage";
-import { PrimaryFeatures } from '@/components/PrimaryFeatures'
-import { Faqs } from '@/components/Faqs'
-import { SecondaryFeatures } from '@/components/SecondaryFeatures'
-import { FieldTypes, FieldTypesFragment } from '@/components/FieldTypes'
-import { Hero } from '@/components/Hero'
+import HomepageLayoutsLayoutsFaqs from '@/components/HomepageLayoutsLayoutsFaqs'
+import HomepageLayoutsLayoutsSupportedFieldTypes from '@/components/HomepageLayoutsLayoutsSupportedFieldTypes'
+import HomepageLayoutsLayoutsFeatures from '@/components/HomepageLayoutsLayoutsFeatures'
+import HomepageLayoutsLayoutsHero from '@/components/HomepageLayoutsLayoutsHero'
 
 export const FrontPage = ({ data }) => {
     return (
         <LayoutFrontPage>
-            <Hero />
-            <PrimaryFeatures />
-            <SecondaryFeatures />
-            <FieldTypes data={data} />
-            <Faqs />
+            { data?.frontPage?.homepageLayouts?.layouts?.map((layout, i) => {
+                switch (layout.__typename) {
+                    case 'HomepageLayoutsLayoutsHero':
+                        return <HomepageLayoutsLayoutsHero key={i} {...layout} />
+                    case 'HomepageLayoutsLayoutsFeatures':
+                        return <HomepageLayoutsLayoutsFeatures key={i} {...layout} />
+                    case 'HomepageLayoutsLayoutsSupportedFieldTypes':
+                        return <HomepageLayoutsLayoutsSupportedFieldTypes key={i} {...layout} />
+                    case 'HomepageLayoutsLayoutsFaqs':
+                        return <HomepageLayoutsLayoutsFaqs key={i} {...layout} />
+                    default:
+                        return <pre>{JSON.stringify(layout, null, 2)}</pre>;
+                }
+            })}
         </LayoutFrontPage>
     )
 }
@@ -30,10 +38,23 @@ query GetFrontPage($uri: String!) {
         ...on ContentType {
             name
         }
+        ... on WithAcfHomepageLayouts {
+            homepageLayouts {
+                layouts {
+                    __typename
+                    ...HomepageLayoutsLayoutsHero
+                    ...HomepageLayoutsLayoutsFeatures
+                    ...HomepageLayoutsLayoutsSupportedFieldTypes
+                    ...HomepageLayoutsLayoutsFaqs
+                }
+            }
+        }
     }
-    ...FieldTypesFragment
 }
-${FieldTypesFragment}
+${HomepageLayoutsLayoutsHero.fragment}
+${HomepageLayoutsLayoutsFeatures.fragment}
+${HomepageLayoutsLayoutsSupportedFieldTypes.fragment}
+${HomepageLayoutsLayoutsFaqs.fragment}
 `;
 
 FrontPage.variables = ({ uri }) => ({ uri });

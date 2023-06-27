@@ -12,11 +12,10 @@ export function FieldTypesList({ data }) {
 
   return (
     <section
-      id="secondary-features"
+      id="field-types"
       aria-label="Field Types"
       className=""
     >
-        {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
         <div className="">
           <p className="mt-2 text-lg text-gray-600 dark:text-gray-200">
             WPGraphQL for ACF exposes ACF Fields to the GraphQL Schema allowing you to query for the data managed by ACF.

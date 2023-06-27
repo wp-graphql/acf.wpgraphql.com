@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
 
-import { Hero } from '@/components/Hero'
+
 import { Logo } from '@/components/Logo'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { Navigation, NavigationFragment } from '@/components/Navigation'
