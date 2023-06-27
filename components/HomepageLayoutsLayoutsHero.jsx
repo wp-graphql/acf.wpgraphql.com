@@ -23,16 +23,12 @@ const HomepageLayoutsLayoutsHero = ( hero ) => {
           <div className="relative z-10 md:text-center lg:text-left">
             
             <div className="relative">
-              <p className="inline bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600 dark:from-orange-300 dark:via-orange-600 dark:to-orange-300 bg-clip-text font-display text-5xl tracking-tight text-transparent">
-                {hero.title || 'WPGraphQL for ACF'}
-              </p>
-              <p className="mt-3 text-2xl tracking-tight text-gray-600 dark:text-slate-300">
-                { hero.description || 'WPGraphQL for ACF is a free, open source WordPress plugin that exposes ACF Field Groups and Fields to the WPGraphQL Schema, enabling powerful decoupled solutions with modern frontends.' }
-              </p>
+              <p className="inline bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600 dark:from-orange-300 dark:via-orange-600 dark:to-orange-300 bg-clip-text font-display text-5xl tracking-tight text-transparent" dangerouslySetInnerHTML={{__html: hero.title }} />
+              <p className="mt-3 text-2xl tracking-tight text-gray-600 dark:text-slate-300" dangerouslySetInnerHTML={{__html: hero.description }} />
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-                <Button href={ hero.getStartedLink.contentNode.link || '/installation-and-activation/' }>{ hero.getStartedLink.linkText || 'Get started'}</Button>
-                <Button href={ hero.githubLink.url || 'https://github.com/wp-graphql/wpgraphql-acf'} variant="secondary">
-                { hero.githubLink.linkText || 'View on GitHub'}
+                <Button href={ hero.getStartedLink.contentNode.link}>{ hero.getStartedLink.linkText}</Button>
+                <Button href={ hero.githubLink.url} variant="secondary">
+                { hero.githubLink.linkText}
                 </Button>
               </div>
             </div>
