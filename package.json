@@ -1,5 +1,5 @@
 {
-  "name": "@faustwp/faust-scaffold",
+  "name": "acf.wpgraphql.com",
   "private": true,
   "scripts": {
     "dev": "faust dev",
@@ -10,8 +10,8 @@
   "dependencies": {
     "@algolia/autocomplete-core": "^1.9.2",
     "@apollo/client": "^3.7.7",
-    "@faustwp/cli": "0.2.12",
-    "@faustwp/core": "0.2.11",
+    "@faustwp/cli": "1.0.1",
+    "@faustwp/core": "1.0.1",
     "@headlessui/react": "^1.7.13",
     "@markdoc/markdoc": "0.1.7",
     "@markdoc/next.js": "0.1.6",
