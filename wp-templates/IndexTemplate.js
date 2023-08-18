@@ -1,11 +1,9 @@
 import { Layout, LayoutFragment } from '@/components/Layout'
-import { getNodeText } from '@/lib/utils';
 import { gql } from '@apollo/client'
+import blocks from "@/wp-blocks";
+import { WordPressBlocksViewer } from '@faustwp/blocks';
+import { flatListToHierarchical } from '@faustwp/core';
 import slugify from '@sindresorhus/slugify';
-import rehypeParse from 'rehype-parse/lib';
-import rehypeStringify from 'rehype-stringify/lib';
-import { unified } from 'unified';
-import { visit } from 'unist-util-visit';
 
 const IndexTemplate = ({ data }) => {
 
@@ -15,28 +13,35 @@ const IndexTemplate = ({ data }) => {
         return null;
     }
 
-    let toc = [];
+    const { title, editorBlocks } = node;
 
-    let content = node?.content ? 
-    unified()
-        .use(rehypeParse, {
-            fragment: true,
-        })
-        .use(() => {
-            return (tree) => {
-                toc = tree.children;
-                visit(tree, 'element', (node) => {
-                    if ( node.tagName === 'h2' || node.tagName === 'h3' ) {
-                        let title = getNodeText(node);
-                        let id = slugify(title)
-                        node.properties.id = id;
-                    }
-                });
+    let toc = [];
+    
+    editorBlocks && editorBlocks.map( block => {
+        
+        if ( ! block.attributes || ! block.attributes.level ) {
+            return null;
+        }
+
+        if ( block.attributes.level === 2 || block.attributes.level === 3 ) {
+            let id = slugify( block.attributes.content );
+            let heading = {
+                tagName: `h${block.attributes.level}`,
+                children: [{
+                    type: 'text',
+                    value: block.attributes.content
+                }],
             }
-        })
-        .use(rehypeStringify)
-        .processSync(node.content)
-    : null;
+            toc.push( heading )
+        }    
+    });
+
+    const blockList = flatListToHierarchical(editorBlocks, {childrenKey: 'innerBlocks'});
+
+    console.log({
+        editorBlocks,
+        blockList
+    })
 
     return (
         <Layout 
@@ -51,10 +56,14 @@ const IndexTemplate = ({ data }) => {
                     Last Upated: {new Date(node.modified).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}
                 </div>
             }
-            { node.content && 
-                <div 
-                    dangerouslySetInnerHTML={{ __html: content }} 
-                />
+            <WordPressBlocksViewer blocks={blockList} />
+            {/* <h2>Raw editorBlocks</h2> */}
+            {
+                /**
+                 *  uncomment to debug editorBlocks
+                 *  <pre>{JSON.stringify(node.editorBlocks, null, 2)}</pre>
+                 */
+                // <pre>{JSON.stringify(node, null, 2)}</pre>
             }
         </Layout>
     )
@@ -69,6 +78,26 @@ query IndexTemplate($uri: String!) {
         ...on NodeWithTitle {
             title
         }
+        ...on NodeWithEditorBlocks {
+            editorBlocks {
+                __typename
+                name
+                renderedHtml
+                id: clientId
+                parentId: parentClientId
+                ...${blocks.CoreParagraph.fragments.key}
+                ...${blocks.CoreColumns.fragments.key}
+                ...${blocks.CoreColumn.fragments.key}
+                ...${blocks.CoreCode.fragments.key}
+                ...${blocks.CoreButtons.fragments.key}
+                ...${blocks.CoreButton.fragments.key}
+                ...${blocks.CoreQuote.fragments.key}
+                ...${blocks.CoreImage.fragments.key}
+                ...${blocks.CoreSeparator.fragments.key}
+                ...${blocks.CoreList.fragments.key}
+                ...${blocks.CoreHeading.fragments.key}
+            }
+        }
         ...on ContentNode {
             modified
             ...on NodeWithContentEditor {
@@ -78,6 +107,17 @@ query IndexTemplate($uri: String!) {
     }
 }
 ${LayoutFragment}
+${blocks.CoreParagraph.fragments.entry}
+${blocks.CoreColumns.fragments.entry}
+${blocks.CoreColumn.fragments.entry}
+${blocks.CoreCode.fragments.entry}
+${blocks.CoreButtons.fragments.entry}
+${blocks.CoreButton.fragments.entry}
+${blocks.CoreQuote.fragments.entry}
+${blocks.CoreImage.fragments.entry}
+${blocks.CoreSeparator.fragments.entry}
+${blocks.CoreList.fragments.entry}
+${blocks.CoreHeading.fragments.entry}
 `
 
 IndexTemplate.variables = ({ uri }) => ({ uri })
