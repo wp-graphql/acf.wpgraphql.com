@@ -3,7 +3,6 @@ import slugify from "@sindresorhus/slugify";
 const { CoreHeading: FaustCoreHeading } = CoreBlocks;
 
 function CoreHeading(props) {
-    console.log( { headingProps: props, fragments: CoreHeading.fragments })
 
     const { attributes } = props;
     

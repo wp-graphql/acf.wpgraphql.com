@@ -11,8 +11,6 @@ import blocks from '@/wp-blocks'
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
-  console.log( { blocks } )
-
   return (
     <FaustProvider pageProps={pageProps}>
       <WordPressBlocksProvider config={{blocks, theme: null}}>

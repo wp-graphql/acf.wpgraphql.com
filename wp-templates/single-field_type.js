@@ -48,12 +48,6 @@ export const SingleFieldType = ({ data }) => {
 
     const blockList = flatListToHierarchical(editorBlocks, {childrenKey: 'innerBlocks'});
 
-    console.log({
-        editorBlocks,
-        blockList
-    })
-
-
     return (
         <Layout 
             data={data} 
