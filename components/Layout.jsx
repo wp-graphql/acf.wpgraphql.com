@@ -111,9 +111,9 @@ function useTableOfContents(tableOfContents) {
 
       if ( ! headings || ! headings.length ) return;
 
-      let current = headings && headings.length > 0 ? headings[0].id : null;
+      let current = headings && headings.length > 0 ? headings[0]?.id ?? null : null;
       for (let heading of headings) {
-        if (top >= heading.top) {
+        if (top >= heading?.top) {
           current = heading.id
         } else {
           break
