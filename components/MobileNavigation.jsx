@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { Dialog } from '@headlessui/react'
 
 import { Logo } from '@/components/Logo'
-import { Navigation } from '@/components/Navigation'
+import { SidebarNavigation } from '@/components/SidebarNavigation'
 
 function MenuIcon(props) {
   return (
@@ -85,7 +85,7 @@ export function MobileNavigation({ navigation }) {
               <Logo className="h-auto w-9" />
             </Link>
           </div>
-          <Navigation navigation={navigation} className="mt-5 px-1" />
+          <SidebarNavigation navigation={navigation} className="mt-5 px-1" />
         </Dialog.Panel>
       </Dialog>
     </>
