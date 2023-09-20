@@ -26,6 +26,7 @@ export const TopNavigationFragment = gql`
         parentId
         menuItemMeta {
           isFeatured
+          description
         }
       }
     }
@@ -44,7 +45,7 @@ export function TopNavigation({ navigation }) {
               <NavigationMenuItem key={item.id}>
                 <Link href={item.href} legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    {item.label}
+                    {item?.label}
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
@@ -53,12 +54,12 @@ export function TopNavigation({ navigation }) {
 
           return (
             <NavigationMenuItem key={item.id}>
-              <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
+              <NavigationMenuTrigger>{item?.label}</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                   {
                     item.links.map((sublink) => {
-                      if (sublink?.menuItemMeta?.isFeatured) {
+                      if (sublink.menuItemMeta?.isFeatured) {
                         return (
                           <li className="row-span-3" key={sublink.id}>
                             <NavigationMenuLink asChild>
@@ -68,11 +69,10 @@ export function TopNavigation({ navigation }) {
                               >
                                 {/* <Icons.logo className="h-6 w-6" /> */}
                                 <div className="mb-2 mt-4 text-lg font-medium">
-                                  {sublink.label}
+                                  {sublink?.label}
                                 </div>
                                 <p className="text-sm leading-tight text-muted-foreground">
-                                  Beautifully designed components built with Radix UI and
-                                  Tailwind CSS.
+                                  {sublink.menuItemMeta?.description}
                                 </p>
                               </a>
                             </NavigationMenuLink>
@@ -81,7 +81,7 @@ export function TopNavigation({ navigation }) {
                       } else {
                         return (
                           <ListItem key={sublink.id} href={sublink.href} title={sublink.label}>
-                            Re-usable components built using Radix UI and Tailwind CSS.
+                           {sublink.menuItemMeta?.description}
                           </ListItem>
                         );
                       }
