@@ -1,7 +1,10 @@
-import * as React from "react";
-import Link from "next/link";
+"use client";
+
+import * as React from "react"
+import Link from "next/link"
 import { gql } from "@apollo/client";
-import { cn } from "@/lib/utils";
+
+import { cn } from "@/lib/utils"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,7 +13,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
+} from "@/components/ui/navigation-menu"
 
 export const TopNavigationFragment = gql`
   fragment TopNavigationFragment on RootQuery {
@@ -21,30 +24,79 @@ export const TopNavigationFragment = gql`
         title: label
         href: uri
         parentId
+        menuItemMeta {
+          isFeatured
+        }
       }
     }
   }
 `;
 
 export function TopNavigation({ navigation }) {
+  console.log({ navigation });
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        {navigation.map((item) => (
-          <NavigationMenuItem key={item.id}>
-            <Link href={item.href} passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                {item.label}
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        ))}
+        {navigation.map((item) => {
+          
+          if (item.links.length == 0) {
+            return (
+              <NavigationMenuItem key={item.id}>
+                <Link href={item.href} legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    {item.label}
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            )
+          }
+
+          return (
+            <NavigationMenuItem key={item.id}>
+              <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                  {
+                    item.links.map((sublink) => {
+                      if (sublink?.menuItemMeta?.isFeatured) {
+                        return (
+                          <li className="row-span-3" key={sublink.id}>
+                            <NavigationMenuLink asChild>
+                              <a
+                                className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                                href="/"
+                              >
+                                {/* <Icons.logo className="h-6 w-6" /> */}
+                                <div className="mb-2 mt-4 text-lg font-medium">
+                                  {sublink.label}
+                                </div>
+                                <p className="text-sm leading-tight text-muted-foreground">
+                                  Beautifully designed components built with Radix UI and
+                                  Tailwind CSS.
+                                </p>
+                              </a>
+                            </NavigationMenuLink>
+                          </li>
+                        )
+                      } else {
+                        return (
+                          <ListItem key={sublink.id} href={sublink.href} title={sublink.label}>
+                            Re-usable components built using Radix UI and Tailwind CSS.
+                          </ListItem>
+                        );
+                      }
+                    })
+                  }
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+        )})}
       </NavigationMenuList>
     </NavigationMenu>
-  );
+  )
 }
 
-const ListItem = (({ className, title, children, ...props }, ref) => {
+const ListItem = React.forwardRef(({ className, title, children, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -63,6 +115,6 @@ const ListItem = (({ className, title, children, ...props }, ref) => {
         </a>
       </NavigationMenuLink>
     </li>
-  );
-});
-ListItem.displayName = "ListItem";
+  )
+})
+ListItem.displayName = "ListItem"
