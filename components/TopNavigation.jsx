@@ -24,6 +24,7 @@ export const TopNavigationFragment = gql`
         title: label
         href: uri
         parentId
+        target
         menuItemMeta {
           isFeatured
           description
@@ -44,7 +45,7 @@ export function TopNavigation({ navigation }) {
             return (
               <NavigationMenuItem key={item.id}>
                 <Link href={item.href} legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()} target={item?.target ?? null}>
                     {item?.label}
                   </NavigationMenuLink>
                 </Link>
@@ -66,6 +67,7 @@ export function TopNavigation({ navigation }) {
                               <Link
                                 className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                                 href="/"
+                                target={sublink?.target ?? null}
                               >
                                 {/* <Icons.logo className="h-6 w-6" /> */}
                                 <div className="mb-2 mt-4 text-lg font-medium">
@@ -80,7 +82,7 @@ export function TopNavigation({ navigation }) {
                         )
                       } else {
                         return (
-                          <ListItem key={sublink.id} href={sublink.href} title={sublink.label}>
+                          <ListItem key={sublink.id} href={sublink.href} target={sublink?.target ?? null} title={sublink.label}>
                            {sublink.menuItemMeta?.description}
                           </ListItem>
                         );
