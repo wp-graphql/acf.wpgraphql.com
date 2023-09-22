@@ -4,10 +4,11 @@ import HomepageLayoutsLayoutsFaqs from '@/components/HomepageLayoutsLayoutsFaqs'
 import HomepageLayoutsLayoutsSupportedFieldTypes from '@/components/HomepageLayoutsLayoutsSupportedFieldTypes'
 import HomepageLayoutsLayoutsFeatures from '@/components/HomepageLayoutsLayoutsFeatures'
 import HomepageLayoutsLayoutsHero from '@/components/HomepageLayoutsLayoutsHero'
+import { TopNavigationFragment } from "@/components/TopNavigation";
 
 export const FrontPage = ({ data }) => {
     return (
-        <LayoutFrontPage>
+        <LayoutFrontPage data={data}>
             { data?.frontPage?.homepageLayouts?.layouts?.map((layout, i) => {
                 switch (layout.__typename) {
                     case 'HomepageLayoutsLayoutsHero':
@@ -50,11 +51,13 @@ query GetFrontPage($uri: String!) {
             }
         }
     }
+    ...TopNavigationFragment
 }
 ${HomepageLayoutsLayoutsHero.fragment}
 ${HomepageLayoutsLayoutsFeatures.fragment}
 ${HomepageLayoutsLayoutsSupportedFieldTypes.fragment}
 ${HomepageLayoutsLayoutsFaqs.fragment}
+${TopNavigationFragment}
 `;
 
 FrontPage.variables = ({ uri }) => ({ uri });

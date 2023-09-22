@@ -5,7 +5,7 @@ import clsx from 'clsx'
 
 import { Logo } from '@/components/Logo'
 import { MobileNavigation } from '@/components/MobileNavigation'
-import { Navigation, NavigationFragment } from '@/components/Navigation'
+import { TopNavigation, TopNavigationFragment } from '@/components/TopNavigation'
 import { Prose } from '@/components/Prose'
 import { Search } from '@/components/Search'
 import { ThemeSelector } from '@/components/ThemeSelector'
@@ -32,12 +32,12 @@ function WordPressIcon(props) {
 
 export const LayoutFragment = gql`
   fragment LayoutFragment on RootQuery {
-    ...NavigationFragment
+    ...TopNavigationFragment
   }
-  ${NavigationFragment}
+  ${TopNavigationFragment}
 `
 
-function Header({ navigation }) {
+function Header({ navigation, data }) {
   let [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -63,10 +63,11 @@ function Header({ navigation }) {
       <div className="mr-6 flex lg:hidden">
         <MobileNavigation navigation={navigation} />
       </div>
-      <div className="relative flex flex-grow basis-0 items-center">
+      <div className="relative flex flex-grow basis-0 items-center gap-4">
         <Link href="/" aria-label="Home page">
           <Logo className="h-5 lg:h-9 w-auto bg-slate-900/95 p-1 rounded-md fill-slate-700 dark:fill-sky-100 lg:block" />
         </Link>
+        <TopNavigation navigation={navigation} />
       </div>
       <div className="-my-5 mr-6 sm:mr-8 md:mr-0">
         <Search />
@@ -147,7 +148,7 @@ export function LayoutFrontPage({ data, children, toc, title }) {
   } ) : [];
   return (
     <>
-      <Header navigation={navigation} />
+      <Header navigation={navigation} data={data} />
       <>
         {children}    
       </>       

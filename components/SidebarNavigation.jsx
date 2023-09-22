@@ -2,8 +2,8 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { gql } from '@apollo/client'
 
-export const NavigationFragment = gql`
-fragment NavigationFragment on RootQuery {
+export const SidebarNavigationFragment = gql`
+fragment SidebarNavigationFragment on RootQuery {
   menuItems(first: 100 where: {location: PRIMARY}) {
     nodes {
       id
@@ -33,8 +33,7 @@ const isActiveSection = (section, currentNode ) => {
 
 }
 
-export function Navigation({ className, data, navigation }) {
- 
+export function SidebarNavigation({ className, data, navigation }) {
   return (
     <nav className={clsx('text-base lg:text-sm', className)}>
       <ul role="list" className="space-y-9">
