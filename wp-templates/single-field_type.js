@@ -1,12 +1,10 @@
-import { LayoutFragment, Layout } from "@/components/Layout";
-import { Badge } from "@/components/ui/badge";
-import { gql } from "@apollo/client";
-import { Separator } from "@radix-ui/react-separator";
-import slugify from "@sindresorhus/slugify";
-import blocks from "@/wp-blocks";
-import { WordPressBlocksViewer } from "@faustwp/blocks";
-import { flatListToHierarchical } from "@faustwp/core";
-
+import { LayoutFragment, Layout } from '@/components/Layout'
+import { Badge } from '@/components/ui/badge'
+import { gql } from '@apollo/client'
+import { Separator } from '@radix-ui/react-separator'
+import blocks from '@/wp-blocks'
+import { WordPressBlocksViewer } from '@faustwp/blocks'
+import { flatListToHierarchical } from '@faustwp/core'
 
 // const nodeContent =`
 //     <div className="prose dark:prose-invert">
@@ -18,54 +16,64 @@ import { flatListToHierarchical } from "@faustwp/core";
 // `;
 
 export const SingleFieldType = ({ data }) => {
-    const { node } = data;
-    
-    if ( ! node ) {
-        return null;
-    }
+  const { node } = data
 
-    const { title, editorBlocks } = node;
-    let toc = [];
-    
-    editorBlocks && editorBlocks.map( block => {
-        
-        if ( ! block.attributes || ! block.attributes.level ) {
-            return null;
+  if (!node) {
+    return null
+  }
+
+  const { title, editorBlocks } = node
+  let toc = []
+
+  editorBlocks &&
+    editorBlocks.map((block) => {
+      if (!block.attributes || !block.attributes.level) {
+        return null
+      }
+
+      if (block.attributes.level === 2 || block.attributes.level === 3) {
+        let heading = {
+          tagName: `h${block.attributes.level}`,
+          children: [
+            {
+              type: 'text',
+              value: block.attributes.content,
+            },
+          ],
         }
+        toc.push(heading)
+      }
+    })
 
-        if ( block.attributes.level === 2 || block.attributes.level === 3 ) {
-            let id = slugify( block.attributes.content );
-            let heading = {
-                tagName: `h${block.attributes.level}`,
-                children: [{
-                    type: 'text',
-                    value: block.attributes.content
-                }],
-            }
-            toc.push( heading )
-        }    
-    });
+  const blockList = flatListToHierarchical(editorBlocks, {
+    childrenKey: 'innerBlocks',
+  })
 
-    const blockList = flatListToHierarchical(editorBlocks, {childrenKey: 'innerBlocks'});
-
-    return (
-        <Layout 
-            data={data} 
-            navigation={data?.navigation?.nodes}
-            toc={toc}
-            >
-            <h1>{title}</h1>
-            { node?.aCFFieldTypeCategories && node?.aCFFieldTypeCategories?.nodes && <div id="field-type-categories" className="my-2">
-                { node.aCFFieldTypeCategories.nodes.map( fieldTypeCategory => <Badge key={fieldTypeCategory.id} variant="">{fieldTypeCategory.name}</Badge> ) }
-            </div>
-            }
-            <Separator className="my-4" /> 
-            { node?.modified && 
-                <div id="last-updated" className="text-sm text-gray-500">
-                    Last Upated: {new Date(node.modified).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}
-                </div>
-            }
-            {/* {
+  return (
+    <Layout data={data} navigation={data?.navigation?.nodes} toc={toc}>
+      <h1>{title}</h1>
+      {node?.aCFFieldTypeCategories && node?.aCFFieldTypeCategories?.nodes && (
+        <div id="field-type-categories" className="my-2">
+          {node.aCFFieldTypeCategories.nodes.map((fieldTypeCategory) => (
+            <Badge key={fieldTypeCategory.id} variant="">
+              {fieldTypeCategory.name}
+            </Badge>
+          ))}
+        </div>
+      )}
+      <Separator className="my-4" />
+      {node?.modified && (
+        <div id="last-updated" className="text-sm text-gray-500">
+          Last Upated:{' '}
+          {new Date(node.modified).toLocaleDateString('en-us', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          })}
+        </div>
+      )}
+      {/* {
                 node.editorBlocks && node.editorBlocks.map( ( block, i ) => {
                     switch( block.__typename ) {
                         case 'CoreHeading':
@@ -84,25 +92,25 @@ export const SingleFieldType = ({ data }) => {
                     }
                 })
             } */}
-            <WordPressBlocksViewer blocks={blockList} />
-            {/* <h2>Raw Blocks List</h2>
+      <WordPressBlocksViewer blocks={blockList} />
+      {/* <h2>Raw Blocks List</h2>
             <pre>{JSON.stringify( blockList, null, 2)}</pre>
             <h2>Raw editorBlocks</h2>
             <pre>{JSON.stringify(node.editorBlocks, null, 2)}</pre> */}
-        </Layout>
-    )
+    </Layout>
+  )
 }
 
 const aCFFieldTypeCategoriesFragment = gql`
-fragment aCFFieldTypeCategoriesFragment on FieldType {
+  fragment aCFFieldTypeCategoriesFragment on FieldType {
     aCFFieldTypeCategories {
-        nodes {
-            id
-            name
-        }
+      nodes {
+        id
+        name
+      }
     }
-}
-`;
+  }
+`
 
 SingleFieldType.query = gql`
 query SingleAcfFieldType($uri: String!) {
@@ -149,6 +157,6 @@ ${blocks.CoreImage.fragments.entry}
 ${blocks.CoreSeparator.fragments.entry}
 ${blocks.CoreList.fragments.entry}
 ${blocks.CoreHeading.fragments.entry}
-`;
+`
 
-SingleFieldType.variables = ( { uri } ) => ( { uri } );
+SingleFieldType.variables = ({ uri }) => ({ uri })

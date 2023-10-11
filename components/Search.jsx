@@ -48,7 +48,7 @@ function useAutocomplete() {
           ]
         })
       },
-    })
+    }),
   )
 
   return { autocomplete, autocompleteState }
@@ -98,7 +98,7 @@ function SearchResult({ result, autocomplete, collection, query }) {
   let id = useId()
 
   let sectionTitle = navigation.find((section) =>
-    section.links.find((link) => link.href === result.url.split('#')[0])
+    section.links.find((link) => link.href === result.url.split('#')[0]),
   )?.title
   let hierarchy = [sectionTitle, result.pageTitle].filter(Boolean)
 
@@ -174,7 +174,7 @@ function SearchResults({ autocomplete, query, collection }) {
 
 const SearchInput = forwardRef(function SearchInput(
   { autocomplete, autocompleteState, onClose },
-  inputRef
+  inputRef,
 ) {
   let inputProps = autocomplete.getInputProps({})
 
@@ -185,7 +185,7 @@ const SearchInput = forwardRef(function SearchInput(
         ref={inputRef}
         className={clsx(
           'flex-auto appearance-none bg-transparent pl-12 text-slate-900 outline-none placeholder:text-slate-400 focus:w-full focus:flex-none dark:text-white sm:text-sm [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden',
-          autocompleteState.status === 'stalled' ? 'pr-11' : 'pr-4'
+          autocompleteState.status === 'stalled' ? 'pr-11' : 'pr-4',
         )}
         {...inputProps}
         onKeyDown={(event) => {
@@ -333,7 +333,7 @@ export function Search() {
 
   useEffect(() => {
     setModifierKey(
-      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? '⌘' : 'Ctrl '
+      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? '⌘' : 'Ctrl ',
     )
   }, [])
 

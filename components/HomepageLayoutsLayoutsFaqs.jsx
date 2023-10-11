@@ -2,27 +2,26 @@ import { Container } from '@/components/Container'
 import { gql } from '@apollo/client'
 
 const getColumns = (questions, numberOfColumns) => {
-  
-  let columns = [];
+  let columns = []
   // start with the middle column to keep things centered
-  let currentColumn = 1;
-  questions && questions.map(question => {
-    if (currentColumn >= numberOfColumns) {
-      currentColumn = 0;
-    }
-    if ( !columns[currentColumn] ) {
-      columns[currentColumn] = [];
-    }
-    columns[currentColumn].push(question);
-    currentColumn++;
-  })
+  let currentColumn = 1
+  questions &&
+    questions.map((question) => {
+      if (currentColumn >= numberOfColumns) {
+        currentColumn = 0
+      }
+      if (!columns[currentColumn]) {
+        columns[currentColumn] = []
+      }
+      columns[currentColumn].push(question)
+      currentColumn++
+    })
 
-  return columns;
-};
+  return columns
+}
 
 const HomepageLayoutsLayoutsFaqs = ({ title, description, questions }) => {
-
-  const columns = getColumns(questions, 3);
+  const columns = getColumns(questions, 3)
 
   return (
     <section
@@ -30,7 +29,6 @@ const HomepageLayoutsLayoutsFaqs = ({ title, description, questions }) => {
       aria-labelledby="faq-title"
       className="relative overflow-hidden bg-slate-100 dark:bg-slate-800 py-20 sm:py-32"
     >
-      
       <Container className="relative">
         <div className="mx-auto max-w-2xl lg:mx-0 prose dark:prose-invert">
           <h2
@@ -39,7 +37,10 @@ const HomepageLayoutsLayoutsFaqs = ({ title, description, questions }) => {
           >
             {title}
           </h2>
-          <p className="mt-4 text-lg tracking-tight dark:text-slate-300 text-slate-700" dangerouslySetInnerHTML={{__html: description}} />
+          <p
+            className="mt-4 text-lg tracking-tight dark:text-slate-300 text-slate-700"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         </div>
         <ul
           role="list"
@@ -53,7 +54,10 @@ const HomepageLayoutsLayoutsFaqs = ({ title, description, questions }) => {
                     <h3 className="font-display text-lg leading-7 dark:text-slate-200 text-slate-900">
                       {faq.question}
                     </h3>
-                    <div className="prose dark:prose-invert mt-4 text-sm dark:text-slate-300 text-slate-700" dangerouslySetInnerHTML={{__html: faq.answer }} />
+                    <div
+                      className="prose dark:prose-invert mt-4 text-sm dark:text-slate-300 text-slate-700"
+                      dangerouslySetInnerHTML={{ __html: faq.answer }}
+                    />
                   </li>
                 ))}
               </ul>
@@ -66,14 +70,14 @@ const HomepageLayoutsLayoutsFaqs = ({ title, description, questions }) => {
 }
 
 HomepageLayoutsLayoutsFaqs.fragment = gql`
-fragment HomepageLayoutsLayoutsFaqs on LayoutFaqs_Fields {
-  title
-  description
-  questions {
-    question
-    answer
+  fragment HomepageLayoutsLayoutsFaqs on LayoutFaqs_Fields {
+    title
+    description
+    questions {
+      question
+      answer
+    }
   }
-}
-`;
+`
 
-export default HomepageLayoutsLayoutsFaqs;
+export default HomepageLayoutsLayoutsFaqs

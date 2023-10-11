@@ -39,7 +39,7 @@ const themeScript = `
 `
 
 export default function Document() {
-    return (
+  return (
     <Html className="antialiased [font-feature-settings:'ss01']" lang="en">
       <Head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
@@ -49,5 +49,5 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-    )
+  )
 }
