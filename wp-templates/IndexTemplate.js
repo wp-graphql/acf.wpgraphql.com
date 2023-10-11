@@ -13,7 +13,7 @@ const IndexTemplate = ({ data }) => {
         return null;
     }
 
-    const { title, editorBlocks } = node;
+    const { editorBlocks } = node;
 
     let toc = [];
     
