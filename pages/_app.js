@@ -6,6 +6,7 @@ import { FaustProvider } from "@faustwp/core";
 import { WordPressBlocksProvider } from "@faustwp/blocks";
 import 'focus-visible'
 import '@/styles/tailwind.css'
+import '../globalStylesheet.css'
 import blocks from '@/wp-blocks'
 
 export default function MyApp({ Component, pageProps }) {
