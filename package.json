@@ -13,7 +13,7 @@
     "@algolia/autocomplete-core": "^1.9.2",
     "@apollo/client": "^3.7.7",
     "@faustwp/blocks": "^2.0.0",
-    "@faustwp/cli": "^1.1.3",
+    "@faustwp/cli": "^1.1.4",
     "@faustwp/core": "^1.1.2",
     "@headlessui/react": "^1.7.13",
     "@markdoc/markdoc": "0.1.7",
