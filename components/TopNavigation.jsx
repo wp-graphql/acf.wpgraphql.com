@@ -35,7 +35,6 @@ export const TopNavigationFragment = gql`
 `;
 
 export function TopNavigation({ navigation }) {
-  console.log({ navigation });
   return (
     <NavigationMenu>
       <NavigationMenuList>
