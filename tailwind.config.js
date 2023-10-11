@@ -43,6 +43,10 @@ module.exports = {
           display: ['Lexend', ...defaultTheme.fontFamily.sans],
         },
         colors: {
+          'wp-primary': 'var(--wp--preset--color--primary)',
+          'wp-secondary': 'var(--wp--preset--color--secondary)',
+          'wp-base': 'var(--wp--preset--color--base)',
+          'wp-contrast': 'var(--wp--preset--color--contrast)',
           border: "hsl(var(--border))",
           input: "hsl(var(--input))",
           ring: "hsl(var(--ring))",
@@ -76,6 +80,11 @@ module.exports = {
             DEFAULT: "hsl(var(--card))",
             foreground: "hsl(var(--card-foreground))",
           },
+        },
+        fontSize: {
+          'wp-small': 'var(--wp--preset--font-size--small)',
+          'wp-medium': 'var(--wp--preset--font-size--medium)',
+          'wp-large': 'var(--wp--preset--font-size--large)'
         },
         maxWidth: {
           '8xl': '88rem',
