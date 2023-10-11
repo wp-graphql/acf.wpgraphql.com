@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "faust dev",
     "build": "faust build",
-    "generate": "faust generatePossibleTypes",
+    "generate": "faust generatePossibleTypes && faust generateGlobalStylesheet",
     "start": "faust start",
     "predev": "npm run generate",
     "prebuild": "npm run generate"
