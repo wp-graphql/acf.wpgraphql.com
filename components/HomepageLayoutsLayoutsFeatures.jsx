@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+
 import FeatureTabsLeft from './FeatureTabsLeft'
 import FeatureTabsTop from './FeatureTabsTop'
 

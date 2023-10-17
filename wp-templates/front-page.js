@@ -1,9 +1,10 @@
 import { gql } from '@apollo/client'
-import { LayoutFrontPage } from '@/components/LayoutFrontPage'
+
 import HomepageLayoutsLayoutsFaqs from '@/components/HomepageLayoutsLayoutsFaqs'
-import HomepageLayoutsLayoutsSupportedFieldTypes from '@/components/HomepageLayoutsLayoutsSupportedFieldTypes'
 import HomepageLayoutsLayoutsFeatures from '@/components/HomepageLayoutsLayoutsFeatures'
 import HomepageLayoutsLayoutsHero from '@/components/HomepageLayoutsLayoutsHero'
+import HomepageLayoutsLayoutsSupportedFieldTypes from '@/components/HomepageLayoutsLayoutsSupportedFieldTypes'
+import { LayoutFrontPage } from '@/components/LayoutFrontPage'
 
 export const FrontPage = ({ data }) => {
   return (

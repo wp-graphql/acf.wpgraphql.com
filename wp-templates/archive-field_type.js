@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client'
-import { FieldTypesList } from '../components/FieldTypesList'
-import { LayoutArchive } from '../components/LayoutArchive'
+
+import { FieldTypesList } from '@/components/FieldTypesList'
+import { LayoutArchive } from '@/components/LayoutArchive'
 
 export const ArchiveFieldType = (props) => {
   const { data } = props

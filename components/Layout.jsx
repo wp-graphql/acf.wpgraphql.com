@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useState } from 'react'
-import Link from 'next/link'
-import clsx from 'clsx'
-
-import { PrimaryNavigation } from '@/components/PrimaryNavigation'
-import { DocsSidebarNavigation } from '@/components/DocsSidebarNavigation'
-import { Prose } from '@/components/Prose'
 import { gql } from '@apollo/client'
 import { flatListToHierarchical } from '@faustwp/core'
-import { collectHeadings } from '@/lib/utils'
+import clsx from 'clsx'
+import Link from 'next/link'
+import { useCallback, useEffect, useState } from 'react'
+
+import { DocsSidebarNavigation } from '@/components/DocsSidebarNavigation'
+import { PrimaryNavigation } from '@/components/PrimaryNavigation'
+import { Prose } from '@/components/Prose'
 import { SiteHeader } from '@/components/SiteHeader'
+import { collectHeadings } from '@/lib/utils'
 
 Layout.fragment = gql`
   fragment LayoutFragment on RootQuery {

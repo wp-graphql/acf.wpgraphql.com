@@ -1,77 +1,49 @@
 {
   "root": true,
-  "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "ecmaVersion": 2020,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
   "env": {
     "browser": true,
-    "es6": true,
-    "node": true,
-    "jest": true
+    "es2021": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@next/next/recommended",
     "plugin:react/recommended",
-    "plugin:jest/recommended",
-    "plugin:prettier/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "next"
   ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
   "plugins": [
     "react",
-    "jest",
-    "prettier",
-    "react-hooks",
-    "@next/next"
+    "@typescript-eslint",
+    "import"
   ],
   "rules": {
-    "prettier/prettier": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
-    "no-console": "warn",
-    "no-debugger": "warn",
-    "no-unused-vars": "warn",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "@next/next/no-img-element": "error"
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "react/prop-types": "off"
   },
   "settings": {
     "react": {
       "version": "detect"
-    },
-    "requireConfigFile": false
-  },
-  "overrides": [
-    {
-      "files": ["*.js", "*.jsx"],
-      "parser": "@babel/eslint-parser",
-      "parserOptions": {
-        "requireConfigFile": false,
-        "babelOptions": {
-          "presets": ["@babel/preset-env", "@babel/preset-react"]
-        }
-      },
-      "rules": {
-        // ...your JavaScript-specific rules here
-      }
-    },
-    {
-      "files": ["*.ts", "*.tsx"],
-      "parser": "@typescript-eslint/parser",
-      "plugins": ["@typescript-eslint"],
-      "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
-      ],
-      "rules": {
-        // ...your TypeScript-specific rules here
-      }
     }
-  ]
+  }
 }

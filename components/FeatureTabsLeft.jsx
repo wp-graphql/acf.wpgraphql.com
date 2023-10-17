@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
-import Image from 'next/image'
+import { gql } from '@apollo/client'
 import { Tab } from '@headlessui/react'
 import clsx from 'clsx'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
 import { Container } from '@/components/Container'
-import { gql } from '@apollo/client'
+
 
 const FeatureTabsLeft = (layout) => {
   const { features } = layout

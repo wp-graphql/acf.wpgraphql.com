@@ -1,6 +1,7 @@
-import { PrimaryNavigation } from '@/components/PrimaryNavigation'
 import { gql } from '@apollo/client'
 import { flatListToHierarchical } from '@faustwp/core'
+
+import { PrimaryNavigation } from '@/components/PrimaryNavigation'
 import { SiteHeader } from '@/components/SiteHeader'
 
 LayoutFrontPage.fragment = gql`

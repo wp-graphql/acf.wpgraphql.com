@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
 import clsx from 'clsx'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
+import { GitHubIcon } from '@/components/icons/GitHubIcon'
+import { WordPressIcon } from '@/components/icons/WordPressIcon'
 import { Logo } from '@/components/Logo'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { PrimaryNavigation } from '@/components/PrimaryNavigation'
 import { Search } from '@/components/Search'
 import { ThemeSelector } from '@/components/ThemeSelector'
-import { GitHubIcon } from '@/components/icons/GitHubIcon'
-import { WordPressIcon } from '@/components/icons/WordPressIcon'
 
 export function SiteHeader({ navigation }) {
   let [isScrolled, setIsScrolled] = useState(false)

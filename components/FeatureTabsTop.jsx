@@ -1,9 +1,10 @@
-import Image from 'next/image'
+import { gql } from '@apollo/client'
 import { Tab } from '@headlessui/react'
 import clsx from 'clsx'
+import Image from 'next/image'
 
 import { Container } from '@/components/Container'
-import { gql } from '@apollo/client'
+
 
 function Feature({ feature, isActive, className, ...props }) {
   return (
