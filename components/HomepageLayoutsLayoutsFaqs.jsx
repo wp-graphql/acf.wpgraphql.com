@@ -1,5 +1,6 @@
-import { Container } from '@/components/Container'
 import { gql } from '@apollo/client'
+
+import { Container } from '@/components/Container'
 
 const getColumns = (questions, numberOfColumns) => {
   let columns = []

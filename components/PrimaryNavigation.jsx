@@ -1,8 +1,7 @@
-import * as React from 'react'
-import Link from 'next/link'
 import { gql } from '@apollo/client'
+import Link from 'next/link'
+import * as React from 'react'
 
-import { cn } from '@/lib/utils'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,6 +11,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
+import { cn } from '@/lib/utils'
 
 PrimaryNavigation.fragment = gql`
   fragment PrimaryNavigationFragment on RootQuery {

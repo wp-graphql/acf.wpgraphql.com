@@ -1,10 +1,12 @@
-import { Layout } from '@/components/Layout'
-import { Badge } from '@/components/ui/badge'
 import { gql } from '@apollo/client'
-import { Separator } from '@radix-ui/react-separator'
-import blocks from '@/wp-blocks'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { flatListToHierarchical } from '@faustwp/core'
+import { Separator } from '@radix-ui/react-separator'
+
+import { Layout } from '@/components/Layout'
+import { Badge } from '@/components/ui/badge'
+import blocks from '@/wp-blocks'
+
 
 // const nodeContent =`
 //     <div className="prose dark:prose-invert">

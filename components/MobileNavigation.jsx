@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import { Dialog } from '@headlessui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Dialog } from '@headlessui/react'
+import { useEffect, useState } from 'react'
 
-import { Logo } from '@/components/Logo'
 import { DocsSidebarNavigation } from '@/components/DocsSidebarNavigation'
+import { Logo } from '@/components/Logo'
 
 function MenuIcon(props) {
   return (

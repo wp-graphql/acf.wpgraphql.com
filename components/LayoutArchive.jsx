@@ -1,9 +1,12 @@
-import { DocsSidebarNavigation } from '@/components/DocsSidebarNavigation'
-import { Prose } from '@/components/Prose'
 import { gql } from '@apollo/client'
 import { flatListToHierarchical } from '@faustwp/core'
-import { SiteHeader } from '@/components/SiteHeader'
+
 import { PrimaryNavigation } from './PrimaryNavigation'
+
+import { DocsSidebarNavigation } from '@/components/DocsSidebarNavigation'
+import { Prose } from '@/components/Prose'
+import { SiteHeader } from '@/components/SiteHeader'
+
 
 LayoutArchive.fragment = gql`
   fragment LayoutArchiveFragment on RootQuery {

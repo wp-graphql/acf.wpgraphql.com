@@ -1,9 +1,10 @@
-import { Fragment } from 'react'
+import { gql } from '@apollo/client'
 import clsx from 'clsx'
 import Highlight, { defaultProps } from 'prism-react-renderer'
+import { Fragment } from 'react'
 
 import { Button } from '@/components/Button'
-import { gql } from '@apollo/client'
+
 
 function TrafficLightsIcon(props) {
   return (

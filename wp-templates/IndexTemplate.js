@@ -1,8 +1,9 @@
-import { Layout } from '@/components/Layout'
 import { gql } from '@apollo/client'
-import blocks from '@/wp-blocks'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { flatListToHierarchical } from '@faustwp/core'
+
+import { Layout } from '@/components/Layout'
+import blocks from '@/wp-blocks'
 
 export const IndexTemplate = ({ data }) => {
   const { node } = data

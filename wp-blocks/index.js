@@ -1,9 +1,12 @@
 import { CoreBlocks } from '@faustwp/blocks'
-import CustomHeading from './CoreHeading'
-import AcfFieldTypeSettings from './AcfFieldTypeSettings'
 
-export default {
+import AcfFieldTypeSettings from './AcfFieldTypeSettings'
+import CustomHeading from './CoreHeading'
+
+const blocks = {
   ...CoreBlocks,
   CoreHeading: CustomHeading,
   AcfFieldTypeSettings: AcfFieldTypeSettings,
 }
+
+export default blocks
