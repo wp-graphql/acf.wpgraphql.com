@@ -10,8 +10,9 @@ import TempPersistedQueriesFixPlugin from './plugins/TempPersistedQueriesFixPlug
 export default setConfig({
   templates,
   experimentalPlugins: [
-    new TempPersistedQueriesFixPlugin(),
-    new PersistedQueriesPlugin(),
+    // new TempPersistedQueriesFixPlugin(),
+    // new PersistedQueriesPlugin(),
   ],
+  usePersistedQueries: true,
   possibleTypes,
 })
