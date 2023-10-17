@@ -159,7 +159,7 @@ const HomepageLayoutsLayoutsSupportedFieldTypes = (data) => {
         >
           {data.title}
         </h2>
-        <p
+        <div
           className="mt-2 text-lg dark:text-gray-200 text-gray-600 sm:text-center"
           dangerouslySetInnerHTML={{ __html: data.description }}
         />

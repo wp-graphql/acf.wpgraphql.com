@@ -22,11 +22,11 @@ const HomepageLayoutsLayoutsHero = (hero) => {
         <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 lg:max-w-8xl lg:grid-cols-2 lg:px-8 xl:gap-x-16 xl:px-12">
           <div className="relative z-10 md:text-center lg:text-left">
             <div className="relative">
-              <p
+              <div
                 className="inline bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600 dark:from-orange-300 dark:via-orange-600 dark:to-orange-300 bg-clip-text font-display text-5xl tracking-tight text-transparent"
                 dangerouslySetInnerHTML={{ __html: hero.title }}
               />
-              <p
+              <div
                 className="mt-3 text-2xl tracking-tight text-gray-600 dark:text-slate-300"
                 dangerouslySetInnerHTML={{ __html: hero.description }}
               />

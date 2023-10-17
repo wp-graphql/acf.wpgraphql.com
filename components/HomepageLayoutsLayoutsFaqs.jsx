@@ -37,7 +37,7 @@ const HomepageLayoutsLayoutsFaqs = ({ title, description, questions }) => {
           >
             {title}
           </h2>
-          <p
+          <div
             className="mt-4 text-lg tracking-tight dark:text-slate-300 text-slate-700"
             dangerouslySetInnerHTML={{ __html: description }}
           />

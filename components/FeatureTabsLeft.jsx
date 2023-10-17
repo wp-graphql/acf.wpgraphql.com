@@ -37,7 +37,7 @@ const FeatureTabsLeft = (layout) => {
             className="font-display text-3xl tracking-tight text-gray dark:text-white sm:text-4xl md:text-5xl"
             dangerouslySetInnerHTML={{ __html: layout.name }}
           />
-          <p
+          <div
             className="mt-6 text-lg tracking-tight text-gray dark:text-white"
             dangerouslySetInnerHTML={{ __html: layout.descripton }}
           />
