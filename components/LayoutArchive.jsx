@@ -1,7 +1,7 @@
 import {
-  SidebarNavigation,
-  SidebarNavigationFragment,
-} from '@/components/SidebarNavigation'
+  DocsSidebarNavigation,
+  DocsSidebarNavigationFragment,
+} from '@/components/DocsSidebarNavigation'
 import { Prose } from '@/components/Prose'
 import { gql } from '@apollo/client'
 import { flatListToHierarchical } from '@faustwp/core'
@@ -9,9 +9,9 @@ import { SiteHeader } from '@/components/SiteHeader'
 
 export const LayoutFragment = gql`
   fragment LayoutFragment on RootQuery {
-    ...SidebarNavigationFragment
+    ...DocsSidebarNavigationFragment
   }
-  ${SidebarNavigationFragment}
+  ${DocsSidebarNavigationFragment}
 `
 
 export function LayoutArchive({ data, children, title }) {
@@ -37,7 +37,7 @@ export function LayoutArchive({ data, children, title }) {
           <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
           <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-slate-800 dark:block" />
           <div className="sticky top-[4.5rem] -ml-0.5 h-[calc(100vh-4.5rem)] w-64 overflow-y-auto overflow-x-hidden py-16 pl-0.5 pr-8 xl:w-72 xl:pr-16">
-            <SidebarNavigation data={data} navigation={navigation} />
+            <DocsSidebarNavigation data={data} navigation={navigation} />
           </div>
         </div>
         <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pl-8 lg:pr-0 xl:px-16">

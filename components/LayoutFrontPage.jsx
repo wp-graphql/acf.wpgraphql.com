@@ -1,13 +1,13 @@
-import { TopNavigationFragment } from '@/components/TopNavigation'
+import { PrimaryNavigationFragment } from '@/components/PrimaryNavigation'
 import { gql } from '@apollo/client'
 import { flatListToHierarchical } from '@faustwp/core'
 import { SiteHeader } from '@/components/SiteHeader'
 
 export const LayoutFragment = gql`
   fragment LayoutFragment on RootQuery {
-    ...TopNavigationFragment
+    ...PrimaryNavigationFragment
   }
-  ${TopNavigationFragment}
+  ${PrimaryNavigationFragment}
 `
 
 export function LayoutFrontPage({ data, children }) {

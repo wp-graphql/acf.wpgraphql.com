@@ -15,9 +15,9 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 
-export const TopNavigationFragment = gql`
-  fragment TopNavigationFragment on RootQuery {
-    menuItems(first: 100, where: { location: TOP }) {
+export const PrimaryNavigationFragment = gql`
+  fragment PrimaryNavigationFragment on RootQuery {
+    menuItems(first: 100, where: { location: PRIMARY }) {
       nodes {
         id
         label
@@ -34,7 +34,7 @@ export const TopNavigationFragment = gql`
   }
 `
 
-export function TopNavigation({ navigation }) {
+export function PrimaryNavigation({ navigation }) {
   return (
     <NavigationMenu>
       <NavigationMenuList>

@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 import { Logo } from '@/components/Logo'
 import { MobileNavigation } from '@/components/MobileNavigation'
-import { TopNavigation } from '@/components/TopNavigation'
+import { PrimaryNavigation } from '@/components/PrimaryNavigation'
 import { Search } from '@/components/Search'
 import { ThemeSelector } from '@/components/ThemeSelector'
 import { GitHubIcon } from '@/components/icons/GitHubIcon'
@@ -40,7 +40,7 @@ export function SiteHeader({ navigation }) {
         <Link href="/" aria-label="Home page">
           <Logo className="h-5 lg:h-9 w-auto bg-slate-900/95 p-1 rounded-md fill-slate-700 dark:fill-sky-100 lg:block" />
         </Link>
-        <TopNavigation navigation={navigation} />
+        <PrimaryNavigation navigation={navigation} />
       </div>
       <div className="-my-5 mr-6 sm:mr-8 md:mr-0">
         <Search />
