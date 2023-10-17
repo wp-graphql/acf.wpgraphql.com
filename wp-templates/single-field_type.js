@@ -1,4 +1,4 @@
-import { LayoutFragment, Layout } from '@/components/Layout'
+import { Layout } from '@/components/Layout'
 import { Badge } from '@/components/ui/badge'
 import { gql } from '@apollo/client'
 import { Separator } from '@radix-ui/react-separator'
@@ -144,7 +144,7 @@ query SingleAcfFieldType($uri: String!) {
         ...aCFFieldTypeCategoriesFragment
     }
 }
-${LayoutFragment}
+${Layout.fragment}
 ${aCFFieldTypeCategoriesFragment}
 ${blocks.CoreParagraph.fragments.entry}
 ${blocks.CoreColumns.fragments.entry}

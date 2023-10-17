@@ -1,5 +1,3 @@
-'use client'
-
 import * as React from 'react'
 import Link from 'next/link'
 import { gql } from '@apollo/client'
@@ -15,9 +13,9 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 
-export const PrimaryNavigationFragment = gql`
+PrimaryNavigation.fragment = gql`
   fragment PrimaryNavigationFragment on RootQuery {
-    menuItems(first: 100, where: { location: PRIMARY }) {
+    primaryMenuItems: menuItems(first: 100, where: { location: PRIMARY }) {
       nodes {
         id
         label

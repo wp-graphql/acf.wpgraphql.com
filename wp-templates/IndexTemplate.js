@@ -1,10 +1,10 @@
-import { Layout, LayoutFragment } from '@/components/Layout'
+import { Layout } from '@/components/Layout'
 import { gql } from '@apollo/client'
 import blocks from '@/wp-blocks'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { flatListToHierarchical } from '@faustwp/core'
 
-const IndexTemplate = ({ data }) => {
+export const IndexTemplate = ({ data }) => {
   const { node } = data
 
   if (!node) {
@@ -78,7 +78,6 @@ const IndexTemplate = ({ data }) => {
 
 IndexTemplate.query = gql`
 query IndexTemplate($uri: String!) {
-    ...LayoutFragment
     node: nodeByUri(uri: $uri) {
         __typename
         uri
@@ -112,8 +111,8 @@ query IndexTemplate($uri: String!) {
             }
         }
     }
+    ...LayoutFragment
 }
-${LayoutFragment}
 ${blocks.CoreParagraph.fragments.entry}
 ${blocks.CoreColumns.fragments.entry}
 ${blocks.CoreColumn.fragments.entry}
@@ -125,8 +124,7 @@ ${blocks.CoreImage.fragments.entry}
 ${blocks.CoreSeparator.fragments.entry}
 ${blocks.CoreList.fragments.entry}
 ${blocks.CoreHeading.fragments.entry}
+${Layout.fragment}
 `
 
 IndexTemplate.variables = ({ uri }) => ({ uri })
-
-export default IndexTemplate

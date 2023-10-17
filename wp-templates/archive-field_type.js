@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 import { FieldTypesList } from '../components/FieldTypesList'
-import { LayoutArchive, LayoutFragment } from '../components/LayoutArchive'
+import { LayoutArchive } from '../components/LayoutArchive'
 
-const ArchiveFieldType = (props) => {
+export const ArchiveFieldType = (props) => {
   const { data } = props
 
   const { node } = data
@@ -62,11 +62,9 @@ ArchiveFieldType.query = gql`
         }
       }
     }
-    ...LayoutFragment
+    ...LayoutArchiveFragment
   }
-  ${LayoutFragment}
+  ${LayoutArchive.fragment}
 `
 
 ArchiveFieldType.variables = ({ uri }) => ({ uri })
-
-export default ArchiveFieldType

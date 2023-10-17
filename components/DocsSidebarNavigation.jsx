@@ -2,9 +2,9 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { gql } from '@apollo/client'
 
-export const DocsSidebarNavigationFragment = gql`
+DocsSidebarNavigation.fragment = gql`
   fragment DocsSidebarNavigationFragment on RootQuery {
-    menuItems(first: 100, where: { location: PRIMARY }) {
+    docsSidebarMenuItems: menuItems(first: 100, where: { location: DOCS_SIDEBAR }) {
       nodes {
         id
         label

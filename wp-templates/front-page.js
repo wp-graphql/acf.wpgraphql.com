@@ -4,7 +4,6 @@ import HomepageLayoutsLayoutsFaqs from '@/components/HomepageLayoutsLayoutsFaqs'
 import HomepageLayoutsLayoutsSupportedFieldTypes from '@/components/HomepageLayoutsLayoutsSupportedFieldTypes'
 import HomepageLayoutsLayoutsFeatures from '@/components/HomepageLayoutsLayoutsFeatures'
 import HomepageLayoutsLayoutsHero from '@/components/HomepageLayoutsLayoutsHero'
-import { PrimaryNavigationFragment } from '@/components/PrimaryNavigation'
 
 export const FrontPage = ({ data }) => {
   return (
@@ -53,13 +52,13 @@ FrontPage.query = gql`
         }
       }
     }
-    ...PrimaryNavigationFragment
+    ...LayoutFrontPageFragment
   }
   ${HomepageLayoutsLayoutsHero.fragment}
   ${HomepageLayoutsLayoutsFeatures.fragment}
   ${HomepageLayoutsLayoutsSupportedFieldTypes.fragment}
   ${HomepageLayoutsLayoutsFaqs.fragment}
-  ${PrimaryNavigationFragment}
+  ${LayoutFrontPage.fragment}
 `
 
 FrontPage.variables = ({ uri }) => ({ uri })
