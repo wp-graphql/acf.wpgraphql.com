@@ -4,7 +4,10 @@ import { gql } from '@apollo/client'
 
 DocsSidebarNavigation.fragment = gql`
   fragment DocsSidebarNavigationFragment on RootQuery {
-    docsSidebarMenuItems: menuItems(first: 100, where: { location: DOCS_SIDEBAR }) {
+    docsSidebarMenuItems: menuItems(
+      first: 100
+      where: { location: DOCS_SIDEBAR }
+    ) {
       nodes {
         id
         label

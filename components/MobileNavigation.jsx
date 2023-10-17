@@ -85,7 +85,10 @@ export function MobileNavigation({ navigation }) {
               <Logo className="h-auto w-9" />
             </Link>
           </div>
-          <DocsSidebarNavigation navigation={navigation} className="mt-5 px-1" />
+          <DocsSidebarNavigation
+            navigation={navigation}
+            className="mt-5 px-1"
+          />
         </Dialog.Panel>
       </Dialog>
     </>
