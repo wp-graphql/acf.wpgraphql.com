@@ -2,7 +2,16 @@
 
 This repository contains the Next.js application intended for acf.wpgraphql.com.
 
-## Development
+## 🧰 Built With
+
+- [wpengine/faust-scaffold](https://github.com/wpengine/faust-scaffold)
+- [wpengine/wp-graphql-content-blocks](https://github.com/wpengine/wp-graphql-content-blocks)
+- [wp-graphql/wp-graphql](https://github.com/wp-graphql/wp-graphql)
+- [wp-graphql/wpgraphql-acf](https://github.com/wp-graphql/wpgraphql-acf)
+- [ACF](https://www.advancedcustomfields.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+
+## ⌨️ Development
 
 Install dependencies
 
