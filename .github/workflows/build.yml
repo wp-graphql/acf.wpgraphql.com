@@ -1,17 +1,41 @@
 name: Build
-on: pull_request
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         node: ["16", "18"]
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - run: npm install
-      - run: cp .env.local.sample .env.local
-      - run: npm run build
-        continue-on-error: FALSE
+
+      - name: Install and Build
+        run: |
+          npm ci
+          cp .env.local.sample .env.local
+          npm run build
+
+      - name: Error handling
+        if: failure()
+        run: echo "Build failed!"
