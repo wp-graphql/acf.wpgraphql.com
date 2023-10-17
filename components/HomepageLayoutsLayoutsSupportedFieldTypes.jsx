@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import clsx from 'clsx'
-import {
-  useInView,
-} from 'framer-motion'
+import { useInView } from 'framer-motion'
 import Link from 'next/link'
 
 import { Container } from '@/components/Container'
@@ -21,30 +19,25 @@ function FieldType({ title, uri, featuredImage, className, ...props }) {
     <figure
       className={clsx(
         'animate-fade-in rounded-3xl bg-white p-6 opacity-0 shadow-md shadow-gray-900/5',
-        className
+        className,
       )}
       style={{ animationDelay }}
       {...props}
     >
       <Link href={uri}>
         <div className="text-gray-900">
-          {
-          featuredImage?.node?.sourceUrl && (
-              <Image
-                  src={featuredImage?.node?.sourceUrl}
-                  alt={featuredImage?.node?.altText || title}
-                  width={200}
-                  height={200}
-                  className='mx-auto'
-              />
-          )
-          }
-          <p className="mt-4 text-lg font-semibold leading-6">
-            {title}
-          </p>
+          {featuredImage?.node?.sourceUrl && (
+            <Image
+              src={featuredImage?.node?.sourceUrl}
+              alt={featuredImage?.node?.altText || title}
+              width={200}
+              height={200}
+              className="mx-auto"
+            />
+          )}
+          <p className="mt-4 text-lg font-semibold leading-6">{title}</p>
         </div>
       </Link>
-      
     </figure>
   )
 }
@@ -90,7 +83,6 @@ function FieldTypeColumn({
       style={{ '--marquee-duration': duration }}
     >
       {fieldTypes.concat(fieldTypes).map((fieldType, fieldTypeIndex) => (
-        
         <FieldType
           key={fieldTypeIndex}
           aria-hidden={fieldTypeIndex >= fieldTypes.length}
@@ -103,13 +95,13 @@ function FieldTypeColumn({
 }
 
 function FieldTypeGrid({ fieldTypes }) {
-
   let containerRef = useRef()
   let isInView = useInView(containerRef, { once: true, amount: 0.4 })
-  let columns = fieldTypes && fieldTypes.length > 0 ? splitArray(fieldTypes, 3) : null;
+  let columns =
+    fieldTypes && fieldTypes.length > 0 ? splitArray(fieldTypes, 3) : null
 
-  if ( ! columns) {
-    return null;
+  if (!columns) {
+    return null
   }
 
   columns = [columns[0], columns[1], splitArray(columns[2], 2)]
@@ -127,7 +119,7 @@ function FieldTypeGrid({ fieldTypes }) {
               clsx(
                 reviewIndex >= columns[0].length + columns[2][0].length &&
                   'md:hidden',
-                reviewIndex >= columns[0].length && 'lg:hidden'
+                reviewIndex >= columns[0].length && 'lg:hidden',
               )
             }
             msPerPixel={10}
@@ -153,7 +145,7 @@ function FieldTypeGrid({ fieldTypes }) {
   )
 }
 
-const HomepageLayoutsLayoutsSupportedFieldTypes = ( data ) => {
+const HomepageLayoutsLayoutsSupportedFieldTypes = (data) => {
   return (
     <section
       id="reviews"
@@ -165,9 +157,12 @@ const HomepageLayoutsLayoutsSupportedFieldTypes = ( data ) => {
           id="reviews-title"
           className="text-3xl font-medium tracking-tight mb-5 dark:text-gray-100 text-gray-900 sm:text-center"
         >
-           { data.title }
+          {data.title}
         </h2>
-        <p className="mt-2 text-lg dark:text-gray-200 text-gray-600 sm:text-center" dangerouslySetInnerHTML={{__html: data.description}}/>
+        <div
+          className="mt-2 text-lg dark:text-gray-200 text-gray-600 sm:text-center"
+          dangerouslySetInnerHTML={{ __html: data.description }}
+        />
 
         <FieldTypeGrid fieldTypes={data?.fieldTypes?.nodes} />
       </Container>
@@ -179,7 +174,7 @@ HomepageLayoutsLayoutsSupportedFieldTypes.fragment = gql`
   fragment HomepageLayoutsLayoutsSupportedFieldTypes on LayoutSupportedFieldTypes_Fields {
     title
     description
-    fieldTypes(first:100) {
+    fieldTypes(first: 100) {
       nodes {
         __typename
         ... on FieldType {
@@ -198,4 +193,4 @@ HomepageLayoutsLayoutsSupportedFieldTypes.fragment = gql`
   }
 `
 
-export default HomepageLayoutsLayoutsSupportedFieldTypes;
+export default HomepageLayoutsLayoutsSupportedFieldTypes

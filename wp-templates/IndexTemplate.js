@@ -1,77 +1,83 @@
-import { Layout, LayoutFragment } from '@/components/Layout'
+import { Layout } from '@/components/Layout'
 import { gql } from '@apollo/client'
-import blocks from "@/wp-blocks";
-import { WordPressBlocksViewer } from '@faustwp/blocks';
-import { flatListToHierarchical } from '@faustwp/core';
-import slugify from '@sindresorhus/slugify';
+import blocks from '@/wp-blocks'
+import { WordPressBlocksViewer } from '@faustwp/blocks'
+import { flatListToHierarchical } from '@faustwp/core'
 
-const IndexTemplate = ({ data }) => {
+export const IndexTemplate = ({ data }) => {
+  const { node } = data
 
-    const { node } = data;
+  if (!node) {
+    return null
+  }
 
-    if ( ! node ) {
-        return null;
-    }
+  const { editorBlocks } = node
 
-    const { title, editorBlocks } = node;
+  let toc = []
 
-    let toc = [];
-    
-    editorBlocks && editorBlocks.map( block => {
-        
-        if ( ! block.attributes || ! block.attributes.level ) {
-            return null;
+  editorBlocks &&
+    editorBlocks.map((block) => {
+      if (!block.attributes || !block.attributes.level) {
+        return null
+      }
+
+      if (block.attributes.level === 2 || block.attributes.level === 3) {
+        let heading = {
+          tagName: `h${block.attributes.level}`,
+          children: [
+            {
+              type: 'text',
+              value: block.attributes.content,
+            },
+          ],
         }
-
-        if ( block.attributes.level === 2 || block.attributes.level === 3 ) {
-            let id = slugify( block.attributes.content );
-            let heading = {
-                tagName: `h${block.attributes.level}`,
-                children: [{
-                    type: 'text',
-                    value: block.attributes.content
-                }],
-            }
-            toc.push( heading )
-        }    
-    });
-
-    const blockList = flatListToHierarchical(editorBlocks, {childrenKey: 'innerBlocks'});
-
-    console.log({
-        editorBlocks,
-        blockList
+        toc.push(heading)
+      }
     })
 
-    return (
-        <Layout 
-            title={node?.title ? node.title : 'WPGraphQL for ACF' } 
-            data={data} 
-            navigation={data?.navigation?.nodes}
-            toc={toc}
-            >
-            
-            { node?.modified && 
-                <div id="last-updated" className="text-sm text-gray-500">
-                    Last Upated: {new Date(node.modified).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}
-                </div>
-            }
-            <WordPressBlocksViewer blocks={blockList} />
-            {/* <h2>Raw editorBlocks</h2> */}
-            {
-                /**
-                 *  uncomment to debug editorBlocks
-                 *  <pre>{JSON.stringify(node.editorBlocks, null, 2)}</pre>
-                 */
-                // <pre>{JSON.stringify(node, null, 2)}</pre>
-            }
-        </Layout>
-    )
+  const blockList = flatListToHierarchical(editorBlocks, {
+    childrenKey: 'innerBlocks',
+  })
+
+  // eslint-disable-next-line no-console
+  console.log({
+    editorBlocks,
+    blockList,
+  })
+
+  return (
+    <Layout
+      title={node?.title ? node.title : 'WPGraphQL for ACF'}
+      data={data}
+      navigation={data?.navigation?.nodes}
+      toc={toc}
+    >
+      {node?.modified && (
+        <div id="last-updated" className="text-sm text-gray-500">
+          Last Upated:{' '}
+          {new Date(node.modified).toLocaleDateString('en-us', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          })}
+        </div>
+      )}
+      <WordPressBlocksViewer blocks={blockList} />
+      {/* <h2>Raw editorBlocks</h2> */}
+      {
+        /**
+         *  uncomment to debug editorBlocks
+         *  <pre>{JSON.stringify(node.editorBlocks, null, 2)}</pre>
+         */
+        // <pre>{JSON.stringify(node, null, 2)}</pre>
+      }
+    </Layout>
+  )
 }
 
 IndexTemplate.query = gql`
 query IndexTemplate($uri: String!) {
-    ...LayoutFragment
     node: nodeByUri(uri: $uri) {
         __typename
         uri
@@ -105,8 +111,8 @@ query IndexTemplate($uri: String!) {
             }
         }
     }
+    ...LayoutFragment
 }
-${LayoutFragment}
 ${blocks.CoreParagraph.fragments.entry}
 ${blocks.CoreColumns.fragments.entry}
 ${blocks.CoreColumn.fragments.entry}
@@ -118,8 +124,7 @@ ${blocks.CoreImage.fragments.entry}
 ${blocks.CoreSeparator.fragments.entry}
 ${blocks.CoreList.fragments.entry}
 ${blocks.CoreHeading.fragments.entry}
+${Layout.fragment}
 `
 
 IndexTemplate.variables = ({ uri }) => ({ uri })
-
-export default IndexTemplate

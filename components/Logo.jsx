@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from 'next/image'
 
 function LogomarkPaths() {
   return (
@@ -20,11 +20,11 @@ export function Logomark(props) {
 export function Logo(props) {
   return (
     <Image
-        width={props?.width ?? 91}
-        height={props?.height ?? 35}
-        src="/logo-wpgraphql-acf.png"
-        alt="WPGraphQL Logo"
-        {...props}
+      width={props?.width ?? 91}
+      height={props?.height ?? 35}
+      src="/logo-wpgraphql-acf.png"
+      alt="WPGraphQL Logo"
+      {...props}
     />
   )
 }

@@ -1,10 +1,10 @@
+/* eslint-disable */
 import { useEffect, useId, useState, forwardRef, useRef, Fragment } from 'react'
 import { useRouter } from 'next/router'
 import { createAutocomplete } from '@algolia/autocomplete-core'
 import { Dialog } from '@headlessui/react'
 import clsx from 'clsx'
 import Highlighter from 'react-highlight-words'
-import { navigation } from '@/components/Layout'
 
 function SearchIcon(props) {
   return (
@@ -48,7 +48,7 @@ function useAutocomplete() {
           ]
         })
       },
-    })
+    }),
   )
 
   return { autocomplete, autocompleteState }
@@ -95,53 +95,14 @@ function HighlightQuery({ text, query }) {
 }
 
 function SearchResult({ result, autocomplete, collection, query }) {
-  let id = useId()
+  // let id = useId()
 
-  let sectionTitle = navigation.find((section) =>
-    section.links.find((link) => link.href === result.url.split('#')[0])
-  )?.title
-  let hierarchy = [sectionTitle, result.pageTitle].filter(Boolean)
+  // let sectionTitle = navigation?.find((section) =>
+  //   section.links.find((link) => link.href === result.url.split('#')[0]),
+  // )?.title
+  // let hierarchy = [sectionTitle, result.pageTitle].filter(Boolean)
 
-  return (
-    <li
-      className="group block cursor-default rounded-lg px-3 py-2 aria-selected:bg-slate-100 dark:aria-selected:bg-slate-700/30"
-      aria-labelledby={`${id}-hierarchy ${id}-title`}
-      {...autocomplete.getItemProps({
-        item: result,
-        source: collection.source,
-      })}
-    >
-      <div
-        id={`${id}-title`}
-        aria-hidden="true"
-        className="text-sm text-slate-700 group-aria-selected:text-sky-600 dark:text-slate-300 dark:group-aria-selected:text-sky-400"
-      >
-        <HighlightQuery text={result.title} query={query} />
-      </div>
-      {hierarchy.length > 0 && (
-        <div
-          id={`${id}-hierarchy`}
-          aria-hidden="true"
-          className="mt-0.5 truncate whitespace-nowrap text-xs text-slate-500 dark:text-slate-400"
-        >
-          {hierarchy.map((item, itemIndex, items) => (
-            <Fragment key={itemIndex}>
-              <HighlightQuery text={item} query={query} />
-              <span
-                className={
-                  itemIndex === items.length - 1
-                    ? 'sr-only'
-                    : 'mx-2 text-slate-300 dark:text-slate-700'
-                }
-              >
-                /
-              </span>
-            </Fragment>
-          ))}
-        </div>
-      )}
-    </li>
-  )
+  return <>test</>
 }
 
 function SearchResults({ autocomplete, query, collection }) {
@@ -174,7 +135,7 @@ function SearchResults({ autocomplete, query, collection }) {
 
 const SearchInput = forwardRef(function SearchInput(
   { autocomplete, autocompleteState, onClose },
-  inputRef
+  inputRef,
 ) {
   let inputProps = autocomplete.getInputProps({})
 
@@ -185,7 +146,7 @@ const SearchInput = forwardRef(function SearchInput(
         ref={inputRef}
         className={clsx(
           'flex-auto appearance-none bg-transparent pl-12 text-slate-900 outline-none placeholder:text-slate-400 focus:w-full focus:flex-none dark:text-white sm:text-sm [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden',
-          autocompleteState.status === 'stalled' ? 'pr-11' : 'pr-4'
+          autocompleteState.status === 'stalled' ? 'pr-11' : 'pr-4',
         )}
         {...inputProps}
         onKeyDown={(event) => {
@@ -333,7 +294,7 @@ export function Search() {
 
   useEffect(() => {
     setModifierKey(
-      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? '⌘' : 'Ctrl '
+      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? '⌘' : 'Ctrl ',
     )
   }, [])
 

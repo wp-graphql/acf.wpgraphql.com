@@ -1,8 +1,8 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 class TempPersistedQueriesFixPlugin {
   apply({ addFilter }) {
-    addFilter("seedQueryDocumentNode", "faust", (seedQuery) => {
+    addFilter('seedQueryDocumentNode', 'faust', () => {
       return gql`
         query GetSeedNode(
           $id: ID! = 0
@@ -84,9 +84,9 @@ class TempPersistedQueriesFixPlugin {
           userId
           databaseId
         }
-      `;
-    });
+      `
+    })
   }
 }
 
-export default TempPersistedQueriesFixPlugin;
+export default TempPersistedQueriesFixPlugin

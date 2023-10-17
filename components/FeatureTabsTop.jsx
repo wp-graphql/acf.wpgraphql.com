@@ -5,17 +5,22 @@ import clsx from 'clsx'
 import { Container } from '@/components/Container'
 import { gql } from '@apollo/client'
 
-
 function Feature({ feature, isActive, className, ...props }) {
   return (
     <div
-      className={clsx(className, 'p-5 rounded-lg', !isActive ? 'opacity-75 hover:opacity-100 hover:bg-slate-50 dark:hover:bg-gray-800' : 'bg-slate-100 dark:bg-slate-800')}
+      className={clsx(
+        className,
+        'p-5 rounded-lg',
+        !isActive
+          ? 'opacity-75 hover:opacity-100 hover:bg-slate-50 dark:hover:bg-gray-800'
+          : 'bg-slate-100 dark:bg-slate-800',
+      )}
       {...props}
     >
       <h3
         className={clsx(
           'mt-6 text-sm font-medium',
-          isActive ? 'text-orange-500' : 'text-gray-500'
+          isActive ? 'text-orange-500' : 'text-gray-500',
         )}
       >
         {feature.featureSubtitle}
@@ -23,7 +28,9 @@ function Feature({ feature, isActive, className, ...props }) {
       <p className="mt-2 font-display text-xl text-left text-slate-900 dark:text-slate-50">
         {feature.name}
       </p>
-      <p className="mt-4 text-sm text-slate-600 dark:text-slate-200">{feature.featureDescription}</p>
+      <p className="mt-4 text-sm text-slate-600 dark:text-slate-200">
+        {feature.featureDescription}
+      </p>
     </div>
   )
 }
@@ -37,8 +44,8 @@ function FeaturesMobile({ features }) {
           <div className="relative mt-10 pb-10">
             <div className="absolute -inset-x-4 bottom-0 top-8  sm:-inset-x-6" />
             <div className="relative mx-auto w-[30.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
-            
-              { feature.featureImage && <Image
+              {feature.featureImage && (
+                <Image
                   className="w-full"
                   src={feature.featureImage.node.sourceUrl}
                   alt={feature.featureImage.node.altText}
@@ -46,7 +53,7 @@ function FeaturesMobile({ features }) {
                   height={feature.featureImage.node.mediaDetails.height}
                   sizes="30.75rem"
                 />
-                }
+              )}
             </div>
           </div>
         </div>
@@ -86,21 +93,22 @@ function FeaturesDesktop({ features }) {
                   key={feature.name}
                   className={clsx(
                     'px-5 transition duration-500 ease-in-out [&:not(:focus-visible)]:focus:outline-none',
-                    featureIndex !== selectedIndex && 'opacity-60'
+                    featureIndex !== selectedIndex && 'opacity-60',
                   )}
                   style={{ transform: `translateX(-${selectedIndex * 100}%)` }}
                   aria-hidden={featureIndex !== selectedIndex}
                 >
                   <div className="w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
-                    { feature.featureImage && <Image
-                      className="w-full"
-                      src={feature.featureImage.node.sourceUrl}
-                      alt={feature.featureImage.node.altText}
-                      width={feature.featureImage.node.mediaDetails.width}
-                      height={feature.featureImage.node.mediaDetails.height}
-                      sizes="52.75rem"
-                    />
-                    }
+                    {feature.featureImage && (
+                      <Image
+                        className="w-full"
+                        src={feature.featureImage.node.sourceUrl}
+                        alt={feature.featureImage.node.altText}
+                        width={feature.featureImage.node.mediaDetails.width}
+                        height={feature.featureImage.node.mediaDetails.height}
+                        sizes="52.75rem"
+                      />
+                    )}
                   </div>
                 </Tab.Panel>
               ))}
@@ -137,26 +145,26 @@ const FeatureTabsTop = (feature) => {
 }
 
 FeatureTabsTop.fragment = gql`
-fragment FeatureTabsTop on LayoutFeatureTabs_Fields {
-  layout
-  name
-  description
-  features {
+  fragment FeatureTabsTop on LayoutFeatureTabs_Fields {
+    layout
     name
-    featureSubtitle
-    featureDescription
-    featureImage {
-      node {
-        altText
-        sourceUrl
-        mediaDetails {
-          width
-          height
+    description
+    features {
+      name
+      featureSubtitle
+      featureDescription
+      featureImage {
+        node {
+          altText
+          sourceUrl
+          mediaDetails {
+            width
+            height
+          }
         }
       }
     }
   }
-}
-`;
+`
 
-export default FeatureTabsTop;
+export default FeatureTabsTop
