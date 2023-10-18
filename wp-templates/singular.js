@@ -5,7 +5,7 @@ import { flatListToHierarchical } from '@faustwp/core'
 import { Layout } from '@/components/Layout'
 import blocks from '@/wp-blocks'
 
-export const IndexTemplate = ({ data }) => {
+export const Singular = ({ data }) => {
   const myNode = data?.node
 
   if (!myNode) {
@@ -48,15 +48,15 @@ export const IndexTemplate = ({ data }) => {
 
   return (
     <Layout
-      title={myNode?.title ? myNode.title : 'WPGraphQL for ACF'}
+      title={node?.title ? node.title : 'WPGraphQL for ACF'}
       data={data}
       navigation={data?.navigation?.nodes}
       toc={toc}
     >
-      {myNode?.modified && (
+      {node?.modified && (
         <div id="last-updated" className="text-sm text-gray-500">
           Last Upated:{' '}
-          {new Date(myNode.modified).toLocaleDateString('en-us', {
+          {new Date(node.modified).toLocaleDateString('en-us', {
             weekday: 'long',
             year: 'numeric',
             month: 'short',
@@ -65,21 +65,13 @@ export const IndexTemplate = ({ data }) => {
         </div>
       )}
       <WordPressBlocksViewer blocks={blockList} />
-      {/* <h2>Raw editorBlocks</h2> */}
-      {
-        /**
-         *  uncomment to debug editorBlocks
-         *  <pre>{JSON.stringify(node.editorBlocks, null, 2)}</pre>
-         */
-        // <pre>{JSON.stringify(node, null, 2)}</pre>
-      }
     </Layout>
   )
 }
 
-IndexTemplate.query = gql`
-query IndexTemplate($uri: String!) {
-    node: nodeByUri(uri: $uri) {
+Singular.query = gql`
+query SingularTemplate($id: ID!, $asPreview: Boolean = false) {
+    node: post(id: $id, idType: URI, asPreview: $asPreview) {
         __typename
         uri
         ...on NodeWithTitle {
@@ -128,4 +120,9 @@ ${blocks.CoreHeading.fragments.entry}
 ${Layout.fragment}
 `
 
-IndexTemplate.variables = ({ uri }) => ({ uri })
+Singular.variables = ({ uri, asPreview }) => {
+  return {
+    id: uri,
+    asPreview
+  }
+}
