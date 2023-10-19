@@ -1,0 +1,50 @@
+.socialIconLink {
+  color: transparent;
+  display: inline-flex;
+  margin-left: 0.8rem;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+}
+
+.socialIconLink::after {
+  background-color: hsl(var(--muted-foreground));
+  content: "";
+  height: 100%;
+  left: 0;
+  opacity: 0.8;
+  position: absolute;
+  top: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.socialIconLink:hover::after,
+.socialIconLink:focus::after {
+  opacity: 1;
+}
+
+.socialIconLink[href*="github.com"]::after {
+  mask: url("/social-icons/github.svg");
+}
+
+.socialIconLink[href*="slack.com"]::after {
+  mask: url("/social-icons/slack.svg");
+}
+
+.socialIconLink[href*="twitter.com"]::after,
+.socialIconLink[href*="x.com"]::after {
+  mask: url("/social-icons/twitter.svg");
+}
+
+.socialIconLink[href*="wordpress.org"]::after {
+  mask: url("/social-icons/wordpress.svg");
+}
+
+.socialIconLink[href*="youtube.com"]::after {
+  mask: url("/social-icons/youtube.svg");
+}
