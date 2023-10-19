@@ -2,6 +2,7 @@ import { gql } from '@apollo/client'
 import clsx from 'clsx'
 import Link from 'next/link'
 import * as React from 'react'
+
 import styles from '@/styles/footer-navigation.module.css';
 
 export function FooterNavigation({ navigation }) {

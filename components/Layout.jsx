@@ -5,11 +5,11 @@ import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 
 import { DocsSidebarNavigation } from '@/components/DocsSidebarNavigation'
-import { PrimaryNavigation } from '@/components/PrimaryNavigation'
 import { FooterNavigation } from '@/components/FooterNavigation'
+import { PrimaryNavigation } from '@/components/PrimaryNavigation'
 import { Prose } from '@/components/Prose'
-import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
+import { SiteHeader } from '@/components/SiteHeader'
 import { collectHeadings } from '@/lib/utils'
 
 Layout.fragment = gql`

@@ -1,11 +1,12 @@
 import { gql } from '@apollo/client'
 import { flatListToHierarchical } from '@faustwp/core'
 
-import { PrimaryNavigation } from '@/components/PrimaryNavigation'
 import { FooterNavigation } from './FooterNavigation'
-
-import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from './SiteFooter'
+
+import { PrimaryNavigation } from '@/components/PrimaryNavigation'
+import { SiteHeader } from '@/components/SiteHeader'
+
 
 LayoutFrontPage.fragment = gql`
   fragment LayoutFrontPageFragment on RootQuery {
