@@ -1,26 +1,37 @@
 import { gql } from '@apollo/client'
 import { flatListToHierarchical } from '@faustwp/core'
 
+import { FooterNavigation } from './FooterNavigation'
 import { PrimaryNavigation } from './PrimaryNavigation'
 
 import { DocsSidebarNavigation } from '@/components/DocsSidebarNavigation'
 import { Prose } from '@/components/Prose'
+import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
-
 
 LayoutArchive.fragment = gql`
   fragment LayoutArchiveFragment on RootQuery {
     ...PrimaryNavigationFragment
     ...DocsSidebarNavigationFragment
+    ...FooterNavigationFragment
   }
   ${PrimaryNavigation.fragment}
   ${DocsSidebarNavigation.fragment}
+  ${FooterNavigation.fragment}
 `
 
 export function LayoutArchive({ data, children, title }) {
   const primaryMenuItems = data?.primaryMenuItems ?? []
   const primaryNavigation = primaryMenuItems?.nodes
     ? flatListToHierarchical(primaryMenuItems.nodes, {
+        idKey: 'id',
+        childrenKey: 'links',
+        parentKey: 'parentId',
+      })
+    : []
+  const footerMenuItems = data?.footerMenuItems ?? []
+  const footerNavigation = footerMenuItems?.nodes
+    ? flatListToHierarchical(footerMenuItems.nodes, {
         idKey: 'id',
         childrenKey: 'links',
         parentKey: 'parentId',
@@ -75,6 +86,7 @@ export function LayoutArchive({ data, children, title }) {
           </article>
         </div>
       </div>
+      <SiteFooter navigation={footerNavigation} />
     </>
   )
 }

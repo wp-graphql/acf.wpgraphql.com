@@ -5,8 +5,10 @@ import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 
 import { DocsSidebarNavigation } from '@/components/DocsSidebarNavigation'
+import { FooterNavigation } from '@/components/FooterNavigation'
 import { PrimaryNavigation } from '@/components/PrimaryNavigation'
 import { Prose } from '@/components/Prose'
+import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
 import { collectHeadings } from '@/lib/utils'
 
@@ -14,9 +16,11 @@ Layout.fragment = gql`
   fragment LayoutFragment on RootQuery {
     ...PrimaryNavigationFragment
     ...DocsSidebarNavigationFragment
+    ...FooterNavigationFragment
   }
   ${PrimaryNavigation.fragment}
   ${DocsSidebarNavigation.fragment}
+  ${FooterNavigation.fragment}
 `
 
 function useTableOfContents(tableOfContents) {
@@ -74,6 +78,14 @@ export function Layout({ data, children, toc, title }) {
   const primaryMenuItems = data?.primaryMenuItems ?? []
   const primaryNavigation = primaryMenuItems?.nodes
     ? flatListToHierarchical(primaryMenuItems.nodes, {
+        idKey: 'id',
+        childrenKey: 'links',
+        parentKey: 'parentId',
+      })
+    : []
+  const footerMenuItems = data?.footerMenuItems ?? []
+  const footerNavigation = footerMenuItems?.nodes
+    ? flatListToHierarchical(footerMenuItems.nodes, {
         idKey: 'id',
         childrenKey: 'links',
         parentKey: 'parentId',
@@ -231,6 +243,8 @@ export function Layout({ data, children, toc, title }) {
           </nav>
         </div>
       </div>
+
+      <SiteFooter navigation={footerNavigation} />
     </>
   )
 }
