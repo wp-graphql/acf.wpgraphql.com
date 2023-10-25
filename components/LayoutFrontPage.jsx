@@ -37,7 +37,9 @@ export function LayoutFrontPage({ data, children }) {
   return (
     <>
       <SiteHeader navigation={primaryNavigation} data={data} />
-      {children}
+      <main className='content'>
+        {children}
+      </main>
       <SiteFooter navigation={footerNavigation} />
     </>
   )

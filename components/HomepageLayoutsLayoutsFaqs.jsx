@@ -28,18 +28,18 @@ const HomepageLayoutsLayoutsFaqs = ({ title, description, questions }) => {
     <section
       id="faq"
       aria-labelledby="faq-title"
-      className="relative overflow-hidden bg-slate-100 dark:bg-slate-800 py-20 sm:py-32"
+      className="relative overflow-hidden bg-slate-100 py-20 dark:bg-slate-800 sm:py-32"
     >
       <Container className="relative">
-        <div className="mx-auto max-w-2xl lg:mx-0 prose dark:prose-invert">
+        <div className="prose mx-auto max-w-2xl dark:prose-invert lg:mx-0">
           <h2
             id="faq-title"
-            className="font-display text-3xl tracking-tight dark:text-slate-200 text-slate-900 sm:text-4xl"
+            className="font-display text-3xl tracking-tight text-slate-900 dark:text-slate-200 sm:text-4xl"
           >
             {title}
           </h2>
           <div
-            className="mt-4 text-lg tracking-tight dark:text-slate-300 text-slate-700"
+            className="mt-4 text-lg tracking-tight text-slate-700 dark:text-slate-300"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         </div>
@@ -52,11 +52,11 @@ const HomepageLayoutsLayoutsFaqs = ({ title, description, questions }) => {
               <ul role="list" className="flex flex-col gap-y-8">
                 {column.map((faq, faqIndex) => (
                   <li key={faqIndex}>
-                    <h3 className="font-display text-lg leading-7 dark:text-slate-200 text-slate-900">
+                    <h3 className="font-display text-lg leading-7 text-slate-900 dark:text-slate-200">
                       {faq.question}
                     </h3>
                     <div
-                      className="prose dark:prose-invert mt-4 text-sm dark:text-slate-300 text-slate-700"
+                      className="prose mt-4 text-sm text-slate-700 dark:prose-invert dark:text-slate-300"
                       dangerouslySetInnerHTML={{ __html: faq.answer }}
                     />
                   </li>

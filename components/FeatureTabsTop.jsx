@@ -11,9 +11,9 @@ function Feature({ feature, isActive, className, ...props }) {
     <div
       className={clsx(
         className,
-        'p-5 rounded-lg',
+        'rounded-lg p-5',
         !isActive
-          ? 'opacity-75 hover:opacity-100 hover:bg-slate-50 dark:hover:bg-gray-800'
+          ? 'opacity-75 hover:bg-slate-50 hover:opacity-100 dark:hover:bg-gray-800'
           : 'bg-slate-100 dark:bg-slate-800',
       )}
       {...props}
@@ -26,7 +26,7 @@ function Feature({ feature, isActive, className, ...props }) {
       >
         {feature.featureSubtitle}
       </h3>
-      <p className="mt-2 font-display text-xl text-left text-slate-900 dark:text-slate-50">
+      <p className="mt-2 text-left font-display text-xl text-slate-900 dark:text-slate-50">
         {feature.name}
       </p>
       <p className="mt-4 text-sm text-slate-600 dark:text-slate-200">
@@ -75,7 +75,7 @@ function FeaturesDesktop({ features }) {
                 feature={{
                   ...feature,
                   name: (
-                    <Tab className="[&:not(:focus-visible)]:focus:outline-none text-left">
+                    <Tab className="text-left [&:not(:focus-visible)]:focus:outline-none">
                       <span className="absolute inset-0" />
                       {feature.name}
                     </Tab>
@@ -86,7 +86,7 @@ function FeaturesDesktop({ features }) {
               />
             ))}
           </Tab.List>
-          <Tab.Panels className="relative mt-20 overflow-hidden rounded-xl bg-slate-200 dark:bg-slate-700 px-14 py-16 xl:px-16">
+          <Tab.Panels className="relative mt-20 overflow-hidden rounded-xl bg-slate-200 px-14 py-16 dark:bg-slate-700 xl:px-16">
             <div className="-mx-5 flex">
               {features.map((feature, featureIndex) => (
                 <Tab.Panel
@@ -114,7 +114,7 @@ function FeaturesDesktop({ features }) {
                 </Tab.Panel>
               ))}
             </div>
-            <div className="pointer-events-none absolute inset-0 rounded-4xl ring-1 ring-inset ring-slate-900/10" />
+            <div className="rounded-4xl pointer-events-none absolute inset-0 ring-1 ring-inset ring-slate-900/10" />
           </Tab.Panels>
         </>
       )}

@@ -30,16 +30,16 @@ const FeatureTabsLeft = (layout) => {
     <section
       id="features"
       aria-label="Features of WPGraphQL for ACF"
-      className="relative overflow-hidden bg-slate-100  dark:bg-slate-800 pb-28 pt-20 sm:py-32"
+      className="relative overflow-hidden bg-slate-100  pb-28 pt-20 dark:bg-slate-800 sm:py-32"
     >
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
           <h2
-            className="font-display text-3xl tracking-tight text-gray dark:text-white sm:text-4xl md:text-5xl"
+            className="text-gray font-display text-3xl tracking-tight dark:text-white sm:text-4xl md:text-5xl"
             dangerouslySetInnerHTML={{ __html: layout.name }}
           />
           <div
-            className="mt-6 text-lg tracking-tight text-gray dark:text-white"
+            className="text-gray mt-6 text-lg tracking-tight dark:text-white"
             dangerouslySetInnerHTML={{ __html: layout.descripton }}
           />
         </div>
@@ -56,10 +56,10 @@ const FeatureTabsLeft = (layout) => {
                     <div
                       key={feature.name}
                       className={clsx(
-                        'group relative rounded-full px-4 my-2  py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6',
+                        'group relative my-2 rounded-full px-4  py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6',
                         selectedIndex === featureIndex
-                          ? 'bg-slate-600 dark:bg-slate-800 lg:dark:bg-slate-700 lg:ring-1 lg:ring-inset lg:ring-white/10 group-hover:text-white '
-                          : 'hover:bg-slate-600 dark:hover:bg-slate-800 lg:dark:hover:bg-slate-700 bg-gray-100 group-hover:text-white',
+                          ? 'bg-slate-600 group-hover:text-white dark:bg-slate-800 lg:ring-1 lg:ring-inset lg:ring-white/10 lg:dark:bg-slate-700 '
+                          : 'bg-gray-100 hover:bg-slate-600 group-hover:text-white dark:hover:bg-slate-800 lg:dark:hover:bg-slate-700',
                       )}
                     >
                       <h3>
@@ -67,7 +67,7 @@ const FeatureTabsLeft = (layout) => {
                           className={clsx(
                             'font-display text-lg [&:not(:focus-visible)]:focus:outline-none',
                             selectedIndex === featureIndex
-                              ? 'text-white dark:text-slate-200 hover:text-white group-hover:text-white dark:hover:text-slate-300 lg:dark:hover:text-slate-200'
+                              ? 'text-white hover:text-white group-hover:text-white dark:text-slate-200 dark:hover:text-slate-300 lg:dark:hover:text-slate-200'
                               : 'text-slate-800 hover:text-white group-hover:text-white dark:hover:text-slate-200',
                           )}
                         >
@@ -77,9 +77,9 @@ const FeatureTabsLeft = (layout) => {
                       </h3>
                       <p
                         className={clsx(
-                          'mt-2 hidden text-sm lg:block group-hover:text-white  dark:group-hover:text-slate-200',
+                          'mt-2 hidden text-sm group-hover:text-white dark:group-hover:text-slate-200  lg:block',
                           selectedIndex === featureIndex
-                            ? 'text-slate-800 lg:text-white dark:text-slate-200'
+                            ? 'text-slate-800 dark:text-slate-200 lg:text-white'
                             : 'text-slate-800',
                         )}
                       >
@@ -93,7 +93,7 @@ const FeatureTabsLeft = (layout) => {
                 {features.map((feature) => (
                   <Tab.Panel key={feature.name} unmount={false}>
                     <div className="relative sm:px-6 lg:hidden">
-                      <div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] bg-slate-200 dark:bg-slate-700 lg:bg-white/10 ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl" />
+                      <div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] bg-slate-200 ring-1 ring-inset ring-white/10 dark:bg-slate-700 sm:inset-x-0 sm:rounded-t-xl lg:bg-white/10" />
                       <p className="relative mx-auto max-w-2xl text-base text-slate-800 dark:text-white sm:text-center">
                         {feature.featureDescription}
                       </p>

@@ -1,296 +1,120 @@
-/* eslint-disable */
-import { useEffect, useId, useState, forwardRef, useRef, Fragment } from 'react'
-import { useRouter } from 'next/router'
-import { createAutocomplete } from '@algolia/autocomplete-core'
-import { Dialog } from '@headlessui/react'
+import { DocSearchModal } from "@docsearch/react";
 import clsx from 'clsx'
-import Highlighter from 'react-highlight-words'
+import Head from 'next/head'
+import Link from 'next/link'
+import { useRouter } from "next/router";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
-function SearchIcon(props) {
+import { SearchIcon } from '@/components/icons/SearchIcon';
+import '@docsearch/css/dist/style.css';
+
+const INDEX_NAME = 'wpgraphql';
+const API_KEY = '0c11d662dad18e8a18d20c969b25c65f';
+const APP_ID = 'HB50HVJDY8';
+
+const SearchContext = createContext();
+
+export function SearchProvider({ children }) {
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false)
+  const [initialQuery, setInitialQuery] = useState(null)
+  const [initialScrollY, setInitialScrollY] = useState(null);
+
+  const onOpen = useCallback(() => {
+    setIsOpen(true);
+  }, [setIsOpen]);
+
+  const onClose = useCallback(() => {
+    setIsOpen(false)
+  }, [setIsOpen])
+
+  const onInput = useCallback((e) => {
+    setIsOpen(true)
+    setInitialQuery(e.key)
+  }, [setIsOpen, setInitialQuery])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setInitialScrollY(window.scrollY);
+    }
+  }, []);
+
+  useDocSearchKeyboardEvents({
+    isOpen,
+    onOpen,
+    onClose
+  })
+
   return (
-    <svg aria-hidden="true" viewBox="0 0 20 20" {...props}>
-      <path d="M16.293 17.707a1 1 0 0 0 1.414-1.414l-1.414 1.414ZM9 14a5 5 0 0 1-5-5H2a7 7 0 0 0 7 7v-2ZM4 9a5 5 0 0 1 5-5V2a7 7 0 0 0-7 7h2Zm5-5a5 5 0 0 1 5 5h2a7 7 0 0 0-7-7v2Zm8.707 12.293-3.757-3.757-1.414 1.414 3.757 3.757 1.414-1.414ZM14 9a4.98 4.98 0 0 1-1.464 3.536l1.414 1.414A6.98 6.98 0 0 0 16 9h-2Zm-1.464 3.536A4.98 4.98 0 0 1 9 14v2a6.98 6.98 0 0 0 4.95-2.05l-1.414-1.414Z" />
-    </svg>
-  )
-}
-
-function useAutocomplete() {
-  let id = useId()
-  let router = useRouter()
-  let [autocompleteState, setAutocompleteState] = useState({})
-
-  let [autocomplete] = useState(() =>
-    createAutocomplete({
-      id,
-      placeholder: 'Find something...',
-      defaultActiveItemId: 0,
-      onStateChange({ state }) {
-        setAutocompleteState(state)
-      },
-      shouldPanelOpen({ state }) {
-        return state.query !== ''
-      },
-      getSources({ query }) {
-        return import('@/markdoc/search.mjs').then(({ search }) => {
-          return [
-            {
-              sourceId: 'documentation',
-              getItems() {
-                return search(query, { limit: 5 })
-              },
-              getItemUrl({ item }) {
-                return item.url
-              },
-              onSelect({ itemUrl }) {
-                router.push(itemUrl)
-              },
+    <>
+      <Head>
+        <link rel="preconnect" href={`https://${APP_ID}-dsn.algolia.net`} crossOrigin="true" />
+      </Head>
+      <SearchContext.Provider value={{ isOpen, onOpen, onClose, onInput }}>
+        {children}
+      </SearchContext.Provider>
+      {isOpen && createPortal(
+        <DocSearchModal
+          initialQuery={initialQuery}
+          initialScrollY={initialScrollY}
+          searchParameters={{
+            distinct: 1
+          }}
+          onClose={onClose}
+          indexName={INDEX_NAME}
+          apiKey={API_KEY}
+          appId={APP_ID}
+          placeholder="Search..."
+          navigator={{
+            navigate({ itemUrl }) {
+              setIsOpen(false);
+              router.push(itemUrl);
             },
-          ]
-        })
-      },
-    }),
-  )
-
-  return { autocomplete, autocompleteState }
-}
-
-function LoadingIcon(props) {
-  let id = useId()
-
-  return (
-    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" {...props}>
-      <circle cx="10" cy="10" r="5.5" strokeLinejoin="round" />
-      <path
-        stroke={`url(#${id})`}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M15.5 10a5.5 5.5 0 1 0-5.5 5.5"
-      />
-      <defs>
-        <linearGradient
-          id={id}
-          x1="13"
-          x2="9.5"
-          y1="9"
-          y2="15"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="currentColor" />
-          <stop offset="1" stopColor="currentColor" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-    </svg>
-  )
-}
-
-function HighlightQuery({ text, query }) {
-  return (
-    <Highlighter
-      highlightClassName="group-aria-selected:underline bg-transparent text-sky-600 dark:text-sky-400"
-      searchWords={[query]}
-      autoEscape={true}
-      textToHighlight={text}
-    />
-  )
-}
-
-function SearchResult({ result, autocomplete, collection, query }) {
-  // let id = useId()
-
-  // let sectionTitle = navigation?.find((section) =>
-  //   section.links.find((link) => link.href === result.url.split('#')[0]),
-  // )?.title
-  // let hierarchy = [sectionTitle, result.pageTitle].filter(Boolean)
-
-  return <>test</>
-}
-
-function SearchResults({ autocomplete, query, collection }) {
-  if (collection.items.length === 0) {
-    return (
-      <p className="px-4 py-8 text-center text-sm text-slate-700 dark:text-slate-400">
-        No results for &ldquo;
-        <span className="break-words text-slate-900 dark:text-white">
-          {query}
-        </span>
-        &rdquo;
-      </p>
-    )
-  }
-
-  return (
-    <ul role="list" {...autocomplete.getListProps()}>
-      {collection.items.map((result) => (
-        <SearchResult
-          key={result.url}
-          result={result}
-          autocomplete={autocomplete}
-          collection={collection}
-          query={query}
-        />
-      ))}
-    </ul>
-  )
-}
-
-const SearchInput = forwardRef(function SearchInput(
-  { autocomplete, autocompleteState, onClose },
-  inputRef,
-) {
-  let inputProps = autocomplete.getInputProps({})
-
-  return (
-    <div className="group relative flex h-12">
-      <SearchIcon className="pointer-events-none absolute left-4 top-0 h-full w-5 fill-slate-400 dark:fill-slate-500" />
-      <input
-        ref={inputRef}
-        className={clsx(
-          'flex-auto appearance-none bg-transparent pl-12 text-slate-900 outline-none placeholder:text-slate-400 focus:w-full focus:flex-none dark:text-white sm:text-sm [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden',
-          autocompleteState.status === 'stalled' ? 'pr-11' : 'pr-4',
-        )}
-        {...inputProps}
-        onKeyDown={(event) => {
-          if (
-            event.key === 'Escape' &&
-            !autocompleteState.isOpen &&
-            autocompleteState.query === ''
-          ) {
-            // In Safari, closing the dialog with the escape key can sometimes cause the scroll position to jump to the
-            // bottom of the page. This is a workaround for that until we can figure out a proper fix in Headless UI.
-            document.activeElement?.blur()
-
-            onClose()
-          } else {
-            inputProps.onKeyDown(event)
-          }
-        }}
-      />
-      {autocompleteState.status === 'stalled' && (
-        <div className="absolute inset-y-0 right-3 flex items-center">
-          <LoadingIcon className="h-6 w-6 animate-spin stroke-slate-200 text-slate-400 dark:stroke-slate-700 dark:text-slate-500" />
-        </div>
+          }}
+          hitComponent={Hit}
+        />, document.body
       )}
-    </div>
+    </>
   )
-})
+}
 
-function SearchDialog({ open, setOpen, className }) {
-  let router = useRouter()
-  let formRef = useRef()
-  let panelRef = useRef()
-  let inputRef = useRef()
-  let { autocomplete, autocompleteState } = useAutocomplete()
+function Hit({ hit, children }) {
+  return (
+    <Link href={hit.url} legacyBehavior>
+      <a
+        className={clsx({
+          'DocSearch-Hit--Result': hit.__is_result?.(),
+          'DocSearch-Hit--Parent': hit.__is_parent?.(),
+          'DocSearch-Hit--FirstChild': hit.__is_first?.(),
+          'DocSearch-Hit--LastChild': hit.__is_last?.(),
+          'DocSearch-Hit--Child': hit.__is_child?.(),
+        })}
+      >
+        {children}
+      </a>
+    </Link>
+  )
+}
 
-  useEffect(() => {
-    if (!open) {
-      return
-    }
-
-    function onRouteChange() {
-      setOpen(false)
-    }
-
-    router.events.on('routeChangeStart', onRouteChange)
-    router.events.on('hashChangeStart', onRouteChange)
-
-    return () => {
-      router.events.off('routeChangeStart', onRouteChange)
-      router.events.off('hashChangeStart', onRouteChange)
-    }
-  }, [open, setOpen, router])
+export function Search({ ...props }) {
+  let [modifierKey, setModifierKey] = useState()
+  let searchButtonRef = useRef()
+  let { onOpen, onInput } = useContext(SearchContext)
 
   useEffect(() => {
-    if (open) {
-      return
-    }
-
     function onKeyDown(event) {
-      if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault()
-        setOpen(true)
+      if (searchButtonRef && searchButtonRef.current === document.activeElement && onInput) {
+        if (/[a-zA-Z0-9]/.test(String.fromCharCode(event.keyCode))) {
+          onInput(event)
+        }
       }
     }
-
     window.addEventListener('keydown', onKeyDown)
-
     return () => {
       window.removeEventListener('keydown', onKeyDown)
     }
-  }, [open, setOpen])
-
-  return (
-    <Dialog
-      open={open}
-      onClose={() => {
-        setOpen(false)
-        autocomplete.setQuery('')
-      }}
-      className={clsx('fixed inset-0 z-50', className)}
-    >
-      <div className="fixed inset-0 bg-slate-900/50 backdrop-blur" />
-
-      <div className="fixed inset-0 overflow-y-auto px-4 py-4 sm:px-6 sm:py-20 md:py-32 lg:px-8 lg:py-[15vh]">
-        <Dialog.Panel className="mx-auto overflow-hidden rounded-xl bg-white shadow-xl dark:bg-slate-800 dark:ring-1 dark:ring-slate-700 sm:max-w-xl">
-          <div {...autocomplete.getRootProps({})}>
-            <form
-              ref={formRef}
-              {...autocomplete.getFormProps({
-                inputElement: inputRef.current,
-              })}
-            >
-              <SearchInput
-                ref={inputRef}
-                autocomplete={autocomplete}
-                autocompleteState={autocompleteState}
-                onClose={() => setOpen(false)}
-              />
-              <div
-                ref={panelRef}
-                className="border-t border-slate-200 bg-white px-2 py-3 empty:hidden dark:border-slate-400/10 dark:bg-slate-800"
-                {...autocomplete.getPanelProps({})}
-              >
-                {autocompleteState.isOpen && (
-                  <SearchResults
-                    autocomplete={autocomplete}
-                    query={autocompleteState.query}
-                    collection={autocompleteState.collections[0]}
-                  />
-                )}
-              </div>
-            </form>
-          </div>
-        </Dialog.Panel>
-      </div>
-    </Dialog>
-  )
-}
-
-function useSearchProps() {
-  let buttonRef = useRef()
-  let [open, setOpen] = useState(false)
-
-  return {
-    buttonProps: {
-      ref: buttonRef,
-      onClick() {
-        setOpen(true)
-      },
-    },
-    dialogProps: {
-      open,
-      setOpen(open) {
-        let { width, height } = buttonRef.current.getBoundingClientRect()
-        if (!open || (width !== 0 && height !== 0)) {
-          setOpen(open)
-        }
-      },
-    },
-  }
-}
-
-export function Search() {
-  let [modifierKey, setModifierKey] = useState()
-  let { buttonProps, dialogProps } = useSearchProps()
+  }, [onInput, searchButtonRef])
 
   useEffect(() => {
     setModifierKey(
@@ -299,13 +123,14 @@ export function Search() {
   }, [])
 
   return (
-    <>
-      <button
-        type="button"
-        className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1 md:ring-slate-200 md:hover:ring-slate-300 dark:md:bg-slate-800/75 dark:md:ring-inset dark:md:ring-white/5 dark:md:hover:bg-slate-700/40 dark:md:hover:ring-slate-500 lg:w-96"
-        {...buttonProps}
-      >
-        <SearchIcon className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 md:group-hover:fill-slate-400" />
+    <button
+      className="group flex h-6 w-6 items-center justify-center sm:justify-start md:h-auto md:w-80 md:flex-none md:rounded-lg md:py-2.5 md:pl-4 md:pr-3.5 md:text-sm md:ring-1 md:ring-slate-200 md:hover:ring-slate-300 dark:md:bg-slate-800/75 dark:md:ring-inset dark:md:ring-white/5 dark:md:hover:bg-slate-700/40 dark:md:hover:ring-slate-500 lg:w-96"
+      type="button"
+      ref={searchButtonRef}
+      onClick={onOpen}
+      {...props}
+    >
+      <SearchIcon className="h-5 w-5 flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 md:group-hover:fill-slate-400" />
         <span className="sr-only md:not-sr-only md:ml-2 md:text-slate-500 md:dark:text-slate-400">
           Search docs
         </span>
@@ -315,8 +140,50 @@ export function Search() {
             <kbd className="font-sans">K</kbd>
           </kbd>
         )}
-      </button>
-      <SearchDialog {...dialogProps} />
-    </>
+    </button>
+  )
+}
+
+function useDocSearchKeyboardEvents({ isOpen, onOpen, onClose }) {
+  useEffect(() => {
+    function onKeyDown(event) {
+      function open() {
+        // We check that no other DocSearch modal is showing before opening
+        // another one.
+        if (!document.body.classList.contains('DocSearch--active')) {
+          onOpen()
+        }
+      }
+
+      if (
+        (event.keyCode === 27 && isOpen) ||
+        (event.key === 'k' && (event.metaKey || event.ctrlKey)) ||
+        (!isEditingContent(event) && event.key === '/' && !isOpen)
+      ) {
+        event.preventDefault()
+
+        if (isOpen) {
+          onClose()
+        } else if (!document.body.classList.contains('DocSearch--active')) {
+          open()
+        }
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [isOpen, onOpen, onClose])
+}
+
+function isEditingContent(event) {
+  let element = event.target
+  let tagName = element.tagName
+  return (
+    element.isContentEditable ||
+    tagName === 'INPUT' ||
+    tagName === 'SELECT' ||
+    tagName === 'TEXTAREA'
   )
 }

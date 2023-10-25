@@ -49,22 +49,22 @@ export function DocsSidebarNavigation({ className, data, navigation }) {
       <ul role="list" className="space-y-9">
         {navigation.map((section) => (
           <li key={section.title}>
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <Link href={section.href}>
-                <h2 className="font-display font-medium text-slate-900 dark:text-white cursor-pointer">
+                <h2 className="cursor-pointer font-display font-medium text-slate-900 dark:text-white">
                   {section.title}
                 </h2>
               </Link>
-              <div className="inline-flex items-center justify-center p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors duration-300">
+              <div className="inline-flex items-center justify-center rounded-full p-2 transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-800">
                 <button
                   onClick={() => toggleSection(section.title)}
-                  className="text-slate-900 dark:text-white transition-transform duration-300"
+                  className="text-slate-900 transition-transform duration-300 dark:text-white"
                 >
                   <svg
                     className={clsx(
-                      'transform',
+                      '',
                       expandedSections[section.title] && 'rotate-90',
-                      'w-4 h-4'
+                      'h-4 w-4'
                     )}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -87,7 +87,7 @@ export function DocsSidebarNavigation({ className, data, navigation }) {
                 'mt-2 space-y-2 border-l-2 transition-all duration-300',
                 expandedSections[section.title]
                   ? 'border-slate-100 dark:border-slate-800'
-                  : 'border-transparent hidden',
+                  : 'hidden border-transparent',
                 'lg:mt-4 lg:space-y-4 lg:border-slate-200'
               )}
             >

@@ -9,7 +9,7 @@ export function SiteFooter({ navigation }) {
           <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
             &copy; 2023 WPGraphQL. All rights reserved. | Development sponsored by <a href="https://www.wpengine.com/atlas" target="_blank" rel="noreferrer" className="font-medium underline underline-offset-4">WP Engine</a>
           </p>
-          <div className="text-muted-foreground flex flex-row gap-4">
+          <div className="flex flex-row gap-4 text-muted-foreground">
             <FooterNavigation navigation={navigation} />
           </div>
         </div>
