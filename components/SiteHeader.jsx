@@ -36,16 +36,18 @@ export function SiteHeader({ navigation }) {
       <div className="mr-6 flex lg:hidden">
         <MobileNavigation navigation={navigation} />
       </div>
-      <div className="relative flex flex-grow basis-0 items-center gap-4">
-        <Link href="/" aria-label="Home page">
-          <Logo className="h-5 lg:h-9 w-auto bg-slate-900/95 p-1 rounded-md fill-slate-700 dark:fill-sky-100 lg:block" />
+      <div className="relative flex grow basis-0 items-center gap-4">
+        <Link href="/" aria-label="Home page" className='shrink-0'>
+          <Logo className="h-5 w-auto rounded-md bg-slate-900/95 fill-slate-700 p-1 dark:fill-sky-100 md:block lg:block lg:h-9" />
         </Link>
-        <PrimaryNavigation navigation={navigation} />
+        <div className="hidden lg:block">
+          <PrimaryNavigation navigation={navigation} />
+        </div>
       </div>
       <div className="-my-5 mr-6 sm:mr-8 md:mr-0">
         <Search />
       </div>
-      <div className="relative flex basis-0 justify-end gap-4 sm:gap-8 md:flex-grow">
+      <div className="relative flex basis-0 justify-end gap-4 sm:gap-8 md:grow">
         <ThemeSelector className="relative z-10" />
         <Link
           href="https://github.com/wp-graphql/wpgraphql-acf"

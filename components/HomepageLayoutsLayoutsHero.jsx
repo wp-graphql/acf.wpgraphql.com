@@ -18,13 +18,13 @@ function TrafficLightsIcon(props) {
 
 const HomepageLayoutsLayoutsHero = (hero) => {
   return (
-    <div className="overflow-hidden bg-white dark:bg-slate-900 dark:-mb-32 dark:mt-[-4.5rem] dark:pb-32 dark:pt-[4.5rem] dark:lg:mt-[-4.75rem] dark:lg:pt-[4.75rem]">
+    <div className="overflow-hidden bg-white dark:-mb-32 dark:mt-[-4.5rem] dark:bg-slate-900 dark:pb-32 dark:pt-[4.5rem] dark:lg:mt-[-4.75rem] dark:lg:pt-[4.75rem]">
       <div className="py-16 sm:px-2 lg:relative lg:px-0 lg:py-20">
         <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 lg:max-w-8xl lg:grid-cols-2 lg:px-8 xl:gap-x-16 xl:px-12">
           <div className="relative z-10 md:text-center lg:text-left">
             <div className="relative">
               <div
-                className="inline bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600 dark:from-orange-300 dark:via-orange-600 dark:to-orange-300 bg-clip-text font-display text-5xl tracking-tight text-transparent"
+                className="inline bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600 bg-clip-text font-display text-5xl tracking-tight text-transparent dark:from-orange-300 dark:via-orange-600 dark:to-orange-300"
                 dangerouslySetInnerHTML={{ __html: hero.title }}
               />
               <div
@@ -45,7 +45,7 @@ const HomepageLayoutsLayoutsHero = (hero) => {
             <div className="relative">
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-orange-300 via-orange-300/70 to-orange-300 opacity-10 blur-lg" />
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-orange-300 via-orange-300/70 to-orange-300 opacity-10" />
-              <div className="relative rounded-2xl bg-slate-900 dark:bg-[#0A101F]/80 ring-1 ring-white/10 backdrop-blur">
+              <div className="relative rounded-2xl bg-slate-900 ring-1 ring-white/10 backdrop-blur dark:bg-[#0A101F]/80">
                 <div className="absolute -top-px left-20 right-11 h-px bg-gradient-to-r from-orange-300/0 via-orange-300/70 to-orange-300/0" />
                 <div className="absolute -bottom-px left-11 right-20 h-px bg-gradient-to-r from-orange-400/0 via-orange-400 to-orange-400/0" />
                 <div className="pl-4 pt-4">
@@ -55,7 +55,7 @@ const HomepageLayoutsLayoutsHero = (hero) => {
                       key={hero?.codeFileName || 'query-acf-fields.gql'}
                       className="flex h-6 rounded-full bg-gradient-to-r from-orange-400/30 via-orange-400 to-orange-400/30 p-px font-medium text-orange-300"
                     >
-                      <div className="flex items-center rounded-full px-2.5 bg-slate-800">
+                      <div className="flex items-center rounded-full bg-slate-800 px-2.5">
                         {hero?.codeFileName || null}
                       </div>
                     </div>

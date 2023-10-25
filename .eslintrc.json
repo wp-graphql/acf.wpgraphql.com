@@ -9,6 +9,7 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:tailwindcss/recommended",
     "prettier",
     "next"
   ],
@@ -39,7 +40,8 @@
     ],
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "tailwindcss/no-custom-classname": "off"
   },
   "settings": {
     "react": {

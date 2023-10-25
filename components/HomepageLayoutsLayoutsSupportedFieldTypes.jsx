@@ -151,17 +151,17 @@ const HomepageLayoutsLayoutsSupportedFieldTypes = (data) => {
     <section
       id="reviews"
       aria-labelledby="reviews-title"
-      className="pb-16 pt-20 sm:pb-24 sm:pt-32 dark:bg-slate-700"
+      className="pb-16 pt-20 dark:bg-slate-700 sm:pb-24 sm:pt-32"
     >
       <Container>
         <h2
           id="reviews-title"
-          className="text-3xl font-medium tracking-tight mb-5 dark:text-gray-100 text-gray-900 sm:text-center"
+          className="mb-5 text-3xl font-medium tracking-tight text-gray-900 dark:text-gray-100 sm:text-center"
         >
           {data.title}
         </h2>
         <div
-          className="mt-2 text-lg dark:text-gray-200 text-gray-600 sm:text-center"
+          className="mt-2 text-lg text-gray-600 dark:text-gray-200 sm:text-center"
           dangerouslySetInnerHTML={{ __html: data.description }}
         />
 
