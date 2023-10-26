@@ -6,16 +6,7 @@ import { Separator } from '@radix-ui/react-separator'
 import { Layout } from '@/components/Layout'
 import { Badge } from '@/components/ui/badge'
 import blocks from '@/wp-blocks'
-
-
-// const nodeContent =`
-//     <div className="prose dark:prose-invert">
-//             <h2>Description</h2>
-//             <h2>Field Settings</h2>
-//             <h2>Query in GraphQL</h2>
-//             <pre>{JSON.stringify(node, null, 2)</pre>
-//         </div>
-// `;
+import { AcfFieldTypeSettingsBlock } from '@/wp-blocks/AcfFieldTypeSettingsBlock';
 
 export const SingleFieldType = ({ data }) => {
   const { node } = data
@@ -75,30 +66,7 @@ export const SingleFieldType = ({ data }) => {
           })}
         </div>
       )}
-      {/* {
-                node.editorBlocks && node.editorBlocks.map( ( block, i ) => {
-                    switch( block.__typename ) {
-                        case 'CoreHeading':
-                            let Tag = `h${block.attributes.level}`;
-                            return (
-                                <Tag key={i} id={slugify(block.attributes.content)}>
-                                    {block.attributes.content}
-                                </Tag>
-                            );
-                            break;
-                        case 'AcfTestBlock': 
-                                return <pre>{JSON.stringify(block, null, 2)}</pre>
-                        default:
-                            return <span key={i} dangerouslySetInnerHTML={{ __html: block.renderedHtml }} />;
-                            break;
-                    }
-                })
-            } */}
       <WordPressBlocksViewer blocks={blockList} />
-      {/* <h2>Raw Blocks List</h2>
-            <pre>{JSON.stringify( blockList, null, 2)}</pre>
-            <h2>Raw editorBlocks</h2>
-            <pre>{JSON.stringify(node.editorBlocks, null, 2)}</pre> */}
     </Layout>
   )
 }
@@ -141,6 +109,7 @@ query SingleAcfFieldType($uri: String!) {
                 ...${blocks.CoreSeparator.fragments.key}
                 ...${blocks.CoreList.fragments.key}
                 ...${blocks.CoreHeading.fragments.key}
+                ...AcfFieldTypeSettingsBlockFragment
             }
         }
         ...aCFFieldTypeCategoriesFragment
@@ -148,6 +117,8 @@ query SingleAcfFieldType($uri: String!) {
 }
 ${Layout.fragment}
 ${aCFFieldTypeCategoriesFragment}
+${AcfFieldTypeSettingsBlock.fragments.entry}
+
 ${blocks.CoreParagraph.fragments.entry}
 ${blocks.CoreColumns.fragments.entry}
 ${blocks.CoreColumn.fragments.entry}
