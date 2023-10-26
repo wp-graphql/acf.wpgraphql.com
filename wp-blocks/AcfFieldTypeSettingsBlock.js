@@ -5,15 +5,12 @@ const Component = (props) => {
   return <pre>{JSON.stringify(props, null, 2)}</pre>
 }
 
-export default Component
-
 Component.displayName = `AcfFieldTypeSettingsBlock`
 Component.config = {
   name: `AcfFieldTypeSettingsBlock`,
 }
 Component.fragments = {
   key: `AcfFieldTypeSettingsBlockFragment`,
-  // @todo: the fragment should be updated to fetch the fields for the field type, and return a list of the selected settings for the Field Type.
   entry: gql`
     fragment AcfFieldTypeSettingsBlockFragment on AcfFieldTypeSettingsBlock {
       fieldTypeSettingsBlockFields {
@@ -34,3 +31,5 @@ Component.fragments = {
     }
   `,
 }
+
+export default Component
