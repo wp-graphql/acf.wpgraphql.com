@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-const Component = (props) => {
+function Component(props) {
   // @todo: this component should render a table of settings for the field type, similar to what's seen on pages like: https://www.advancedcustomfields.com/resources/email/#settings
   return <pre>{JSON.stringify(props, null, 2)}</pre>
 }

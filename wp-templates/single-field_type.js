@@ -6,7 +6,7 @@ import { Separator } from '@radix-ui/react-separator'
 import { Layout } from '@/components/Layout'
 import { Badge } from '@/components/ui/badge'
 import blocks from '@/wp-blocks'
-
+import AcfFieldTypeSettingsBlockFragment from '@/wp-blocks/AcfFieldTypeSettingsBlock';
 
 // const nodeContent =`
 //     <div className="prose dark:prose-invert">
@@ -141,6 +141,7 @@ query SingleAcfFieldType($uri: String!) {
                 ...${blocks.CoreSeparator.fragments.key}
                 ...${blocks.CoreList.fragments.key}
                 ...${blocks.CoreHeading.fragments.key}
+                ...AcfFieldTypeSettingsBlockFragment
             }
         }
         ...aCFFieldTypeCategoriesFragment
@@ -148,6 +149,8 @@ query SingleAcfFieldType($uri: String!) {
 }
 ${Layout.fragment}
 ${aCFFieldTypeCategoriesFragment}
+${AcfFieldTypeSettingsBlockFragment.fragments.entry}
+
 ${blocks.CoreParagraph.fragments.entry}
 ${blocks.CoreColumns.fragments.entry}
 ${blocks.CoreColumn.fragments.entry}

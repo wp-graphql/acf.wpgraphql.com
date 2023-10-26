@@ -5,7 +5,7 @@ import CustomHeading from './CoreHeading'
 
 const blocks = {
   ...CoreBlocks,
-  CoreHeading: CustomHeading,
+  // CoreHeading: CustomHeading,
   AcfFieldTypeSettingsBlock: AcfFieldTypeSettingsBlock,
 }
 

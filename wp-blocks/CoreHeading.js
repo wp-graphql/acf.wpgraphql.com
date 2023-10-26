@@ -2,7 +2,7 @@ import { CoreBlocks } from '@faustwp/blocks'
 import slugify from '@sindresorhus/slugify'
 const { CoreHeading: FaustCoreHeading } = CoreBlocks
 
-function CoreHeading(props) {
+function Component(props) {
   const { attributes } = props
 
   const customAttributes = {
@@ -19,8 +19,8 @@ function CoreHeading(props) {
   )
 }
 
-CoreHeading.displayName = { ...FaustCoreHeading.displayName }
-CoreHeading.config = { ...FaustCoreHeading.config }
-CoreHeading.fragments = { ...FaustCoreHeading.fragments }
+Component.displayName = { ...FaustCoreHeading.displayName }
+Component.config = { ...FaustCoreHeading.config }
+Component.fragments = { ...FaustCoreHeading.fragments }
 
-export default CoreHeading
+export default Component
