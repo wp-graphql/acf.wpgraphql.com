@@ -1,15 +1,43 @@
-import { gql } from '@apollo/client'
+import { gql } from '@apollo/client';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
-function Component(props) {
-  // @todo: this component should render a table of settings for the field type, similar to what's seen on pages like: https://www.advancedcustomfields.com/resources/email/#settings
-  return <pre>{JSON.stringify(props, null, 2)}</pre>
+export function AcfFieldTypeSettingsBlock(props) {
+  const { fieldTypeSettings } = props?.fieldTypeSettingsBlockFields;
+
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[100px]">Name</TableHead>
+          <TableHead>Description</TableHead>
+          {/* <TableHead className="text-right whitespace-nowrap">Impact on WPGraphQL</TableHead> */}
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {fieldTypeSettings?.nodes?.map((item, index) => (
+          <TableRow key={item.id}>
+            <TableCell className="font-medium whitespace-nowrap">{item.name}</TableCell>
+            <TableCell>{item.description}</TableCell>
+            {/* <TableCell>{item.impactOnWpgraphql}</TableCell> */}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
 }
 
-Component.displayName = `AcfFieldTypeSettingsBlock`
-Component.config = {
+AcfFieldTypeSettingsBlock.displayName = `AcfFieldTypeSettingsBlock`;
+AcfFieldTypeSettingsBlock.config = {
   name: `AcfFieldTypeSettingsBlock`,
-}
-Component.fragments = {
+};
+AcfFieldTypeSettingsBlock.fragments = {
   key: `AcfFieldTypeSettingsBlockFragment`,
   entry: gql`
     fragment AcfFieldTypeSettingsBlockFragment on AcfFieldTypeSettingsBlock {
@@ -30,6 +58,4 @@ Component.fragments = {
       }
     }
   `,
-}
-
-export default Component
+};
