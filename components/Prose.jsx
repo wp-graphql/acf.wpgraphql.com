@@ -18,6 +18,8 @@ export function Prose({ as: Component = 'div', className, ...props }) {
         'prose-pre:rounded-xl prose-pre:bg-slate-900 prose-pre:shadow-lg dark:prose-pre:bg-slate-800/60 dark:prose-pre:shadow-none dark:prose-pre:ring-1 dark:prose-pre:ring-slate-300/10',
         // hr
         'dark:prose-hr:border-slate-800',
+        // code
+        'prose-code:before:content-none prose-code:after:content-none prose-code:bg-gray-100 prose-code:px-2.5 prose-code:py-0.5 prose-code:rounded-md prose-code:tracking-wide prose-code:border-solid prose-code:border prose-code:border-gray-200',
       )}
       {...props}
     />
