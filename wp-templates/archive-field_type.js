@@ -22,13 +22,6 @@ export const ArchiveFieldType = (props) => {
       toc={toc}
     >
       <FieldTypesList data={data} />
-      {/* { data?.node?.contentNodes && data.node.contentNodes.nodes.map( (node, i) => {
-                return (
-                    <div key={node.id}>
-                        <Link className="text-blue-500 hover:text-blue-700" href={node.uri}>{node.title}</Link>
-                    </div>
-                )
-            })} */}
     </LayoutArchive>
   )
 }
