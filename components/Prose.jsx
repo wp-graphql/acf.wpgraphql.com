@@ -19,7 +19,7 @@ export function Prose({ as: Component = 'div', className, ...props }) {
         // hr
         'dark:prose-hr:border-slate-800',
         // code
-        'prose-code:before:content-none prose-code:after:content-none prose-code:bg-gray-100 prose-code:px-2.5 prose-code:py-0.5 prose-code:rounded-md prose-code:tracking-wide prose-code:border-solid prose-code:border prose-code:border-gray-200',
+        'prose-code:rounded-md prose-code:border prose-code:border-solid prose-code:border-gray-200 prose-code:bg-gray-100 prose-code:px-2.5 prose-code:py-0.5 prose-code:tracking-wide prose-code:before:content-none prose-code:after:content-none',
       )}
       {...props}
     />
