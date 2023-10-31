@@ -1,42 +1,37 @@
-import { gql } from '@apollo/client';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+import { gql } from '@apollo/client'
 
-export function AcfFieldTypeSettingsBlock(props) {
-  const { fieldTypeSettings } = props?.fieldTypeSettingsBlockFields;
+export function AcfFieldTypeSettingsBlock({fieldTypeSettingsBlockFields}) {
+  const { fieldTypeSettings } = fieldTypeSettingsBlockFields
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Name</TableHead>
-          <TableHead>Description</TableHead>
-          {/* <TableHead className="text-right whitespace-nowrap">Impact on WPGraphQL</TableHead> */}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {fieldTypeSettings?.nodes?.map((item, index) => (
-          <TableRow key={item.id}>
-            <TableCell className="font-medium whitespace-nowrap">{item.name}</TableCell>
-            <TableCell>{item.description}</TableCell>
-            {/* <TableCell>{item.impactOnWpgraphql}</TableCell> */}
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  );
+    <>
+      {fieldTypeSettings?.nodes?.map((item) => {
+        const { id, name, description, fieldTypeSettingsMeta } = item
+        const { acfFieldName, impactOnWpgraphql } = fieldTypeSettingsMeta
+
+        return (
+          <div key={id} className="mb-4">
+            <h3 className="mb-2">{name}</h3>
+            <code className="whitespace-nowrap text-gray-400">{acfFieldName}</code>
+            <ul>
+              <li className={description ? '' : 'italic text-gray-400'}>
+                {description || 'Description not yet documented'}
+              </li>
+              <li className={impactOnWpgraphql ? '' : 'italic text-gray-400'}>
+                {impactOnWpgraphql ? <span dangerouslySetInnerHTML={{ __html: impactOnWpgraphql }} /> : 'Impact on WPGraphQL not yet documented'}
+              </li>
+            </ul>
+          </div>
+        );
+      })}
+    </>
+  )
 }
 
-AcfFieldTypeSettingsBlock.displayName = `AcfFieldTypeSettingsBlock`;
+AcfFieldTypeSettingsBlock.displayName = `AcfFieldTypeSettingsBlock`
 AcfFieldTypeSettingsBlock.config = {
   name: `AcfFieldTypeSettingsBlock`,
-};
+}
 AcfFieldTypeSettingsBlock.fragments = {
   key: `AcfFieldTypeSettingsBlockFragment`,
   entry: gql`
@@ -46,11 +41,12 @@ AcfFieldTypeSettingsBlock.fragments = {
           nodes {
             __typename
             id
-            ...on ACFFieldTypeSetting {
+            ... on ACFFieldTypeSetting {
               name
               description
               fieldTypeSettingsMeta {
                 impactOnWpgraphql
+                acfFieldName
               }
             }
           }
@@ -58,4 +54,4 @@ AcfFieldTypeSettingsBlock.fragments = {
       }
     }
   `,
-};
+}
