@@ -34,7 +34,6 @@ jobs:
       - name: Install and Build
         run: |
           npm ci
-          cp .env.local.sample .env.local
           npm run build
 
       - name: Error handling
