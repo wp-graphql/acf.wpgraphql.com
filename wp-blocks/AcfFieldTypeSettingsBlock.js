@@ -12,7 +12,7 @@ export function AcfFieldTypeSettingsBlock({fieldTypeSettingsBlockFields}) {
         return (
           <div key={id} className="mb-4">
             <h3 className="mb-2">{name}</h3>
-            <code className="whitespace-nowrap text-gray-400">{acfFieldName}</code>
+            <code className="">{acfFieldName}</code>
             <ul>
               <li className={description ? '' : 'italic text-gray-400'}>
                 {description || 'Description not yet documented'}
