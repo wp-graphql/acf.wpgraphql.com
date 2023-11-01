@@ -49,16 +49,16 @@ export function DocsSidebarNavigation({ className, data, navigation }) {
       <ul role="list" className="space-y-9">
         {navigation.map((section) => (
           <li key={section.title}>
-            <div className="flex items-center justify-between">
-              <Link href={section.href}>
-                <h2 className="cursor-pointer font-display font-medium text-slate-900 dark:text-white">
+            <div className="flex items-center">
+              <Link href={section.href} className='block w-full'>
+                <h2 className="cursor-pointer font-display font-medium text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-gray-300">
                   {section.title}
                 </h2>
               </Link>
-              <div className="inline-flex items-center justify-center rounded-full p-2 transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-800">
+              <div className="inline-flex items-center justify-center rounded-full transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-800 mr-0 ml-auto">
                 <button
                   onClick={() => toggleSection(section.title)}
-                  className="text-slate-900 transition-transform duration-300 dark:text-white"
+                  className="text-slate-900 transition-transform duration-300 dark:text-white p-2"
                 >
                   <svg
                     className={clsx(
