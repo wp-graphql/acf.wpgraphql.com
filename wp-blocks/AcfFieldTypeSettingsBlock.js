@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import { Fragment } from 'react'
 
 export function AcfFieldTypeSettingsBlock({fieldTypeSettingsBlockFields}) {
   const { fieldTypeSettings } = fieldTypeSettingsBlockFields
@@ -10,18 +11,18 @@ export function AcfFieldTypeSettingsBlock({fieldTypeSettingsBlockFields}) {
         const { acfFieldName, impactOnWpgraphql } = fieldTypeSettingsMeta
 
         return (
-          <div key={id} className="mb-4">
-            <h3 className="mb-2">{name}</h3>
-            <code className="whitespace-nowrap text-gray-400">{acfFieldName}</code>
-            <ul>
-              <li className={description ? '' : 'italic text-gray-400'}>
-                {description || 'Description not yet documented'}
+          <Fragment key={id}>
+            <h3 key={'h3' + id} className="mt-2">{name}</h3>
+            {acfFieldName && <code>{acfFieldName}</code>}
+            <ul key={'ul' + id}>
+              <li>
+                {description || <span className='italic'>Description not yet documented</span>}
               </li>
-              <li className={impactOnWpgraphql ? '' : 'italic text-gray-400'}>
-                {impactOnWpgraphql ? <span dangerouslySetInnerHTML={{ __html: impactOnWpgraphql }} /> : 'Impact on WPGraphQL not yet documented'}
+              <li>
+                {impactOnWpgraphql ? <span dangerouslySetInnerHTML={{ __html: impactOnWpgraphql }} /> : <span className='italic'>Impact on WPGraphQL not yet documented</span>}
               </li>
             </ul>
-          </div>
+          </Fragment>
         );
       })}
     </>
