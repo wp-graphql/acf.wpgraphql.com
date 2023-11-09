@@ -59,7 +59,7 @@ const FeatureTabsLeft = (layout) => {
                         'group relative my-2 rounded-full px-4  py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6',
                         selectedIndex === featureIndex
                           ? 'bg-slate-600 group-hover:text-white dark:bg-slate-800 lg:ring-1 lg:ring-inset lg:ring-white/10 lg:dark:bg-slate-700 '
-                          : 'bg-gray-100 hover:bg-slate-600 group-hover:text-white dark:hover:bg-slate-800 lg:dark:hover:bg-slate-700',
+                          : 'bg-gray-100 group-hover:text-white hover:bg-slate-600 dark:hover:bg-slate-800 lg:dark:hover:bg-slate-700',
                       )}
                     >
                       <h3>
@@ -67,8 +67,8 @@ const FeatureTabsLeft = (layout) => {
                           className={clsx(
                             'font-display text-lg [&:not(:focus-visible)]:focus:outline-none',
                             selectedIndex === featureIndex
-                              ? 'text-white hover:text-white group-hover:text-white dark:text-slate-200 dark:hover:text-slate-300 lg:dark:hover:text-slate-200'
-                              : 'text-slate-800 hover:text-white group-hover:text-white dark:hover:text-slate-200',
+                              ? 'text-white group-hover:text-white hover:text-white dark:text-slate-200 dark:hover:text-slate-300 lg:dark:hover:text-slate-200'
+                              : 'text-slate-800 group-hover:text-white hover:text-white dark:hover:text-slate-200',
                           )}
                         >
                           <span className="absolute inset-0 rounded-full lg:rounded-l-xl lg:rounded-r-none" />

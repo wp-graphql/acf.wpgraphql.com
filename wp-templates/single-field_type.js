@@ -6,7 +6,8 @@ import { Separator } from '@radix-ui/react-separator'
 import { Layout } from '@/components/Layout'
 import { Badge } from '@/components/ui/badge'
 import blocks from '@/wp-blocks'
-import { AcfFieldTypeSettingsBlock } from '@/wp-blocks/AcfFieldTypeSettingsBlock';
+import { AcfFieldTypeSettingsBlock } from '@/wp-blocks/AcfFieldTypeSettingsBlock'
+import { AcfGraphqlQuery } from '@/wp-blocks/AcfGraphqlQuery'
 
 export const SingleFieldType = ({ data }) => {
   const { node } = data
@@ -110,6 +111,7 @@ query SingleAcfFieldType($uri: String!) {
                 ...${blocks.CoreList.fragments.key}
                 ...${blocks.CoreHeading.fragments.key}
                 ...AcfFieldTypeSettingsBlockFragment
+                ...AcfGraphqlQueryFragment
             }
         }
         ...aCFFieldTypeCategoriesFragment
@@ -118,6 +120,7 @@ query SingleAcfFieldType($uri: String!) {
 ${Layout.fragment}
 ${aCFFieldTypeCategoriesFragment}
 ${AcfFieldTypeSettingsBlock.fragments.entry}
+${AcfGraphqlQuery.fragments.entry}
 
 ${blocks.CoreParagraph.fragments.entry}
 ${blocks.CoreColumns.fragments.entry}

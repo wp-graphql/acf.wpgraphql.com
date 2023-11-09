@@ -1,12 +1,14 @@
 import { CoreBlocks } from '@faustwp/blocks'
 
 import { AcfFieldTypeSettingsBlock } from './AcfFieldTypeSettingsBlock'
-import CustomHeading from './CoreHeading'
+import { AcfGraphqlQuery } from './AcfGraphqlQuery'
+import { CoreHeading } from './CoreHeading'
 
 const blocks = {
   ...CoreBlocks,
-  CoreHeading: CustomHeading,
+  CoreHeading,
   AcfFieldTypeSettingsBlock,
+  AcfGraphqlQuery,
 }
 
 export default blocks
