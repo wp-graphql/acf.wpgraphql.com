@@ -1,12 +1,13 @@
 import { gql } from '@apollo/client'
 import Image from 'next/image'
 import { Fragment } from 'react'
+
+import { InfoIcon } from '@/components/icons/InfoIcon'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { InfoIcon } from '@/components/icons/InfoIcon'
 
 export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
   const { fieldTypeSettings } = fieldTypeSettingsBlockFields
@@ -24,7 +25,7 @@ export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
                 <h3 className="m-0 inline-flex">{name}</h3>
                 <Popover className="ml-3">
                   <PopoverTrigger>
-                    <div className="m-2 p-2 rounded-full transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-800">
+                    <div className="m-2 rounded-full p-2 transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-800">
                       <InfoIcon />
                     </div>
                   </PopoverTrigger>

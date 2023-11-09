@@ -51,14 +51,14 @@ export function DocsSidebarNavigation({ className, data, navigation }) {
           <li key={section.title}>
             <div className="flex items-center">
               <Link href={section.href} className='block w-full'>
-                <h2 className="cursor-pointer font-display font-medium text-slate-900 dark:text-white hover:text-slate-600 dark:hover:text-gray-300">
+                <h2 className="cursor-pointer font-display font-medium text-slate-900 hover:text-slate-600 dark:text-white dark:hover:text-gray-300">
                   {section.title}
                 </h2>
               </Link>
-              <div className="inline-flex items-center justify-center rounded-full transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-800 mr-0 ml-auto">
+              <div className="ml-auto mr-0 inline-flex items-center justify-center rounded-full transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-800">
                 <button
                   onClick={() => toggleSection(section.title)}
-                  className="text-slate-900 transition-transform duration-300 dark:text-white p-2"
+                  className="p-2 text-slate-900 transition-transform duration-300 dark:text-white"
                 >
                   <svg
                     className={clsx(
