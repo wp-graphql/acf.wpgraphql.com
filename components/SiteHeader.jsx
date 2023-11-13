@@ -8,7 +8,7 @@ import { Logo } from '@/components/Logo'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { PrimaryNavigation } from '@/components/PrimaryNavigation'
 import { Search } from '@/components/Search'
-import { ThemeSelector } from '@/components/ThemeSelector'
+import { ModeToggle } from '@/components/ThemeSelector'
 
 export function SiteHeader({ navigation }) {
   let [isScrolled, setIsScrolled] = useState(false)
@@ -48,7 +48,7 @@ export function SiteHeader({ navigation }) {
         <Search />
       </div>
       <div className="relative flex basis-0 justify-end gap-4 sm:gap-8 md:grow">
-        <ThemeSelector className="relative z-10" />
+        <ModeToggle className="relative z-10" />
         <Link
           href="https://github.com/wp-graphql/wpgraphql-acf"
           className="group"

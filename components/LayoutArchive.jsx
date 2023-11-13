@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import { flatListToHierarchical } from '@faustwp/core'
+import Head from 'next/head'
 
 import { FooterNavigation } from './FooterNavigation'
 import { PrimaryNavigation } from './PrimaryNavigation'
