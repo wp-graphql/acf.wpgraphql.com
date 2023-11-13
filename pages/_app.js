@@ -9,26 +9,34 @@ import 'focus-visible'
 import '@/styles/tailwind.css'
 // import '../globalStylesheet.css'
 import { SearchProvider } from '@/components/Search'
+import { ThemeProvider } from '@/components/ThemeProvider'
 import blocks from '@/wp-blocks'
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter()
 
   return (
-    <SearchProvider>
-      <FaustProvider pageProps={pageProps}>
-        <WordPressBlocksProvider config={{ blocks, theme: null }}>
-          <Head>
-            {router.pathname === '/' ? (
-              <title>WPGraphQL</title>
-            ) : (
-              <title>{`${pageProps?.title} - WPGraphQL`}</title>
-            )}
-            <meta name="description" content={pageProps?.description} />
-          </Head>
-          <Component {...pageProps} key={router.asPath} />
-        </WordPressBlocksProvider>
-      </FaustProvider>
-    </SearchProvider>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <SearchProvider>
+        <FaustProvider pageProps={pageProps}>
+          <WordPressBlocksProvider config={{ blocks, theme: null }}>
+            <Head>
+              {router.pathname === '/' ? (
+                <title>WPGraphQL for ACF</title>
+              ) : (
+                <title>{`${pageProps?.title} - WPGraphQL for ACF`}</title>
+              )}
+              <meta name="description" content={pageProps?.description} />
+            </Head>
+            <Component {...pageProps} key={router.asPath} />
+          </WordPressBlocksProvider>
+        </FaustProvider>
+      </SearchProvider>
+    </ThemeProvider>
   )
 }

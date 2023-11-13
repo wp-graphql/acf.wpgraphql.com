@@ -2,6 +2,7 @@ import { gql } from '@apollo/client'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { flatListToHierarchical } from '@faustwp/core'
 import { Separator } from '@radix-ui/react-separator'
+import Head from 'next/head'
 
 import { Layout } from '@/components/Layout'
 import { Badge } from '@/components/ui/badge'
@@ -44,31 +45,36 @@ export const SingleFieldType = ({ data }) => {
   })
 
   return (
-    <Layout data={data} navigation={data?.navigation?.nodes} toc={toc}>
-      <h1>{title}</h1>
-      {node?.aCFFieldTypeCategories && node?.aCFFieldTypeCategories?.nodes && (
-        <div id="field-type-categories" className="my-2">
-          {node.aCFFieldTypeCategories.nodes.map((fieldTypeCategory) => (
-            <Badge key={fieldTypeCategory.id} variant="">
-              {fieldTypeCategory.name}
-            </Badge>
-          ))}
-        </div>
-      )}
-      <Separator className="my-4" />
-      {node?.modified && (
-        <div id="last-updated" className="text-sm text-gray-500">
-          Last Upated:{' '}
-          {new Date(node.modified).toLocaleDateString('en-us', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-          })}
-        </div>
-      )}
-      <WordPressBlocksViewer blocks={blockList} />
-    </Layout>
+    <>
+      <Head>
+        <title>{`${title} - WPGraphQL for ACF`}</title>
+      </Head>
+      <Layout data={data} navigation={data?.navigation?.nodes} toc={toc}>
+        <h1>{title}</h1>
+        {node?.aCFFieldTypeCategories && node?.aCFFieldTypeCategories?.nodes && (
+          <div id="field-type-categories" className="my-2">
+            {node.aCFFieldTypeCategories.nodes.map((fieldTypeCategory) => (
+              <Badge key={fieldTypeCategory.id} variant="">
+                {fieldTypeCategory.name}
+              </Badge>
+            ))}
+          </div>
+        )}
+        <Separator className="my-4" />
+        {node?.modified && (
+          <div id="last-updated" className="text-sm text-gray-500">
+            Last Upated:{' '}
+            {new Date(node.modified).toLocaleDateString('en-us', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })}
+          </div>
+        )}
+        <WordPressBlocksViewer blocks={blockList} />
+      </Layout>
+    </>
   )
 }
 

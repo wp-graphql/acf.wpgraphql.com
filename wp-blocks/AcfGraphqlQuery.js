@@ -1,14 +1,18 @@
 import { gql } from '@apollo/client';
 import { getGraphqlEndpoint } from '@faustwp/core';
+import dynamic from 'next/dynamic';
 import React from 'react';
 
-import { MiniGraphQL } from '@/components/MiniGraphQL';
+const MiniGraphiQL = dynamic(
+  () => import('@/components/MiniGraphiQL'),
+  { ssr: false }
+);
 
 export function AcfGraphqlQuery({ graphqlQueryBlockMeta }) {
   const { query, variables } = graphqlQueryBlockMeta;
 
   return (
-    <MiniGraphQL
+    <MiniGraphiQL
       endpoint={getGraphqlEndpoint()}
       initialQuery={query}
       initialVariables={variables}
