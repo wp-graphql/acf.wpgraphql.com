@@ -8,6 +8,7 @@ import { Layout } from '@/components/Layout'
 import { Badge } from '@/components/ui/badge'
 import blocks from '@/wp-blocks'
 import { AcfFieldTypeSettingsBlock } from '@/wp-blocks/AcfFieldTypeSettingsBlock'
+import { AcfFieldTypeConfigurationBlock } from '@/wp-blocks/AcfFieldTypeConfigurationBlock'
 import { AcfGraphqlQuery } from '@/wp-blocks/AcfGraphqlQuery'
 
 export const SingleFieldType = ({ data }) => {
@@ -116,8 +117,9 @@ query SingleAcfFieldType($uri: String!) {
                 ...${blocks.CoreSeparator.fragments.key}
                 ...${blocks.CoreList.fragments.key}
                 ...${blocks.CoreHeading.fragments.key}
-                ...AcfFieldTypeSettingsBlockFragment
-                ...AcfGraphqlQueryFragment
+                ...${AcfFieldTypeSettingsBlock.fragments.key}
+                ...${AcfFieldTypeConfigurationBlock.fragments.key}
+                ...${AcfGraphqlQuery.fragments.key}
             }
         }
         ...aCFFieldTypeCategoriesFragment
@@ -126,6 +128,7 @@ query SingleAcfFieldType($uri: String!) {
 ${Layout.fragment}
 ${aCFFieldTypeCategoriesFragment}
 ${AcfFieldTypeSettingsBlock.fragments.entry}
+${AcfFieldTypeConfigurationBlock.fragments.entry}
 ${AcfGraphqlQuery.fragments.entry}
 
 ${blocks.CoreParagraph.fragments.entry}
