@@ -25,7 +25,12 @@ function AcfUiTabContent({ fieldLabel, uiScreenshot }) {
   return (
     <>
       <p>Field Label: {fieldLabel}</p>
-      <Image src={uiScreenshot.node.mediaItemUrl} alt="ACF UI" />
+      <Image
+        src={uiScreenshot?.node?.mediaItemUrl}
+        alt={uiScreenshot?.node?.altText}
+        width={uiScreenshot?.node?.mediaDetails?.width}
+        height={uiScreenshot?.node?.mediaDetails?.height}
+      />
     </>
   );
 } 
@@ -66,6 +71,11 @@ AcfFieldTypeConfigurationBlock.fragments = {
         uiScreenshot {
           node {
             mediaItemUrl
+            altText
+            mediaDetails {
+              height
+              width
+            }
           }
         }
       }
