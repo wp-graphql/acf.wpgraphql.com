@@ -70,19 +70,17 @@ const MiniGraphiQLClient = ({ initialQuery, initialVariables, endpoint, readOnly
     }
   }
 
-  const containerStyles = {
-    height: '80vh',
-    maxHeight: 'auto',
-    borderRadius: '4px',
-    padding: '0.5rem',
-    display: 'flex',
-    flex: '1 1 0%',
-  };
-
   const graphiqlStyles = `
     .graphiql-container {
+      height: fit-content;
       background-color: transparent !important;
       font-size: 14px;
+      border-radius: 4px;
+      padding: 0.5rem;
+      display: flex;
+    }
+    .graphiql-container * {
+      height: fit-content !important;
     }
     .graphiql-container .graphiql-editors.full-height {
       margin-top: 8px;
@@ -122,7 +120,7 @@ const MiniGraphiQLClient = ({ initialQuery, initialVariables, endpoint, readOnly
   `;
 
   return (
-    <div style={containerStyles} className={resolvedTheme}>
+    <div className={resolvedTheme}>
       <style dangerouslySetInnerHTML={{ __html: graphiqlStyles }} />
       {GraphiQL ? (
         <GraphiQL
