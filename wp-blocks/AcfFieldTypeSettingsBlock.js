@@ -1,57 +1,77 @@
+import { useState } from 'react'
 import { gql } from '@apollo/client'
 import Image from 'next/image'
-import { Fragment } from 'react'
-
-import { InfoIcon } from '@/components/icons/InfoIcon'
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
 
 export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
   const { fieldTypeSettings } = fieldTypeSettingsBlockFields
+  const [openItems, setOpenItems] = useState([]);
+
+  const toggleItem = (value) => {
+    setOpenItems(currentItems => {
+      if (currentItems.includes(value)) {
+        // Remove item from array if it's already there
+        return currentItems.filter(item => item !== value);
+      } else {
+        // Add item to array
+        return [...currentItems, value];
+      }
+    });
+  };
+
+  const expandAll = () => {
+    const allItemValues = fieldTypeSettings.nodes.map((_, index) => `item-${index + 1}`);
+    setOpenItems(allItemValues);
+  };
 
   return (
-    <>
-      {fieldTypeSettings?.nodes?.map((item) => {
-        const { id, name, description, fieldTypeSettingsMeta } = item
-        const { impactOnWpgraphql, adminScreenshot } = fieldTypeSettingsMeta
+    <div>
+      <Accordion 
+        className="w-full space-y-1" 
+        collapsible="collapsible" 
+        type="multiple" 
+        value={openItems} 
+        onChange={(value) => toggleItem(value)}
+      >
+        {fieldTypeSettings?.nodes?.map((item, index) => {
+          const { id, name, description, fieldTypeSettingsMeta } = item
+          const { impactOnWpgraphql, adminScreenshot } = fieldTypeSettingsMeta
 
-        return (
-          <Fragment key={id}>
-            <div className="mb-2">
-              <div className="flex">
-                <h3 className="m-0 inline-flex">{name}</h3>
-                <Popover className="ml-3">
-                  <PopoverTrigger>
-                    <div className="m-2 rounded-full p-2 transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-800">
-                      <InfoIcon />
-                    </div>
-                  </PopoverTrigger>
-                  <PopoverContent className="min-w-full">
-                    <Image
-                      src={adminScreenshot?.node?.mediaItemUrl}
-                      alt={adminScreenshot?.node?.altText}
-                      width={adminScreenshot?.node?.mediaDetails?.width}
-                      height={adminScreenshot?.node?.mediaDetails?.height}
-                    />
-                    {description && <p className='sr-only'>{description}</p>}
-                  </PopoverContent>
-                </Popover>
-              </div>
-              {impactOnWpgraphql ? (
-                <span dangerouslySetInnerHTML={{ __html: impactOnWpgraphql }} />
-              ) : (
-                <span className="italic">
-                  Impact on WPGraphQL not yet documented
-                </span>
-              )}
-            </div>
-          </Fragment>
-        )
-      })}
-    </>
+          return (
+            <AccordionItem key={id} value={`item-${index + 1}`}>
+              <AccordionTrigger className="flex items-center p-4 bg-gray-200 dark:bg-gray-700">
+                {name}
+              </AccordionTrigger>
+              <AccordionContent className="p-4 bg-gray-100 dark:bg-gray-800">
+                <Image
+                  src={adminScreenshot?.node?.mediaItemUrl}
+                  alt={adminScreenshot?.node?.altText}
+                  width={adminScreenshot?.node?.mediaDetails?.width}
+                  height={adminScreenshot?.node?.mediaDetails?.height}
+                />
+                {description && <p>{description}</p>}
+                {impactOnWpgraphql && (
+                  <div className="mt-2 p-2 bg-yellow-300 dark:bg-yellow-500">
+                    <span dangerouslySetInnerHTML={{ __html: impactOnWpgraphql }} />
+                  </div>
+                )}
+              </AccordionContent>
+            </AccordionItem>
+          )
+        })}
+      </Accordion>
+      <div className="mt-4">
+        <Button className="w-full" variant="outline" onClick={expandAll}>
+          Expand All Field Settings
+        </Button>
+      </div>
+    </div>
   )
 }
 

@@ -2,6 +2,13 @@ import React from 'react';
 import { gql } from '@apollo/client'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { snakeToPascalCase } from '@/lib/snakeToPascalCase';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card';
 
 const tabData = [
   {
@@ -61,7 +68,7 @@ add_action( 'acf/include_fields', function() {
 `;
 
   return(
-    <pre>
+    <pre className='mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border py-4'>
       {phpString}
     </pre>
   )
@@ -70,34 +77,33 @@ add_action( 'acf/include_fields', function() {
 function JSONTabContent({fieldTypeConfigurationBlockFields}) {
   const { acfFieldType } = fieldTypeConfigurationBlockFields;
   
-  // const result = JSON.parse(acfFieldType);
-  // const prettyResult = JSON.stringify(result, null, 2);
-
   return(
-    <pre>
-      JSON
+    <pre className='mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border py-4'>
+      JSON OUTPUT for {acfFieldType}
     </pre>
   )
 }
 
 export function AcfFieldTypeConfigurationBlock({ fieldTypeConfigurationBlockFields }) {
   return (
-    <Tabs defaultValue={tabData[0].key}>
-      <TabsList aria-label="Dynamic Tabs">
-        {tabData.map(tab => (
-          <TabsTrigger key={tab.key} value={tab.key}>
-            {tab.name}
-          </TabsTrigger>
-        ))}
-      </TabsList>
-      {tabData.map(tab => (
-        <TabsContent key={tab.key} value={tab.key}>
-          <div className="p-4">
-            {tab.component({ fieldTypeConfigurationBlockFields })}
-          </div>
-        </TabsContent>
-      ))}
-    </Tabs>
+    <Card>
+      <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0">
+        <Tabs defaultValue={tabData[0].key}>
+          <TabsList aria-label="Dynamic Tabs">
+            {tabData.map(tab => (
+              <TabsTrigger key={tab.key} value={tab.key}>
+                {tab.name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+          {tabData.map(tab => (
+            <TabsContent key={tab.key} value={tab.key}>
+              {tab.component({ fieldTypeConfigurationBlockFields })}
+            </TabsContent>
+          ))}
+        </Tabs>
+      </CardHeader>
+    </Card>
   );
 };
 
