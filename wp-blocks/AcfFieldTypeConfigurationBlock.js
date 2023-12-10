@@ -4,11 +4,10 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { snakeToPascalCase } from '@/lib/snakeToPascalCase';
 import {
   Card,
-  CardContent,
-  CardDescription,
   CardHeader,
-  CardTitle
 } from '@/components/ui/card';
+
+const EXAMPLE_KEY = 'example_key'
 
 const tabData = [
   {
@@ -26,7 +25,7 @@ const tabData = [
 function PHPTabContent({fieldTypeConfigurationBlockFields}) {
   const { acfFieldType } = fieldTypeConfigurationBlockFields;
   const phpGuts = `array(
-      'key'                   => 'group_{unique_key_1}',
+      'key'                   => 'group_${EXAMPLE_KEY}',
       'title'                 => 'My Field Group with ${acfFieldType}',
       'show_in_graphql'       => 1,
       'graphql_field_name'    => 'myFieldGroupWith${snakeToPascalCase(acfFieldType)}',
@@ -34,7 +33,7 @@ function PHPTabContent({fieldTypeConfigurationBlockFields}) {
       'graphql_types'         => array( 'Page' ),
       'fields'                => array(
         array(
-          'key'                => 'field_{unique_key_2}',
+          'key'                => 'field_${EXAMPLE_KEY}',
           'label'              => 'My Field',
           'name'               => 'my_field',
           'type'               => '${acfFieldType}',
@@ -77,9 +76,24 @@ add_action( 'acf/include_fields', function() {
 function JSONTabContent({fieldTypeConfigurationBlockFields}) {
   const { acfFieldType } = fieldTypeConfigurationBlockFields;
   
+  const jsonOutput = {
+    key: `group_${EXAMPLE_KEY}`,
+    title: `My Field Group with ${acfFieldType}`,
+    fields: [
+      {
+        key: `field_${EXAMPLE_KEY}`,
+        label: 'My Field',
+        name: 'my_field',
+        type: acfFieldType,
+      }
+    ]
+  };
+
+  const jsonString = JSON.stringify(jsonOutput, null, 2);
+
   return(
     <pre className='mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border py-4'>
-      JSON OUTPUT for {acfFieldType}
+      {jsonString}
     </pre>
   )
 }

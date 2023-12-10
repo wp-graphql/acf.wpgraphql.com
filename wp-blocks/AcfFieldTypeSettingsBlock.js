@@ -1,84 +1,104 @@
-import { useState } from 'react'
-import { gql } from '@apollo/client'
-import Image from 'next/image'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Button } from "@/components/ui/button"
+import React, { useState } from 'react';
+import { gql } from '@apollo/client';
+import Image from 'next/image';
+import { Button } from "@/components/ui/button";
+import { Card, CardFooter, CardContent } from "@/components/ui/card";
+
+const AccordionItem = ({ title, content, isOpen, onClick }) => (
+  <div className="border-b border-gray-300">
+    <Button
+      onClick={onClick}
+      className="py-2 px-4 w-full text-left text-black bg-white hover:bg-gray-100 flex justify-between items-center"
+    >
+      {title}
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        className="h-4 w-4 transform transition duration-300" 
+        style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+      </svg>
+    </Button>
+    {isOpen && (
+      <div className="p-4 bg-white">
+        {content}
+      </div>
+    )}
+  </div>
+);
 
 export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
-  const { fieldTypeSettings } = fieldTypeSettingsBlockFields
+  const { fieldTypeSettings } = fieldTypeSettingsBlockFields;
   const [openItems, setOpenItems] = useState([]);
 
-  const toggleItem = (value) => {
-    setOpenItems(currentItems => {
-      if (currentItems.includes(value)) {
-        // Remove item from array if it's already there
-        return currentItems.filter(item => item !== value);
-      } else {
-        // Add item to array
-        return [...currentItems, value];
-      }
-    });
+  const toggleItem = (index) => {
+    setOpenItems(current => current.includes(index) 
+      ? current.filter(item => item !== index) 
+      : [...current, index]);
   };
 
-  const expandAll = () => {
-    const allItemValues = fieldTypeSettings.nodes.map((_, index) => `item-${index + 1}`);
-    setOpenItems(allItemValues);
+  const toggleAll = () => {
+    if (openItems.length === fieldTypeSettings.nodes.length) {
+      setOpenItems([]);
+    } else {
+      setOpenItems(fieldTypeSettings.nodes.map((_, index) => index));
+    }
   };
 
   return (
     <div>
-      <Accordion 
-        className="w-full space-y-1" 
-        collapsible="collapsible" 
-        type="multiple" 
-        value={openItems} 
-        onChange={(value) => toggleItem(value)}
-      >
-        {fieldTypeSettings?.nodes?.map((item, index) => {
-          const { id, name, description, fieldTypeSettingsMeta } = item
-          const { impactOnWpgraphql, adminScreenshot } = fieldTypeSettingsMeta
+      <Card>
+          {fieldTypeSettings?.nodes?.map((item, index) => {
+            const { id, name, description, fieldTypeSettingsMeta } = item;
+            const { impactOnWpgraphql, adminScreenshot } = fieldTypeSettingsMeta;
 
-          return (
-            <AccordionItem key={id} value={`item-${index + 1}`}>
-              <AccordionTrigger className="flex items-center p-4 bg-gray-200 dark:bg-gray-700">
-                {name}
-              </AccordionTrigger>
-              <AccordionContent className="p-4 bg-gray-100 dark:bg-gray-800">
-                <Image
-                  src={adminScreenshot?.node?.mediaItemUrl}
-                  alt={adminScreenshot?.node?.altText}
-                  width={adminScreenshot?.node?.mediaDetails?.width}
-                  height={adminScreenshot?.node?.mediaDetails?.height}
-                />
-                {description && <p>{description}</p>}
-                {impactOnWpgraphql && (
-                  <div className="mt-2 p-2 bg-yellow-300 dark:bg-yellow-500">
-                    <span dangerouslySetInnerHTML={{ __html: impactOnWpgraphql }} />
-                  </div>
-                )}
-              </AccordionContent>
-            </AccordionItem>
-          )
-        })}
-      </Accordion>
-      <div className="mt-4">
-        <Button className="w-full" variant="outline" onClick={expandAll}>
-          Expand All Field Settings
-        </Button>
+            return (
+              <AccordionItem
+                key={id}
+                title={name}
+                content={
+                  <>
+                    {adminScreenshot?.node && (
+                      <Image
+                        src={adminScreenshot?.node?.mediaItemUrl}
+                        alt={adminScreenshot?.node?.altText}
+                        width={adminScreenshot?.node?.mediaDetails?.width}
+                        height={adminScreenshot?.node?.mediaDetails?.height}
+                      />
+                    )}
+                    {description && <p>{description}</p>}
+                    {impactOnWpgraphql && (
+                      <div className="mt-2 p-2 bg-yellow-300">
+                        <span dangerouslySetInnerHTML={{ __html: impactOnWpgraphql }} />
+                      </div>
+                    )}
+                  </>
+                }
+                isOpen={openItems.includes(index)}
+                onClick={() => toggleItem(index)}
+              />
+            );
+          })}
+      </Card>
+      <div className="text-center mt-4">
+        <button
+          onClick={toggleAll}
+          className="text-blue-500 hover:text-blue-600 underline"
+        >
+          {openItems.length === fieldTypeSettings.nodes.length ? 'Collapse All' : 'Expand All'}
+        </button>
       </div>
     </div>
-  )
+  );
 }
 
-AcfFieldTypeSettingsBlock.displayName = `AcfFieldTypeSettingsBlock`
+AcfFieldTypeSettingsBlock.displayName = `AcfFieldTypeSettingsBlock`;
 AcfFieldTypeSettingsBlock.config = {
   name: `AcfFieldTypeSettingsBlock`,
-}
+};
 AcfFieldTypeSettingsBlock.fragments = {
   key: `AcfFieldTypeSettingsBlockFragment`,
   entry: gql`
@@ -110,4 +130,6 @@ AcfFieldTypeSettingsBlock.fragments = {
       }
     }
   `,
-}
+};
+
+export default AcfFieldTypeSettingsBlock;
