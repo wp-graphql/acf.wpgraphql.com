@@ -78,7 +78,7 @@ const MiniGraphiQLClient = ({ initialQuery, initialVariables, endpoint, readOnly
       border-radius: 4px;
       padding: 0.5rem;
       display: flex;
-      min-height: 400px; 
+      min-height: 600px; 
     }
     .graphiql-container .graphiql-editors.full-height {
       margin-top: 8px;
