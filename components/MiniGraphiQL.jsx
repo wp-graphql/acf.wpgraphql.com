@@ -1,3 +1,4 @@
+import { createGraphiQLFetcher } from '@graphiql/toolkit';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
@@ -42,33 +43,23 @@ const MiniGraphiQLClient = ({ initialQuery, initialVariables, endpoint, readOnly
     }
   }, [theme]);
 
-  const fetcher = async (graphQLParams) => {
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(graphQLParams),
+  // Create a fetcher that only uses GET requests
+  const fetcher = createGraphiQLFetcher({
+    url: endpoint,
+    fetch: async (url, options) => {
+      // Construct query parameters
+      const params = new URLSearchParams({
+        query: options.body.query,
+        variables: JSON.stringify(options.body.variables),
       });
 
-      if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.statusText}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      throw error; // Re-throw to make sure GraphiQL displays the error
+      // Make the GET request
+      return fetch(`${url}?${params.toString()}`, { 
+        method: 'GET', 
+        headers: { 'Accept': 'application/json' } 
+      });
     }
-  };
-
-  let parsedVariables = initialVariables;
-  if (typeof initialVariables === 'string') {
-    try {
-      parsedVariables = JSON.parse(initialVariables);
-    } catch (e) {
-      console.error('Failed to parse variables as JSON:', e);
-    }
-  }
+  });
 
   const graphiqlStyles = `
     .graphiql-container {
@@ -125,7 +116,7 @@ const MiniGraphiQLClient = ({ initialQuery, initialVariables, endpoint, readOnly
           fetcher={fetcher}
           shouldPersistHeaders={false}
           query={initialQuery}
-          variables={parsedVariables}
+          variables={initialVariables}
           readOnly={readOnly}
         />
       ) : (
