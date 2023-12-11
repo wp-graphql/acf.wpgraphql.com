@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   Card,
@@ -7,8 +7,15 @@ import {
 } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { snakeToPascalCase } from '@/lib/snakeToPascalCase';
+import { stringToHash } from '@/lib/stringToHash';
 
-const EXAMPLE_KEY = 'example_key'
+// Field Type is known:
+
+// Fetch the proper JSON to register that field within a field group.
+
+// Use fetched JSON as a param for the PHP tab.
+
+// Highlight relevant lines.
 
 const tabData = [
   {
@@ -23,10 +30,11 @@ const tabData = [
   },
 ];
 
-function PHPTabContent({fieldTypeConfigurationBlockFields}) {
+function PHPTabContent({fieldTypeConfigurationBlockFields, uniqueId}) {
   const { acfFieldType } = fieldTypeConfigurationBlockFields;
+
   const phpGuts = `array(
-      'key'                   => 'group_${EXAMPLE_KEY}',
+      'key'                   => 'my_field_group_${uniqueId}',
       'title'                 => 'My Field Group with ${acfFieldType}',
       'show_in_graphql'       => 1,
       'graphql_field_name'    => 'myFieldGroupWith${snakeToPascalCase(acfFieldType)}',
@@ -34,12 +42,12 @@ function PHPTabContent({fieldTypeConfigurationBlockFields}) {
       'graphql_types'         => array( 'Page' ),
       'fields'                => array(
         array(
-          'key'                => 'field_${EXAMPLE_KEY}',
+          'key'                => 'my_field_${uniqueId}',
           'label'              => 'My Field',
           'name'               => 'my_field',
           'type'               => '${acfFieldType}',
           'show_in_graphql'    => 1,
-          'graphql_field_name' => 'myField',
+          'graphql_field_name' => 'myFieldWith${snakeToPascalCase(acfFieldType)}',
         ),
       ),
       'location'              => array(
@@ -74,23 +82,40 @@ add_action( 'acf/include_fields', function() {
   )
 }
 
-function JSONTabContent({fieldTypeConfigurationBlockFields}) {
+function JSONTabContent({fieldTypeConfigurationBlockFields, uniqueId}) {
   const { acfFieldType } = fieldTypeConfigurationBlockFields;
-  
-  const jsonOutput = {
-    key: `group_${EXAMPLE_KEY}`,
-    title: `My Field Group with ${acfFieldType}`,
+
+  const jsonData = {
+    key: `my_field_group_${uniqueId}`,
+    title:`My Field Group with ${acfFieldType}`,
+    show_in_graphql: 1,
+    graphql_field_name: `myFieldGroupWith${snakeToPascalCase(acfFieldType)}`,
+    map_graphql_types_from_location_rules: 0,
+    graphql_types: [ 
+      "Page"
+    ],
     fields: [
       {
-        key: `field_${EXAMPLE_KEY}`,
-        label: 'My Field',
-        name: 'my_field',
-        type: acfFieldType,
-      }
+        key: `my_field_${uniqueId}`,
+        label: "My Field",
+        name: "my_field",
+        type: `${acfFieldType}`,
+        show_in_graphql: 1,
+        graphql_field_name: `myFieldWith${snakeToPascalCase(acfFieldType)}`,
+      },
+    ],
+    'location': [
+      [
+        {
+          param: 'post_type',
+          operator:'==',
+          value: 'page',
+        },
+      ],
     ]
   };
 
-  const jsonString = JSON.stringify(jsonOutput, null, 2);
+  const jsonString = JSON.stringify(jsonData, null, 2);
 
   return(
     <pre className='mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border py-4'>
@@ -100,6 +125,13 @@ function JSONTabContent({fieldTypeConfigurationBlockFields}) {
 }
 
 export function AcfFieldTypeConfigurationBlock({ fieldTypeConfigurationBlockFields }) {
+  const { acfFieldType } = fieldTypeConfigurationBlockFields;
+  const [uniqueId, setUniqueId] = useState('');
+
+  useEffect(() => {
+    setUniqueId(stringToHash(acfFieldType));
+  }, []);
+
   return (
     <Card>
       <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0">
@@ -113,7 +145,7 @@ export function AcfFieldTypeConfigurationBlock({ fieldTypeConfigurationBlockFiel
           </TabsList>
           {tabData.map(tab => (
             <TabsContent key={tab.key} value={tab.key}>
-              {tab.component({ fieldTypeConfigurationBlockFields })}
+              {tab.component({ fieldTypeConfigurationBlockFields, uniqueId })}
             </TabsContent>
           ))}
         </Tabs>
