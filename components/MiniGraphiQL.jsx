@@ -70,31 +70,15 @@ const MiniGraphiQLClient = ({ initialQuery, initialVariables, endpoint, readOnly
     }
   }
 
-  const containerStyles = {
-    height: '80vh',
-    maxHeight: 'auto',
-    borderRadius: '4px',
-    padding: '0.5rem',
-    display: 'flex',
-    flex: '1 1 0%',
-  };
-
   const graphiqlStyles = `
-    :root {
-      color-scheme: ${theme};
-    }
     .graphiql-container {
+      height: fit-content;
       background-color: transparent !important;
       font-size: 14px;
-    }
-    .graphiql-container * {
-      box-shadow: none !important;
-    }
-    .graphiql-container .graphiql-editor-tools button:nth-child(2) {
-      display: none;
-    }
-    .graphiql-container .graphiql-editors {
-      border-radius: 2px;
+      border-radius: 4px;
+      padding: 0.5rem;
+      display: flex;
+      min-height: 400px; 
     }
     .graphiql-container .graphiql-editors.full-height {
       margin-top: 8px;
@@ -107,25 +91,34 @@ const MiniGraphiQLClient = ({ initialQuery, initialVariables, endpoint, readOnly
     .graphiql-container .graphiql-response .result-window {
       padding-top: 8px;
     }
-    .graphiql-container .graphiql-session-header {
-      display: none;
-    }
     .graphiql-container .graphiql-sessions {
       border-radius: 2px;
+    }
+    .graphiql-container .graphiql-editors {
+      border-radius: 2px;
+    }
+    .graphiql-container * {
+      box-shadow: none !important;
+    }
+    .graphiql-container .graphiql-session-header {
+      display: none;
     }
     .graphiql-container .graphiql-sidebar {
       display: none;
     }
+    .graphiql-container .graphiql-editor-tools button:nth-child(2) {
+      display: none; /* headers tab */
+    }
     .graphiql-toolbar button:nth-child(2) {
-      display: none; /* prettify */
+      display: none; /* prettify button */
     }
     .graphiql-toolbar button:nth-child(3) {
-      display: none; /* merge */
+      display: none; /* merge fragment button */
     }
   `;
 
   return (
-    <div style={containerStyles} className={resolvedTheme}>
+    <div className={resolvedTheme}>
       <style dangerouslySetInnerHTML={{ __html: graphiqlStyles }} />
       {GraphiQL ? (
         <GraphiQL

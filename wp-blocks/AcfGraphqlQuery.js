@@ -9,13 +9,14 @@ const MiniGraphiQL = dynamic(
 );
 
 export function AcfGraphqlQuery({ graphqlQueryBlockMeta }) {
-  const { query, variables } = graphqlQueryBlockMeta;
+  const { query, variables, isReadOnly } = graphqlQueryBlockMeta;
 
   return (
     <MiniGraphiQL
       endpoint={getGraphqlEndpoint()}
       initialQuery={query}
       initialVariables={variables}
+      readOnly={isReadOnly}
     />
   );
 }
@@ -31,6 +32,7 @@ AcfGraphqlQuery.fragments = {
       graphqlQueryBlockMeta {
         query
         variables
+        isReadOnly
       }
     }
   `,
