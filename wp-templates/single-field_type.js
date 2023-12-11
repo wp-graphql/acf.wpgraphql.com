@@ -7,8 +7,8 @@ import Head from 'next/head'
 import { Layout } from '@/components/Layout'
 import { Badge } from '@/components/ui/badge'
 import blocks from '@/wp-blocks'
-import { AcfFieldTypeSettingsBlock } from '@/wp-blocks/AcfFieldTypeSettingsBlock'
 import { AcfFieldTypeConfigurationBlock } from '@/wp-blocks/AcfFieldTypeConfigurationBlock'
+import { AcfFieldTypeSettingsBlock } from '@/wp-blocks/AcfFieldTypeSettingsBlock'
 import { AcfGraphqlQuery } from '@/wp-blocks/AcfGraphqlQuery'
 
 export const SingleFieldType = ({ data }) => {

@@ -51,7 +51,7 @@ export function DocsSidebarNavigation({ className, data, navigation }) {
           <li key={section.title}>
             <div className="flex items-center">
               <Link href={section.href} passHref>
-                <h2 className="cursor-pointer font-display font-medium text-slate-900 hover:text-slate-600 dark:text-white dark:hover:text-gray-300 block w-full">
+                <h2 className="block w-full cursor-pointer font-display font-medium text-slate-900 hover:text-slate-600 dark:text-white dark:hover:text-gray-300">
                   {section.title}
                 </h2>
               </Link>
@@ -61,7 +61,7 @@ export function DocsSidebarNavigation({ className, data, navigation }) {
               >
                 <svg
                   className={clsx(
-                    'h-4 w-4 transform transition-transform',
+                    'h-4 w-4 transition-transform',
                     expandedSections[section.title] && 'rotate-180'
                   )}
                   xmlns="http://www.w3.org/2000/svg"

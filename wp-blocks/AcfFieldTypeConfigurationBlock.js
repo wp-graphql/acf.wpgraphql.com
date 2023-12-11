@@ -1,11 +1,12 @@
-import React from 'react';
 import { gql } from '@apollo/client'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import { snakeToPascalCase } from '@/lib/snakeToPascalCase';
+import React from 'react';
+
 import {
   Card,
   CardHeader,
 } from '@/components/ui/card';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { snakeToPascalCase } from '@/lib/snakeToPascalCase';
 
 const EXAMPLE_KEY = 'example_key'
 
