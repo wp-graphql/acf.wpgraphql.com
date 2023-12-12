@@ -3,19 +3,12 @@ import clsx from 'clsx'
 import React, { useState } from 'react';
 
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 
-const AccordionItem = ({ title, content, isOpen, onClick }) => {
-  const buttonStyles = {
-    closed:
-      'py-2 px-4 w-full text-left bg-white hover:bg-muted flex justify-between items-center text-black dark:bg-gray-800 dark:text-white',
-    open:
-      'py-2 px-4 w-full text-left bg-muted hover:bg-muted flex justify-between items-center text-black dark:text-white',
-  }
- 
+const AccordionItem = ({ title, content, isOpen, onClick }) => { 
   return (
-    <div className="dark:border-dark-gray-300 border-b border-gray-300">
-      <Button onClick={onClick} className={clsx(isOpen ? buttonStyles.open : buttonStyles.closed)}>
+    <>
+      <Button onClick={onClick} variant="primary" className="py-2 w-full text-left flex justify-between items-center">
         {title}
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
@@ -29,11 +22,11 @@ const AccordionItem = ({ title, content, isOpen, onClick }) => {
         </svg>
       </Button>
       {isOpen && (
-        <div className="dark:bg-dark-muted bg-muted px-4 py-2">
+        <div className="dark:bg-dark-muted bg-muted px-4 py-4">
           {content}
         </div>
       )}
-    </div>
+    </>
   )
 }
 
@@ -56,8 +49,9 @@ export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
   };
 
   return (
-    <div>
+    <>
       <Card>
+        <CardHeader className="grid grid-cols-[1fr_110px] items-start space-y-2">
           {fieldTypeSettings?.nodes?.map((item, index) => {
             const { id, name, description, fieldTypeSettingsMeta } = item;
             const { impactOnWpgraphql } = fieldTypeSettingsMeta;
@@ -79,16 +73,16 @@ export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
               />
             );
           })}
+        </CardHeader>
+        <CardFooter>
+          <div className="flex justify-center items-center space-x-4 w-full">
+            <Button variant="ghost" onClick={toggleAll} className="w-full">
+              {openItems.length === fieldTypeSettings.nodes.length ? 'Collapse All' : 'Expand All'}
+            </Button>
+          </div>
+        </CardFooter>
       </Card>
-      <div className="mt-4 text-center">
-        <button
-          onClick={toggleAll}
-          className="text-blue-500 underline hover:text-blue-600"
-        >
-          {openItems.length === fieldTypeSettings.nodes.length ? 'Collapse All' : 'Expand All'}
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 
