@@ -1,10 +1,11 @@
 import { gql } from '@apollo/client';
 import React, { useState, useEffect } from 'react';
+
 import { Card, CardHeader } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { HighlightCode } from '@/lib/highlightCode';
 import { snakeToPascalCase } from '@/lib/snakeToPascalCase';
 import { stringToHash } from '@/lib/stringToHash';
-import { highlightCode } from '@/lib/highlightCode';
 
 function generateData(uniqueId, acfFieldType) {
   return {
@@ -42,12 +43,12 @@ add_action( 'acf/include_fields', function() {
     ]
   );
 });`;
-  return highlightCode(phpString, "php", [3, 4, 5]);
+  return HighlightCode(phpString, "php", [11, 12, 13, 14, 15, 16, 23, 24]);
 }
 
 function generateJSONTabContent(data) {
   const jsonString = JSON.stringify(data, null, 2);
-  return highlightCode(jsonString, "json", [3, 4, 5]);
+  return HighlightCode(jsonString, "json", [4, 5, 6, 7, 8, 9, 16, 17]);
 }
 
 function TabContent({ fieldTypeConfigurationBlockFields, uniqueId, format }) {
