@@ -1,105 +1,76 @@
-import { gql } from '@apollo/client'
-import React from 'react';
+import { gql } from '@apollo/client';
+import React, { useState, useEffect } from 'react';
 
-import {
-  Card,
-  CardHeader,
-} from '@/components/ui/card';
+import { Card, CardHeader } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { HighlightCode } from '@/lib/highlightCode';
 import { snakeToPascalCase } from '@/lib/snakeToPascalCase';
+import { stringToHash } from '@/lib/stringToHash';
 
-const EXAMPLE_KEY = 'example_key'
+function generateData(uniqueId, acfFieldType) {
+  return {
+    key: `my_field_group_${uniqueId}`,
+    title: `My Field Group with ${acfFieldType}`,
+    show_in_graphql: 1,
+    graphql_field_name: `myFieldGroupWith${snakeToPascalCase(acfFieldType)}`,
+    map_graphql_types_from_location_rules: 0,
+    graphql_types: ['Page'],
+    fields: [{
+      key: `my_field_${uniqueId}`,
+      label: 'My Field',
+      name: 'my_field',
+      type: `${acfFieldType}`,
+      show_in_graphql: 1,
+      graphql_field_name: `myFieldWith${snakeToPascalCase(acfFieldType)}`,
+    }],
+    location: [[{
+      param: 'post_type',
+      operator: '==',
+      value: 'page',
+    }]],
+  };
+}
 
-const tabData = [
-  {
-    key: 'php',
-    name: 'PHP',
-    component: PHPTabContent
-  },
-  {
-    key: 'json',
-    name: 'JSON',
-    component: JSONTabContent
-  },
-];
-
-function PHPTabContent({fieldTypeConfigurationBlockFields}) {
-  const { acfFieldType } = fieldTypeConfigurationBlockFields;
-  const phpGuts = `array(
-      'key'                   => 'group_${EXAMPLE_KEY}',
-      'title'                 => 'My Field Group with ${acfFieldType}',
-      'show_in_graphql'       => 1,
-      'graphql_field_name'    => 'myFieldGroupWith${snakeToPascalCase(acfFieldType)}',
-      'map_graphql_types_from_location_rules' => 0,
-      'graphql_types'         => array( 'Page' ),
-      'fields'                => array(
-        array(
-          'key'                => 'field_${EXAMPLE_KEY}',
-          'label'              => 'My Field',
-          'name'               => 'my_field',
-          'type'               => '${acfFieldType}',
-          'show_in_graphql'    => 1,
-          'graphql_field_name' => 'myField',
-        ),
-      ),
-      'location'              => array(
-        array(
-          array(
-            'param'    => 'post_type',
-            'operator' => '==',
-            'value'    => 'page',
-          ),
-        ),
-      )
-    )`
-  
-  let phpString = `<?php
+function generatePHPTabContent(data) {
+  const phpString = `<?php
 add_action( 'acf/include_fields', function() {
-  // Check if the ACF function exists
   if ( ! function_exists( 'acf_add_local_field_group' ) ) {
       return;
   }
-
-  // Add local field group
   acf_add_local_field_group(
-    ${phpGuts}
+    [
+      ${JSON.stringify(data, null, 2).replace(/\n/g, "\n      ") /* Fix rendered indentation */}
+    ]
   );
-});
-`;
-
-  return(
-    <pre className='mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border py-4'>
-      {phpString}
-    </pre>
-  )
+});`;
+  return HighlightCode(phpString, "php", [11, 12, 13, 14, 15, 16, 23, 24]);
 }
 
-function JSONTabContent({fieldTypeConfigurationBlockFields}) {
+function generateJSONTabContent(data) {
+  const jsonString = JSON.stringify(data, null, 2);
+  return HighlightCode(jsonString, "json", [4, 5, 6, 7, 8, 9, 16, 17]);
+}
+
+function TabContent({ fieldTypeConfigurationBlockFields, uniqueId, format }) {
   const { acfFieldType } = fieldTypeConfigurationBlockFields;
-  
-  const jsonOutput = {
-    key: `group_${EXAMPLE_KEY}`,
-    title: `My Field Group with ${acfFieldType}`,
-    fields: [
-      {
-        key: `field_${EXAMPLE_KEY}`,
-        label: 'My Field',
-        name: 'my_field',
-        type: acfFieldType,
-      }
-    ]
-  };
+  const data = generateData(uniqueId, acfFieldType);
 
-  const jsonString = JSON.stringify(jsonOutput, null, 2);
-
-  return(
-    <pre className='mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border py-4'>
-      {jsonString}
-    </pre>
-  )
+  return format === 'php' ? generatePHPTabContent(data) : generateJSONTabContent(data);
 }
 
 export function AcfFieldTypeConfigurationBlock({ fieldTypeConfigurationBlockFields }) {
+  const { acfFieldType } = fieldTypeConfigurationBlockFields;
+  const [uniqueId, setUniqueId] = useState('');
+
+  useEffect(() => {
+    setUniqueId(stringToHash(acfFieldType));
+  }, [acfFieldType]);
+
+  const tabData = [
+    { key: 'php', name: 'PHP' },
+    { key: 'json', name: 'JSON' },
+  ];
+
   return (
     <Card>
       <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0">
@@ -113,14 +84,14 @@ export function AcfFieldTypeConfigurationBlock({ fieldTypeConfigurationBlockFiel
           </TabsList>
           {tabData.map(tab => (
             <TabsContent key={tab.key} value={tab.key}>
-              {tab.component({ fieldTypeConfigurationBlockFields })}
+              <TabContent fieldTypeConfigurationBlockFields={fieldTypeConfigurationBlockFields} uniqueId={uniqueId} format={tab.key} />
             </TabsContent>
           ))}
         </Tabs>
       </CardHeader>
     </Card>
   );
-};
+}
 
 AcfFieldTypeConfigurationBlock.displayName = `AcfFieldTypeConfigurationBlock`
 AcfFieldTypeConfigurationBlock.config = {
