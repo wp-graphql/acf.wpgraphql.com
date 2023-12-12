@@ -73,7 +73,7 @@ export function AcfFieldTypeConfigurationBlock({ fieldTypeConfigurationBlockFiel
 
   return (
     <Card>
-      <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0">
+      <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0 overflow-x-auto">
         <Tabs defaultValue={tabData[0].key}>
           <TabsList aria-label="Dynamic Tabs">
             {tabData.map(tab => (
