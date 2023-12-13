@@ -2,7 +2,6 @@ import '@/faust.config'
 import { WordPressBlocksProvider } from '@faustwp/blocks'
 import { FaustProvider } from '@faustwp/core'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import React from 'react'
 
 import 'focus-visible'
@@ -12,9 +11,7 @@ import { SearchProvider } from '@/components/Search'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import blocks from '@/wp-blocks'
 
-export default function MyApp({ Component, pageProps }) {
-  const router = useRouter()
-
+export default function MyApp({ Component, pageProps, router }) {
   return (
     <ThemeProvider
       attribute="class"
