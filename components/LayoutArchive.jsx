@@ -8,13 +8,16 @@ import { DocsSidebarNavigation } from '@/components/DocsSidebarNavigation'
 import { Prose } from '@/components/Prose'
 import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
+import { SitewideNotice } from '@/components/SitewideNotice'
 
 LayoutArchive.fragment = gql`
   fragment LayoutArchiveFragment on RootQuery {
+    ...SitewideNoticeFragment
     ...PrimaryNavigationFragment
     ...DocsSidebarNavigationFragment
     ...FooterNavigationFragment
   }
+  ${SitewideNotice.fragment}
   ${PrimaryNavigation.fragment}
   ${DocsSidebarNavigation.fragment}
   ${FooterNavigation.fragment}
@@ -53,7 +56,8 @@ export function LayoutArchive({ data, children, title }) {
 
   return (
     <>
-      <SiteHeader navigation={primaryNavigation} />
+      <SitewideNotice displayNotice={data.sitewideNotice.sitewideNoticeFields.displayNotice} message={data.sitewideNotice.sitewideNoticeFields.message} />
+      <SiteHeader navigation={primaryNavigation} isNoticeVisible={data.sitewideNotice.sitewideNoticeFields.displayNotice} />
       <main className='content'>
         <div className="relative mx-auto flex max-w-8xl justify-center sm:px-2 lg:px-8 xl:px-12">
           <div className="hidden lg:relative lg:block lg:flex-none">

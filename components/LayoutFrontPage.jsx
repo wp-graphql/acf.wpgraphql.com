@@ -6,13 +6,16 @@ import { SiteFooter } from './SiteFooter'
 
 import { PrimaryNavigation } from '@/components/PrimaryNavigation'
 import { SiteHeader } from '@/components/SiteHeader'
+import { SitewideNotice } from '@/components/SitewideNotice'
 
 
 LayoutFrontPage.fragment = gql`
   fragment LayoutFrontPageFragment on RootQuery {
+    ...SitewideNoticeFragment
     ...PrimaryNavigationFragment
     ...FooterNavigationFragment
   }
+  ${SitewideNotice.fragment}
   ${PrimaryNavigation.fragment}
   ${FooterNavigation.fragment}
 `
@@ -36,7 +39,8 @@ export function LayoutFrontPage({ data, children }) {
     : []
   return (
     <>
-      <SiteHeader navigation={primaryNavigation} data={data} />
+      <SitewideNotice displayNotice={data.sitewideNotice.sitewideNoticeFields.displayNotice} message={data.sitewideNotice.sitewideNoticeFields.message} />
+      <SiteHeader navigation={primaryNavigation} data={data} isNoticeVisible={data.sitewideNotice.sitewideNoticeFields.displayNotice} />
       <main className='content'>
         {children}
       </main>
