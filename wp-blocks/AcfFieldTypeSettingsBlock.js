@@ -48,6 +48,17 @@ export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
     }
   };
 
+
+  if ( ! fieldTypeSettings?.nodes?.length ) {
+    return (
+      <Card>
+        <CardHeader className="grid grid-cols-[1fr_110px] items-start space-y-2">
+          Field Type Settings not yet configured for this field type
+        </CardHeader>
+      </Card>
+    );
+  }
+
   return (
     <>
       <Card>
@@ -77,7 +88,7 @@ export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
         <CardFooter>
           <div className="flex justify-center items-center space-x-4 w-full">
             <Button variant="ghost" onClick={toggleAll} className="w-full">
-              {openItems.length === fieldTypeSettings.nodes.length ? 'Collapse All' : 'Expand All'}
+              {openItems.length === fieldTypeSettings?.nodes?.length ? 'Collapse All' : 'Expand All'}
             </Button>
           </div>
         </CardFooter>
