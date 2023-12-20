@@ -146,7 +146,7 @@ function FieldTypeGrid({ fieldTypes }) {
   )
 }
 
-const HomepageLayoutsLayoutsSupportedFieldTypes = (data) => {
+const HomepageLayoutsLayoutsSupportedFieldTypesLayout = (data) => {
   return (
     <section
       id="reviews"
@@ -171,8 +171,8 @@ const HomepageLayoutsLayoutsSupportedFieldTypes = (data) => {
   )
 }
 
-HomepageLayoutsLayoutsSupportedFieldTypes.fragment = gql`
-  fragment HomepageLayoutsLayoutsSupportedFieldTypes on LayoutSupportedFieldTypes_Fields {
+HomepageLayoutsLayoutsSupportedFieldTypesLayout.fragment = gql`
+  fragment HomepageLayoutsLayoutsSupportedFieldTypesLayout on LayoutSupportedFieldTypes_Fields {
     title
     description
     fieldTypes(first: 100) {
@@ -194,4 +194,4 @@ HomepageLayoutsLayoutsSupportedFieldTypes.fragment = gql`
   }
 `
 
-export default HomepageLayoutsLayoutsSupportedFieldTypes
+export default HomepageLayoutsLayoutsSupportedFieldTypesLayout

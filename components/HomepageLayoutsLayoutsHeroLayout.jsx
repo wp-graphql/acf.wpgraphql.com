@@ -16,7 +16,7 @@ function TrafficLightsIcon(props) {
   )
 }
 
-const HomepageLayoutsLayoutsHero = (hero) => {
+const HomepageLayoutsLayoutsHeroLayout = (hero) => {
   return (
     <div className="overflow-hidden bg-white dark:-mb-32 dark:mt-[-4.5rem] dark:bg-slate-900 dark:pb-32 dark:pt-[4.5rem] dark:lg:mt-[-4.75rem] dark:lg:pt-[4.75rem]">
       <div className="py-16 sm:px-2 lg:relative lg:px-0 lg:py-20">
@@ -137,8 +137,8 @@ const ACFE_AdvancedLink = gql`
   }
 `
 
-HomepageLayoutsLayoutsHero.fragment = gql`
-  fragment HomepageLayoutsLayoutsHero on LayoutHero_Fields {
+HomepageLayoutsLayoutsHeroLayout.fragment = gql`
+  fragment HomepageLayoutsLayoutsHeroLayout on LayoutHero_Fields {
     title
     description
     getStartedLink {
@@ -153,4 +153,4 @@ HomepageLayoutsLayoutsHero.fragment = gql`
   ${ACFE_AdvancedLink}
 `
 
-export default HomepageLayoutsLayoutsHero
+export default HomepageLayoutsLayoutsHeroLayout

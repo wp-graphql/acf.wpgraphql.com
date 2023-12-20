@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 import FeatureTabsLeft from './FeatureTabsLeft'
 import FeatureTabsTop from './FeatureTabsTop'
 
-const HomepageLayoutsLayoutsFeatures = (feature) => {
+const HomepageLayoutsLayoutsFeaturesLayout = (feature) => {
   const layout = feature?.layout?.[0] ?? 'top'
   switch (layout) {
     case 'top':
@@ -13,8 +13,8 @@ const HomepageLayoutsLayoutsFeatures = (feature) => {
   }
 }
 
-HomepageLayoutsLayoutsFeatures.fragment = gql`
-  fragment HomepageLayoutsLayoutsFeatures on LayoutFeatureTabs_Fields {
+HomepageLayoutsLayoutsFeaturesLayout.fragment = gql`
+  fragment HomepageLayoutsLayoutsFeaturesLayout on LayoutFeatureTabs_Fields {
     __typename
     ...FeatureTabsTop
     ...FeatureTabsLeft
@@ -23,4 +23,4 @@ HomepageLayoutsLayoutsFeatures.fragment = gql`
   ${FeatureTabsLeft.fragment}
 `
 
-export default HomepageLayoutsLayoutsFeatures
+export default HomepageLayoutsLayoutsFeaturesLayout

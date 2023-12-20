@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
 
-import HomepageLayoutsLayoutsFaqs from '@/components/HomepageLayoutsLayoutsFaqs'
-import HomepageLayoutsLayoutsFeatures from '@/components/HomepageLayoutsLayoutsFeatures'
-import HomepageLayoutsLayoutsHero from '@/components/HomepageLayoutsLayoutsHero'
-import HomepageLayoutsLayoutsSupportedFieldTypes from '@/components/HomepageLayoutsLayoutsSupportedFieldTypes'
+import HomepageLayoutsLayoutsFaqsLayout from '@/components/HomepageLayoutsLayoutsFaqsLayout'
+import HomepageLayoutsLayoutsFeaturesLayout from '@/components/HomepageLayoutsLayoutsFeaturesLayout'
+import HomepageLayoutsLayoutsHeroLayout from '@/components/HomepageLayoutsLayoutsHeroLayout'
+import HomepageLayoutsLayoutsSupportedFieldTypesLayout from '@/components/HomepageLayoutsLayoutsSupportedFieldTypesLayout'
 import { LayoutFrontPage } from '@/components/LayoutFrontPage'
 
 export const FrontPage = ({ data }) => {
@@ -11,16 +11,16 @@ export const FrontPage = ({ data }) => {
     <LayoutFrontPage data={data}>
       {data?.frontPage?.homepageLayouts?.layouts?.map((layout, i) => {
         switch (layout.__typename) {
-          case 'HomepageLayoutsLayoutsHero':
-            return <HomepageLayoutsLayoutsHero key={i} {...layout} />
-          case 'HomepageLayoutsLayoutsFeatures':
-            return <HomepageLayoutsLayoutsFeatures key={i} {...layout} />
-          case 'HomepageLayoutsLayoutsSupportedFieldTypes':
+          case 'HomepageLayoutsLayoutsHeroLayout':
+            return <HomepageLayoutsLayoutsHeroLayout key={i} {...layout} />
+          case 'HomepageLayoutsLayoutsFeaturesLayout':
+            return <HomepageLayoutsLayoutsFeaturesLayout key={i} {...layout} />
+          case 'HomepageLayoutsLayoutsSupportedFieldTypesLayout':
             return (
-              <HomepageLayoutsLayoutsSupportedFieldTypes key={i} {...layout} />
+              <HomepageLayoutsLayoutsSupportedFieldTypesLayout key={i} {...layout} />
             )
-          case 'HomepageLayoutsLayoutsFaqs':
-            return <HomepageLayoutsLayoutsFaqs key={i} {...layout} />
+          case 'HomepageLayoutsLayoutsFaqsLayout':
+            return <HomepageLayoutsLayoutsFaqsLayout key={i} {...layout} />
           default:
             return <pre>{JSON.stringify(layout, null, 2)}</pre>
         }
@@ -45,20 +45,20 @@ FrontPage.query = gql`
         homepageLayouts {
           layouts {
             __typename
-            ...HomepageLayoutsLayoutsHero
-            ...HomepageLayoutsLayoutsFeatures
-            ...HomepageLayoutsLayoutsSupportedFieldTypes
-            ...HomepageLayoutsLayoutsFaqs
+            ...HomepageLayoutsLayoutsHeroLayout
+            ...HomepageLayoutsLayoutsFeaturesLayout
+            ...HomepageLayoutsLayoutsSupportedFieldTypesLayout
+            ...HomepageLayoutsLayoutsFaqsLayout
           }
         }
       }
     }
     ...LayoutFrontPageFragment
   }
-  ${HomepageLayoutsLayoutsHero.fragment}
-  ${HomepageLayoutsLayoutsFeatures.fragment}
-  ${HomepageLayoutsLayoutsSupportedFieldTypes.fragment}
-  ${HomepageLayoutsLayoutsFaqs.fragment}
+  ${HomepageLayoutsLayoutsHeroLayout.fragment}
+  ${HomepageLayoutsLayoutsFeaturesLayout.fragment}
+  ${HomepageLayoutsLayoutsSupportedFieldTypesLayout.fragment}
+  ${HomepageLayoutsLayoutsFaqsLayout.fragment}
   ${LayoutFrontPage.fragment}
 `
 

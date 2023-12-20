@@ -21,7 +21,7 @@ const getColumns = (questions, numberOfColumns) => {
   return columns
 }
 
-const HomepageLayoutsLayoutsFaqs = ({ title, description, questions }) => {
+const HomepageLayoutsLayoutsFaqsLayout = ({ title, description, questions }) => {
   const columns = getColumns(questions, 3)
 
   return (
@@ -70,8 +70,8 @@ const HomepageLayoutsLayoutsFaqs = ({ title, description, questions }) => {
   )
 }
 
-HomepageLayoutsLayoutsFaqs.fragment = gql`
-  fragment HomepageLayoutsLayoutsFaqs on LayoutFaqs_Fields {
+HomepageLayoutsLayoutsFaqsLayout.fragment = gql`
+  fragment HomepageLayoutsLayoutsFaqsLayout on LayoutFaqs_Fields {
     title
     description
     questions {
@@ -81,4 +81,4 @@ HomepageLayoutsLayoutsFaqs.fragment = gql`
   }
 `
 
-export default HomepageLayoutsLayoutsFaqs
+export default HomepageLayoutsLayoutsFaqsLayout
