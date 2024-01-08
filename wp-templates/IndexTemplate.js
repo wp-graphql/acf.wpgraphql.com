@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { flatListToHierarchical } from '@faustwp/core'
+import Head from 'next/head'
 
 import { Layout } from '@/components/Layout'
 import blocks from '@/wp-blocks'
@@ -47,33 +48,38 @@ export const IndexTemplate = ({ data }) => {
   })
 
   return (
-    <Layout
-      title={node?.title ? node.title : 'WPGraphQL for ACF'}
-      data={data}
-      navigation={data?.navigation?.nodes}
-      toc={toc}
-    >
-      {node?.modified && (
-        <div id="last-updated" className="text-sm text-gray-500">
-          Last Upated:{' '}
-          {new Date(node.modified).toLocaleDateString('en-us', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-          })}
-        </div>
-      )}
-      <WordPressBlocksViewer blocks={blockList} />
-      {/* <h2>Raw editorBlocks</h2> */}
-      {
-        /**
-         *  uncomment to debug editorBlocks
-         *  <pre>{JSON.stringify(node.editorBlocks, null, 2)}</pre>
-         */
-        // <pre>{JSON.stringify(node, null, 2)}</pre>
-      }
-    </Layout>
+    <>
+      <Head>
+        <title>{`${node?.title} - WPGraphQL for ACF`}</title>
+      </Head>
+      <Layout
+        title={node?.title ? node.title : 'WPGraphQL for ACF'}
+        data={data}
+        navigation={data?.navigation?.nodes}
+        toc={toc}
+      >
+        {node?.modified && (
+          <div id="last-updated" className="text-sm text-gray-500">
+            Last Upated:{' '}
+            {new Date(node.modified).toLocaleDateString('en-us', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })}
+          </div>
+        )}
+        <WordPressBlocksViewer blocks={blockList} />
+        {/* <h2>Raw editorBlocks</h2> */}
+        {
+          /**
+           *  uncomment to debug editorBlocks
+           *  <pre>{JSON.stringify(node.editorBlocks, null, 2)}</pre>
+           */
+          // <pre>{JSON.stringify(node, null, 2)}</pre>
+        }
+      </Layout>
+    </>
   )
 }
 

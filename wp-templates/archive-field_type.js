@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client'
+import Head from 'next/head'
 
 import { FieldTypesList } from '@/components/FieldTypesList'
 import { LayoutArchive } from '@/components/LayoutArchive'
@@ -15,14 +16,19 @@ export const ArchiveFieldType = (props) => {
   let toc = []
 
   return (
-    <LayoutArchive
-      title={data?.node?.label ? data.node.label : 'WPGraphQL for ACF'}
-      data={data}
-      navigation={data?.navigation?.nodes}
-      toc={toc}
-    >
-      <FieldTypesList data={data} />
-    </LayoutArchive>
+    <>
+      <Head>
+        <title>{`${data?.node?.label} - WPGraphQL for ACF`}</title>
+      </Head>
+      <LayoutArchive
+        title={data?.node?.label ? data.node.label : 'WPGraphQL for ACF'}
+        data={data}
+        navigation={data?.navigation?.nodes}
+        toc={toc}
+      >
+        <FieldTypesList data={data} />
+      </LayoutArchive>
+    </>
   )
 }
 
