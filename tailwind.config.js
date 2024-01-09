@@ -12,7 +12,7 @@ module.exports = {
     './wp-templates/**/*.{js,mjs,jsx,mdx,tsx,ts}',
     './wp-templates/*.{js,mjs,jsx,mdx,tsx,ts}',
   ],
-  darkMode: 'class',
+  darkMode: [ 'class', '[data-theme="dark"]'],
   theme: {
     fontSize: {
       xs: ['0.75rem', { lineHeight: '1rem' }],

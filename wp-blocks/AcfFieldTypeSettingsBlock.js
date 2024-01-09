@@ -61,21 +61,23 @@ export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
 
   return (
     <>
+    <p>Below you will find information about how various ACF field settings can impact how the field will map to the GraphQL Schema and/or modify resolution of the field when queried.</p>
       <Card>
         <CardHeader className="grid grid-cols-[1fr_110px] items-start space-y-2">
           {fieldTypeSettings?.nodes?.map((item, index) => {
             const { id, name, description, fieldTypeSettingsMeta } = item;
-            const { impactOnWpgraphql } = fieldTypeSettingsMeta;
+            const { impactOnWpgraphql, acfFieldName } = fieldTypeSettingsMeta;
 
             return (
               <AccordionItem
                 key={id}
-                title={name}
+                title={`${name}`}
                 content={
                   <>
-                    {description && <p>{description}</p>}
+                    {acfFieldName && <><p><code className='mb-10'>{acfFieldName}</code></p></>}
+                    {description && <><p>{description}</p></>}
                     {impactOnWpgraphql && (
-                      <span dangerouslySetInnerHTML={{ __html: impactOnWpgraphql }} />
+                      <><strong>Impact on the GraphQL</strong><span dangerouslySetInnerHTML={{ __html: impactOnWpgraphql }} /></>
                     )}
                   </>
                 }

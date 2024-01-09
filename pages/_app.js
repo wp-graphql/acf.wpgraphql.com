@@ -14,7 +14,6 @@ import blocks from '@/wp-blocks'
 export default function MyApp({ Component, pageProps, router }) {
   return (
     <ThemeProvider
-      attribute="class"
       defaultTheme="system"
       enableSystem
       disableTransitionOnChange
