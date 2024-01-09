@@ -1,5 +1,4 @@
 import { gql } from '@apollo/client';
-import clsx from 'clsx'
 import React, { useState } from 'react';
 
 import { Button } from "@/components/ui/button";
@@ -8,7 +7,7 @@ import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 const AccordionItem = ({ title, content, isOpen, onClick }) => { 
   return (
     <>
-      <Button onClick={onClick} variant="primary" className="py-2 w-full text-left flex justify-between items-center">
+      <Button onClick={onClick} variant="primary" className="flex w-full items-center justify-between py-2 text-left">
         {title}
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
@@ -22,7 +21,7 @@ const AccordionItem = ({ title, content, isOpen, onClick }) => {
         </svg>
       </Button>
       {isOpen && (
-        <div className="dark:bg-dark-muted bg-muted px-4 py-4">
+        <div className="dark:bg-dark-muted bg-muted p-4">
           {content}
         </div>
       )}
@@ -88,7 +87,7 @@ export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
           })}
         </CardHeader>
         <CardFooter>
-          <div className="flex justify-center items-center space-x-4 w-full">
+          <div className="flex w-full items-center justify-center space-x-4">
             <Button variant="ghost" onClick={toggleAll} className="w-full">
               {openItems.length === fieldTypeSettings?.nodes?.length ? 'Collapse All' : 'Expand All'}
             </Button>

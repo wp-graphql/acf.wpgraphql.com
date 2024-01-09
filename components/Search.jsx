@@ -9,9 +9,9 @@ import { createPortal } from "react-dom";
 import { SearchIcon } from '@/components/icons/SearchIcon';
 import '@docsearch/css/dist/style.css';
 
-const INDEX_NAME = 'wpgraphql';
-const API_KEY = '0c11d662dad18e8a18d20c969b25c65f';
-const APP_ID = 'HB50HVJDY8';
+const INDEX_NAME = 'acf-wpgraphql';
+const API_KEY = 'b404b713250845334bb3538fe4f32895';
+const APP_ID = 'I1X3LCBG6R';
 
 const SearchContext = createContext();
 

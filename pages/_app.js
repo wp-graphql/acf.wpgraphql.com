@@ -6,7 +6,7 @@ import React from 'react'
 
 import 'focus-visible'
 import '@/styles/tailwind.css'
-// import '../globalStylesheet.css'
+import '../globalStylesheet.css'
 import { SearchProvider } from '@/components/Search'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import blocks from '@/wp-blocks'

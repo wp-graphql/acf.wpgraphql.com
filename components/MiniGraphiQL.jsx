@@ -47,17 +47,22 @@ const MiniGraphiQLClient = ({ initialQuery, initialVariables, endpoint, readOnly
   const fetcher = createGraphiQLFetcher({
     url: endpoint,
     fetch: async (url, options) => {
-      // Construct query parameters
-      const params = new URLSearchParams({
-        query: options.body.query,
-        variables: JSON.stringify(options.body.variables),
-      });
+      const parsedBody = JSON.parse(options?.body);
+      
+      const params = new URLSearchParams();
+      params.append('query', parsedBody.query);
+      if (options.body.variables) {
+        params.append('variables', JSON.stringify(parsedBody.variables));
+      }
+      const getUrl = `${url}&${params.toString()}`;
 
       // Make the GET request
-      return fetch(`${url}?${params.toString()}`, { 
+      const res = await fetch(getUrl, { 
         method: 'GET', 
-        headers: { 'Accept': 'application/json' } 
+        headers: options?.headers,
       });
+
+      return res;
     }
   });
 
