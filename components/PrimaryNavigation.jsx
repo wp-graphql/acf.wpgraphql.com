@@ -36,10 +36,10 @@ export function PrimaryNavigation({ navigation }) {
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        {navigation.map((item, i) => {
+        {navigation.map((item) => {
           if (item.links.length == 0) {
             return (
-              <NavigationMenuItem key={item?.id ?? i}>
+              <NavigationMenuItem key={item?.id}>
                 <Link href={item.href} legacyBehavior passHref>
                   <NavigationMenuLink
                     className={navigationMenuTriggerStyle()}
@@ -80,7 +80,7 @@ export function PrimaryNavigation({ navigation }) {
                       )
                     } else {
                       return (
-                        <NavigationMenuLink asChild>
+                        <NavigationMenuLink asChild key={sublink.id}>
                           <ListItem
                             key={sublink.id}
                             href={sublink.href}
