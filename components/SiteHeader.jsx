@@ -34,7 +34,7 @@ export function SiteHeader({ navigation, isNoticeVisible = false }) {
         'z-40 flex flex-wrap items-center justify-between bg-white px-4 py-5 shadow-md shadow-slate-900/5 transition duration-500 dark:shadow-none sm:px-6 lg:px-8',
         isScrolled
           ? 'dark:bg-slate-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-slate-900/75'
-          : 'dark:bg-transparent',
+          : 'dark:bg-slate-900',
       )}
     >
       <div className="mr-6 flex lg:hidden">
