@@ -39,7 +39,7 @@ export function PrimaryNavigation({ navigation }) {
         {navigation.map((item) => {
           if (item.links.length == 0) {
             return (
-              <NavigationMenuItem key={item.id}>
+              <NavigationMenuItem key={item?.id}>
                 <Link href={item.href} legacyBehavior passHref>
                   <NavigationMenuLink
                     className={navigationMenuTriggerStyle()}
@@ -56,7 +56,7 @@ export function PrimaryNavigation({ navigation }) {
             <NavigationMenuItem key={item.id}>
               <NavigationMenuTrigger>{item?.label}</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                <ul className="grid gap-2 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                   {item.links.map((sublink) => {
                     if (sublink.menuItemMeta?.isFeatured) {
                       return (
@@ -80,14 +80,16 @@ export function PrimaryNavigation({ navigation }) {
                       )
                     } else {
                       return (
-                        <ListItem
-                          key={sublink.id}
-                          href={sublink.href}
-                          target={sublink?.target ?? null}
-                          title={sublink.label}
-                        >
-                          {sublink.menuItemMeta?.description}
-                        </ListItem>
+                        <NavigationMenuLink asChild key={sublink.id}>
+                          <ListItem
+                            key={sublink.id}
+                            href={sublink.href}
+                            target={sublink?.target ?? null}
+                            title={sublink.label}
+                          >
+                            {sublink.menuItemMeta?.description}
+                          </ListItem>
+                        </NavigationMenuLink>
                       )
                     }
                   })}
