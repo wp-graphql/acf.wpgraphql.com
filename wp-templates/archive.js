@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 import Head from 'next/head'
 
-import { LayoutArchive } from '@/components/LayoutArchive'
+import { LayoutArchive, GET_LAYOUT_QUERY } from '@/components/LayoutArchive'
 
 export const Archive = (props) => {
   const { data } = props
@@ -22,7 +22,7 @@ export const Archive = (props) => {
   )
 }
 
-Archive.query = gql`
+const GET_ARCHIVE_QUERY = gql`
   query GetArchive($uri: String!) {
     node: nodeByUri(uri: $uri) {
       __typename
@@ -41,9 +41,7 @@ Archive.query = gql`
         }
       }
     }
-    ...LayoutArchiveFragment
   }
-  ${LayoutArchive.fragment}
 `
 
 Archive.variables = (seedNode) => {
