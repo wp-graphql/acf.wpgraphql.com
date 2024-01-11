@@ -53,9 +53,7 @@ function generateJSONTabContent(data) {
 
 function TabContent({ fieldTypeConfigurationBlockFields, uniqueId, format }) {
   const { acfFieldType } = fieldTypeConfigurationBlockFields;
-  if ( ! acfFieldType ) {
-    return null;
-  };
+  
   const data = generateData(uniqueId, acfFieldType);
 
   return format === 'php' ? generatePHPTabContent(data) : generateJSONTabContent(data);
@@ -64,7 +62,13 @@ function TabContent({ fieldTypeConfigurationBlockFields, uniqueId, format }) {
 export function AcfFieldTypeConfigurationBlock({ fieldTypeConfigurationBlockFields }) {
   const { acfFieldType } = fieldTypeConfigurationBlockFields;
   if ( ! acfFieldType ) {
-    return null;
+    return (
+      <Card>
+        <CardHeader className="grid grid-cols-[1fr_110px] items-start space-y-2">
+          Field Type Config has not been configured for this field type
+        </CardHeader>
+      </Card>
+    );
   };
   const [uniqueId, setUniqueId] = useState('');
 
