@@ -58,12 +58,28 @@ export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
     );
   }
 
+  // copy the nodes so we can sort them before returning
+  const settings = [...fieldTypeSettings?.nodes];
+
+  // sort by name
+  settings.sort((a, b) => {
+    let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+    let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1; //nameA comes first
+    }
+    if (nameA > nameB) {
+      return 1; // nameB comes first
+    }
+    return 0;  // names must be equal
+  });
+
   return (
     <>
     <p>Below you will find information about how various ACF field settings can impact how the field will map to the GraphQL Schema and/or modify resolution of the field when queried.</p>
       <Card>
         <CardHeader className="grid grid-cols-[1fr_110px] items-start space-y-2">
-          {fieldTypeSettings?.nodes?.map((item, index) => {
+          {settings?.map((item, index) => {
             const { id, name, description, fieldTypeSettingsMeta } = item;
             const { impactOnWpgraphql, acfFieldName } = fieldTypeSettingsMeta;
 
