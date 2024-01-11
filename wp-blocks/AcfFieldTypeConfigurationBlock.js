@@ -53,6 +53,9 @@ function generateJSONTabContent(data) {
 
 function TabContent({ fieldTypeConfigurationBlockFields, uniqueId, format }) {
   const { acfFieldType } = fieldTypeConfigurationBlockFields;
+  if ( ! acfFieldType ) {
+    return null;
+  };
   const data = generateData(uniqueId, acfFieldType);
 
   return format === 'php' ? generatePHPTabContent(data) : generateJSONTabContent(data);
@@ -60,6 +63,9 @@ function TabContent({ fieldTypeConfigurationBlockFields, uniqueId, format }) {
 
 export function AcfFieldTypeConfigurationBlock({ fieldTypeConfigurationBlockFields }) {
   const { acfFieldType } = fieldTypeConfigurationBlockFields;
+  if ( ! acfFieldType ) {
+    return null;
+  };
   const [uniqueId, setUniqueId] = useState('');
 
   useEffect(() => {
