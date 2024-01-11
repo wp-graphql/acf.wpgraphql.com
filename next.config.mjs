@@ -19,7 +19,7 @@ function experimentalConfig() {
     }
 
     if (process.env.ATLAS_CACHE_HANDLER_ENABLED !== undefined) {
-      experimental = { ...experimental,
+      return { ...experimental,
         incrementalCacheHandlerPath: require.resolve('./.atlas/atlas-cache-handler.js'),
         isrMemoryCacheSize: 0
       }
