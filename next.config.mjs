@@ -5,26 +5,27 @@ import withSearch from './markdoc/search.mjs'
 const nextConfig = {
     reactStrictMode: true,
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
-    experimental: {
-        scrollRestoration: true,
-        incrementalCacheHandlerPath: atlas_cache_handler(),
-        isrMemoryCacheSize: 0
-    },
+    experimental: experimentalConfig(),
     trailingSlash: true,
     images: {
         domains: [getWpHostname()],
     },
 };
 
-function atlas_cache_handler() {
+function experimentalConfig() {
+
+    const experimental = {
+        scrollRestoration: true,
+    }
+
     if (process.env.ATLAS_CACHE_HANDLER_ENABLED !== undefined) {
-      return {
+      experimental = { ...experimental,
         incrementalCacheHandlerPath: require.resolve('./.atlas/atlas-cache-handler.js'),
         isrMemoryCacheSize: 0
       }
     }
   
-    return undefined
+    return experimental
   }
   
 
