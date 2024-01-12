@@ -10,8 +10,8 @@ import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SitewideNotice } from '@/components/SitewideNotice'
 
-export const GET_LAYOUT_QUERY = gql`
-  query GetLayout {
+LayoutArchive.fragment = gql`
+  fragment LayoutArchiveFragment on RootQuery {
     ...SitewideNoticeFragment
     ...PrimaryNavigationFragment
     ...DocsSidebarNavigationFragment
@@ -21,7 +21,7 @@ export const GET_LAYOUT_QUERY = gql`
   ${PrimaryNavigation.fragment}
   ${DocsSidebarNavigation.fragment}
   ${FooterNavigation.fragment}
-`;
+`
 
 export function LayoutArchive({ data, children, title }) {
   const primaryMenuItems = data?.primaryMenuItems ?? []
