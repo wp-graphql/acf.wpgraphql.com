@@ -10,11 +10,13 @@ function experimentalConfig() {
 
     if (process.env.ATLAS_CACHE_HANDLER_ENABLED === undefined) {
         const atlasExperimentalOptions = { ...experimental, ...{
-            incrementalCacheHandlerPath: require.resolve('./.atlas/atlas-cache-handler.js'),
+            // instead of require.resolve, use createRequire 
+            // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta/resolve
+            // see: 
+            incrementalCacheHandlerPath: import.meta.resolve( './.atlas/atlas-cache-handler.js' ),
             isrMemoryCacheSize: 0
         }}
-       console.log( { atlasExperimentalOptions })
-       return atlasExperimentalOptions
+        return atlasExperimentalOptions
     }
   
     return experimental
