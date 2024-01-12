@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 import { Tab } from '@headlessui/react'
 import clsx from 'clsx'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 
 import { Container } from '@/components/Container'
 
