@@ -31,11 +31,11 @@ export function FieldTypesList({ data }) {
             <Link
               href={fieldType.uri}
               tabIndex={0}
-              className="absolute inset-0 z-20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-zinc-900/75 focus:ring-offset-2"
+              className="z-20 absolute inset-0 rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-900/75"
               aria-label={`${fieldType.title} field type`}
             />
             <div className="ring-zinc-900/7.5 absolute inset-0 rounded-2xl ring-1 ring-inset group-hover:ring-zinc-900/10 dark:ring-white/10 dark:group-hover:ring-white/20" />
-            <div className="relative z-10 flex h-full flex-col rounded-2xl px-4 pb-4 pt-16">
+            <div className="relative flex flex-col rounded-2xl px-4 pb-4 pt-16 h-full z-10">
               {fieldType?.featuredImage?.node && (
                 <Image
                   src={fieldType?.featuredImage?.node.sourceUrl}
@@ -46,11 +46,11 @@ export function FieldTypesList({ data }) {
                     'screenshot of the field type'
                   }
                   layout="responsive"
-                  className="shrink-0"
+                  className="flex-shrink-0"
                 />
               )}
               <div className="mt-auto">
-                <h3 className="pb-4 pt-6 text-center font-semibold text-gray-900 dark:text-gray-100">
+                <h3 className="font-semibold text-center text-gray-900 dark:text-gray-100 pt-6 pb-4">
                   {fieldType.title}
                 </h3>
               </div>

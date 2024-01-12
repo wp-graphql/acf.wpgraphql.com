@@ -1,62 +1,13 @@
 import { gql } from '@apollo/client'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { flatListToHierarchical, useFaustQuery } from '@faustwp/core'
+import { flatListToHierarchical } from '@faustwp/core'
 import Head from 'next/head'
 
-import { LAYOUT_QUERY, Layout } from '@/components/Layout'
+import { Layout } from '@/components/Layout'
 import blocks from '@/wp-blocks'
 
-const INDEX_TEMPLATE_QUERY = gql`
-query IndexTemplate($uri: String!) {
-    node: nodeByUri(uri: $uri) {
-        __typename
-        uri
-        ...on NodeWithTitle {
-            title
-        }
-        ...on NodeWithEditorBlocks {
-            editorBlocks {
-                __typename
-                name
-                renderedHtml
-                id: clientId
-                parentId: parentClientId
-                ...${blocks.CoreParagraph.fragments.key}
-                ...${blocks.CoreColumns.fragments.key}
-                ...${blocks.CoreColumn.fragments.key}
-                ...${blocks.CoreCode.fragments.key}
-                ...${blocks.CoreButtons.fragments.key}
-                ...${blocks.CoreButton.fragments.key}
-                ...${blocks.CoreQuote.fragments.key}
-                ...${blocks.CoreImage.fragments.key}
-                ...${blocks.CoreSeparator.fragments.key}
-                ...${blocks.CoreList.fragments.key}
-                ...${blocks.CoreHeading.fragments.key}
-            }
-        }
-        ...on ContentNode {
-            modified
-            ...on NodeWithContentEditor {
-                content
-            }
-        }
-    }
-}
-${blocks.CoreParagraph.fragments.entry}
-${blocks.CoreColumns.fragments.entry}
-${blocks.CoreColumn.fragments.entry}
-${blocks.CoreCode.fragments.entry}
-${blocks.CoreButtons.fragments.entry}
-${blocks.CoreButton.fragments.entry}
-${blocks.CoreQuote.fragments.entry}
-${blocks.CoreImage.fragments.entry}
-${blocks.CoreSeparator.fragments.entry}
-${blocks.CoreList.fragments.entry}
-${blocks.CoreHeading.fragments.entry}
-`
-
-export const IndexTemplate = () => {
-  const { node } = useFaustQuery(INDEX_TEMPLATE_QUERY)
+export const IndexTemplate = ({ data }) => {
+  const { node } = data
 
   if (!node) {
     return null
@@ -103,8 +54,9 @@ export const IndexTemplate = () => {
       </Head>
       <Layout
         title={node?.title ? node.title : 'WPGraphQL for ACF'}
+        data={data}
+        navigation={data?.navigation?.nodes}
         toc={toc}
-        node={node}
       >
         {node?.modified && (
           <div id="last-updated" className="text-sm text-gray-500">
@@ -131,12 +83,55 @@ export const IndexTemplate = () => {
   )
 }
 
-IndexTemplate.queries = [
-  {
-    query: LAYOUT_QUERY,
-  },
-  {
-    query: INDEX_TEMPLATE_QUERY,
-    variables: ({ uri }) => ({ uri }),
-  }
-];
+IndexTemplate.query = gql`
+query IndexTemplate($uri: String!) {
+    node: nodeByUri(uri: $uri) {
+        __typename
+        uri
+        ...on NodeWithTitle {
+            title
+        }
+        ...on NodeWithEditorBlocks {
+            editorBlocks {
+                __typename
+                name
+                renderedHtml
+                id: clientId
+                parentId: parentClientId
+                ...${blocks.CoreParagraph.fragments.key}
+                ...${blocks.CoreColumns.fragments.key}
+                ...${blocks.CoreColumn.fragments.key}
+                ...${blocks.CoreCode.fragments.key}
+                ...${blocks.CoreButtons.fragments.key}
+                ...${blocks.CoreButton.fragments.key}
+                ...${blocks.CoreQuote.fragments.key}
+                ...${blocks.CoreImage.fragments.key}
+                ...${blocks.CoreSeparator.fragments.key}
+                ...${blocks.CoreList.fragments.key}
+                ...${blocks.CoreHeading.fragments.key}
+            }
+        }
+        ...on ContentNode {
+            modified
+            ...on NodeWithContentEditor {
+                content
+            }
+        }
+    }
+    ...LayoutFragment
+}
+${blocks.CoreParagraph.fragments.entry}
+${blocks.CoreColumns.fragments.entry}
+${blocks.CoreColumn.fragments.entry}
+${blocks.CoreCode.fragments.entry}
+${blocks.CoreButtons.fragments.entry}
+${blocks.CoreButton.fragments.entry}
+${blocks.CoreQuote.fragments.entry}
+${blocks.CoreImage.fragments.entry}
+${blocks.CoreSeparator.fragments.entry}
+${blocks.CoreList.fragments.entry}
+${blocks.CoreHeading.fragments.entry}
+${Layout.fragment}
+`
+
+IndexTemplate.variables = ({ uri }) => ({ uri })
