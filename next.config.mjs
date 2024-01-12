@@ -12,7 +12,7 @@ function experimentalConfig() {
         const atlasExperimentalOptions = { ...experimental, ...{
             // instead of require.resolve, use createRequire 
             // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta/resolve
-            incrementalCacheHandlerPath: import.meta.resolve( './.atlas/atlas-cache-handler.js' ),
+            incrementalCacheHandlerPath: require.resolve( './.atlas/atlas-cache-handler.js' ),
             isrMemoryCacheSize: 0
         }}
         return atlasExperimentalOptions
