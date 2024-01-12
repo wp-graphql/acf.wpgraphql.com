@@ -61,6 +61,11 @@ function TabContent({ fieldTypeConfigurationBlockFields, uniqueId, format }) {
 
 export function AcfFieldTypeConfigurationBlock({ fieldTypeConfigurationBlockFields }) {
   const { acfFieldType } = fieldTypeConfigurationBlockFields;
+  const [uniqueId, setUniqueId] = useState('');
+  useEffect(() => {
+    setUniqueId(stringToHash(acfFieldType));
+  }, [acfFieldType]);
+  
   if ( ! acfFieldType ) {
     return (
       <Card>
@@ -70,11 +75,6 @@ export function AcfFieldTypeConfigurationBlock({ fieldTypeConfigurationBlockFiel
       </Card>
     );
   };
-  const [uniqueId, setUniqueId] = useState('');
-
-  useEffect(() => {
-    setUniqueId(stringToHash(acfFieldType));
-  }, [acfFieldType]);
 
   const tabData = [
     { key: 'php', name: 'PHP' },
