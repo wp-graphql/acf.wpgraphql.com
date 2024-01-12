@@ -31,10 +31,10 @@ export function FieldTypesList({ data }) {
             <Link
               href={fieldType.uri}
               tabIndex={0}
-              className="absolute inset-0 rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-900/75"
+              className="z-20 absolute inset-0 rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-900/75"
               aria-label={`${fieldType.title} field type`}
             />
-            <div className="ring-zinc-900/7.5 absolute inset-0 rounded-2xl ring-1 ring-inset group-hover:ring-zinc-900/10 dark:ring-white/10 dark:group-hover:ring-white/20" />
+            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset group-hover:ring-zinc-900/7.5 dark:ring-white/10 dark:group-hover:ring-white/20" />
             <div className="relative flex flex-col rounded-2xl px-4 pb-4 pt-16 h-full z-10">
               {fieldType?.featuredImage?.node && (
                 <Image
