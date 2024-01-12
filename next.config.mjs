@@ -8,7 +8,7 @@ function experimentalConfig() {
         scrollRestoration: true,
     }
 
-    if (process.env.ATLAS_CACHE_HANDLER_ENABLED === undefined) {
+    if (process.env.ATLAS_CACHE_HANDLER_ENABLED !== undefined) {
         const atlasExperimentalOptions = { ...experimental, ...{
             // instead of require.resolve, use createRequire 
             // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta/resolve
