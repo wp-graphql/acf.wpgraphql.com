@@ -12,7 +12,6 @@ function experimentalConfig() {
         const atlasExperimentalOptions = { ...experimental, ...{
             // instead of require.resolve, use createRequire 
             // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta/resolve
-            // see: 
             incrementalCacheHandlerPath: import.meta.resolve( './.atlas/atlas-cache-handler.js' ),
             isrMemoryCacheSize: 0
         }}
@@ -31,8 +30,5 @@ const nextConfig = {
         domains: [getWpHostname()],
     },
 };
-
-
   
-
 export default withFaust( withSearch( withMarkdoc({ schemaPath: './src/markdoc' })(nextConfig) ) );
