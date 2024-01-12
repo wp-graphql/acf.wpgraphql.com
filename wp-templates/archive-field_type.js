@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
-import { useFaustQuery } from "@faustwp/core";
 import Head from 'next/head'
+import { useFaustQuery } from "@faustwp/core";
 
 import { FieldTypesList } from '@/components/FieldTypesList'
 import { LayoutArchive, GET_LAYOUT_QUERY } from '@/components/LayoutArchive'
@@ -38,7 +38,7 @@ export const GET_POST_QUERY = gql`
   }
 `;
 
-export const ArchiveFieldType = () => {
+export const ArchiveFieldType = (props) => {
   const { node } = useFaustQuery(GET_POST_QUERY);
   const {
     docsSidebarMenuItems,
@@ -46,6 +46,8 @@ export const ArchiveFieldType = () => {
     primaryMenuItems,
     sitewideNotice
   } = useFaustQuery(GET_LAYOUT_QUERY);
+
+  // console.log({ node, docsSidebarMenuItems, footerMenuItems, primaryMenuItems, sitewideNotice });
 
   if (!node) {
     return null

@@ -1,8 +1,26 @@
 import { gql } from '@apollo/client'
-import { useFaustQuery } from "@faustwp/core";
 import Head from 'next/head'
 
 import { LayoutArchive, GET_LAYOUT_QUERY } from '@/components/LayoutArchive'
+
+export const Archive = (props) => {
+  const { data } = props
+
+  return (
+    <>
+      <Head>
+        <title>{`${data?.node?.name} - WPGraphQL for ACF`}</title>
+      </Head>
+      <LayoutArchive
+        title={data?.node?.name ? data.node.name : 'Archive'}
+        data={data}
+        navigation={data?.navigation?.nodes}
+      >
+        {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
+      </LayoutArchive>
+    </>
+  )
+}
 
 const GET_ARCHIVE_QUERY = gql`
   query GetArchive($uri: String!) {
@@ -26,47 +44,9 @@ const GET_ARCHIVE_QUERY = gql`
   }
 `
 
-export const Archive = () => {
-  const { node } = useFaustQuery(GET_ARCHIVE_QUERY);
-  const {
-    docsSidebarMenuItems,
-    footerMenuItems,
-    primaryMenuItems,
-    sitewideNotice
-  } = useFaustQuery(GET_LAYOUT_QUERY);
-
-  return (
-    <>
-      <Head>
-        <title>{`${node?.name} - WPGraphQL for ACF`}</title>
-      </Head>
-      <LayoutArchive
-        title={node?.name ? node.name : 'Archive'}
-        data={{
-          node,
-          docsSidebarMenuItems,
-          footerMenuItems,
-          primaryMenuItems,
-          sitewideNotice
-        }}
-      >
-        {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
-      </LayoutArchive>
-    </>
-  )
+Archive.variables = (seedNode) => {
+  console.log({seedNode});
+  return {
+    uri: seedNode.uri
+  }; 
 }
-
-
-Archive.queries = [
-  {
-    query: GET_LAYOUT_QUERY,
-  },
-  {
-    query: GET_ARCHIVE_QUERY,
-    variables: (seedNode) => {
-      return {
-        uri: seedNode.uri
-      }
-    }
-  }
-];

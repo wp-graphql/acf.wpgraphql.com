@@ -4,10 +4,32 @@ import HomepageLayoutsLayoutsFaqsLayout from '@/components/HomepageLayoutsLayout
 import HomepageLayoutsLayoutsFeaturesLayout from '@/components/HomepageLayoutsLayoutsFeaturesLayout'
 import HomepageLayoutsLayoutsHeroLayout from '@/components/HomepageLayoutsLayoutsHeroLayout'
 import HomepageLayoutsLayoutsSupportedFieldTypesLayout from '@/components/HomepageLayoutsLayoutsSupportedFieldTypesLayout'
-import { LayoutFrontPage, LAYOUT_FRONT_PAGE_QUERY } from '@/components/LayoutFrontPage'
-import { useFaustQuery } from '@faustwp/core'
+import { LayoutFrontPage } from '@/components/LayoutFrontPage'
 
-const FRONT_PAGE_QUERY = gql`
+export const FrontPage = ({ data }) => {
+  return (
+    <LayoutFrontPage data={data}>
+      {data?.frontPage?.homepageLayouts?.layouts?.map((layout, i) => {
+        switch (layout.__typename) {
+          case 'HomepageLayoutsLayoutsHeroLayout':
+            return <HomepageLayoutsLayoutsHeroLayout key={i} {...layout} />
+          case 'HomepageLayoutsLayoutsFeaturesLayout':
+            return <HomepageLayoutsLayoutsFeaturesLayout key={i} {...layout} />
+          case 'HomepageLayoutsLayoutsSupportedFieldTypesLayout':
+            return (
+              <HomepageLayoutsLayoutsSupportedFieldTypesLayout key={i} {...layout} />
+            )
+          case 'HomepageLayoutsLayoutsFaqsLayout':
+            return <HomepageLayoutsLayoutsFaqsLayout key={i} {...layout} />
+          default:
+            return <pre>{JSON.stringify(layout, null, 2)}</pre>
+        }
+      })}
+    </LayoutFrontPage>
+  )
+}
+
+FrontPage.query = gql`
   query GetFrontPage($uri: String!) {
     frontPage: nodeByUri(uri: $uri) {
       __typename
@@ -31,47 +53,13 @@ const FRONT_PAGE_QUERY = gql`
         }
       }
     }
+    ...LayoutFrontPageFragment
   }
   ${HomepageLayoutsLayoutsHeroLayout.fragment}
   ${HomepageLayoutsLayoutsFeaturesLayout.fragment}
   ${HomepageLayoutsLayoutsSupportedFieldTypesLayout.fragment}
   ${HomepageLayoutsLayoutsFaqsLayout.fragment}
-`;
+  ${LayoutFrontPage.fragment}
+`
 
-export const FrontPage = () => {
-
-  const { frontPage } = useFaustQuery(FRONT_PAGE_QUERY);
-
-  return (
-    <LayoutFrontPage>
-      {frontPage?.homepageLayouts?.layouts?.map((layout, i) => {
-        switch (layout.__typename) {
-          case 'HomepageLayoutsLayoutsHeroLayout':
-            return <HomepageLayoutsLayoutsHeroLayout key={i} {...layout} />
-          case 'HomepageLayoutsLayoutsFeaturesLayout':
-            return <HomepageLayoutsLayoutsFeaturesLayout key={i} {...layout} />
-          case 'HomepageLayoutsLayoutsSupportedFieldTypesLayout':
-            return (
-              <HomepageLayoutsLayoutsSupportedFieldTypesLayout key={i} {...layout} />
-            )
-          case 'HomepageLayoutsLayoutsFaqsLayout':
-            return <HomepageLayoutsLayoutsFaqsLayout key={i} {...layout} />
-          default:
-            return <pre>{JSON.stringify(layout, null, 2)}</pre>
-        }
-      })}
-    </LayoutFrontPage>
-  )
-}
-
-
-FrontPage.queries = [
-  {
-    query: LAYOUT_FRONT_PAGE_QUERY,
-  },
-  {
-    query: FRONT_PAGE_QUERY,
-    variables: ({ uri }) => ({ uri }),
-  },
-]
-
+FrontPage.variables = ({ uri }) => ({ uri })
