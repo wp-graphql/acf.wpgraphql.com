@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { flatListToHierarchical, useFaustQuery } from '@faustwp/core'
+import { flatListToHierarchical } from '@faustwp/core'
 
 import { FooterNavigation } from './FooterNavigation'
 import { SiteFooter } from './SiteFooter'
@@ -9,8 +9,8 @@ import { SiteHeader } from '@/components/SiteHeader'
 import { SitewideNotice } from '@/components/SitewideNotice'
 
 
-export const LAYOUT_FRONT_PAGE_QUERY = gql`
-  query LayoutFrontPageFragment {
+LayoutFrontPage.fragment = gql`
+  fragment LayoutFrontPageFragment on RootQuery {
     ...SitewideNoticeFragment
     ...PrimaryNavigationFragment
     ...FooterNavigationFragment
@@ -20,10 +20,8 @@ export const LAYOUT_FRONT_PAGE_QUERY = gql`
   ${FooterNavigation.fragment}
 `
 
-export function LayoutFrontPage({ children }) {
-
-  const { sitewideNotice, primaryMenuItems, footerMenuItems } = useFaustQuery(LAYOUT_FRONT_PAGE_QUERY);
-
+export function LayoutFrontPage({ data, children }) {
+  const primaryMenuItems = data?.primaryMenuItems ?? []
   const primaryNavigation = primaryMenuItems?.nodes
     ? flatListToHierarchical(primaryMenuItems.nodes, {
         idKey: 'id',
@@ -31,6 +29,7 @@ export function LayoutFrontPage({ children }) {
         parentKey: 'parentId',
       })
     : []
+  const footerMenuItems = data?.footerMenuItems ?? []
   const footerNavigation = footerMenuItems?.nodes
     ? flatListToHierarchical(footerMenuItems.nodes, {
         idKey: 'id',
@@ -40,8 +39,8 @@ export function LayoutFrontPage({ children }) {
     : []
   return (
     <>
-      <SitewideNotice displayNotice={sitewideNotice?.sitewideNoticeFields?.displayNotice} message={sitewideNotice?.sitewideNoticeFields?.message} />
-      <SiteHeader navigation={primaryNavigation} isNoticeVisible={sitewideNotice?.sitewideNoticeFields?.displayNotice} />
+      <SitewideNotice displayNotice={data.sitewideNotice.sitewideNoticeFields.displayNotice} message={data.sitewideNotice.sitewideNoticeFields.message} />
+      <SiteHeader navigation={primaryNavigation} data={data} isNoticeVisible={data.sitewideNotice.sitewideNoticeFields.displayNotice} />
       <main className='content'>
         {children}
       </main>

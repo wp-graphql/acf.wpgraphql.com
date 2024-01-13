@@ -48,7 +48,7 @@ export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
   };
 
 
-  if ( fieldTypeSettings?.nodes?.length === 0 ) {
+  if ( ! fieldTypeSettings?.nodes?.length ) {
     return (
       <Card>
         <CardHeader className="grid grid-cols-[1fr_110px] items-start space-y-2">
@@ -59,7 +59,7 @@ export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
   }
 
   // copy the nodes so we can sort them before returning
-  const settings = [...fieldTypeSettings.nodes];
+  const settings = [...fieldTypeSettings?.nodes];
 
   // sort by name
   settings.sort((a, b) => {

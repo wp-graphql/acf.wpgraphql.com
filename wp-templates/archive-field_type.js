@@ -1,12 +1,39 @@
 import { gql } from '@apollo/client'
-import { useFaustQuery } from "@faustwp/core";
 import Head from 'next/head'
 
 import { FieldTypesList } from '@/components/FieldTypesList'
-import { LayoutArchive, GET_LAYOUT_QUERY } from '@/components/LayoutArchive'
+import { LayoutArchive } from '@/components/LayoutArchive'
 
-export const GET_POST_QUERY = gql`
-  query GetPost($uri: String!) {
+export const ArchiveFieldType = (props) => {
+  const { data } = props
+
+  const { node } = data
+
+  if (!node) {
+    return null
+  }
+
+  let toc = []
+
+  return (
+    <>
+      <Head>
+        <title>{`${data?.node?.label} - WPGraphQL for ACF`}</title>
+      </Head>
+      <LayoutArchive
+        title={data?.node?.label ? data.node.label : 'WPGraphQL for ACF'}
+        data={data}
+        navigation={data?.navigation?.nodes}
+        toc={toc}
+      >
+        <FieldTypesList data={data} />
+      </LayoutArchive>
+    </>
+  )
+}
+
+ArchiveFieldType.query = gql`
+  query GetArchiveFieldType($uri: String!) {
     node: nodeByUri(uri: $uri) {
       __typename
       uri
@@ -35,49 +62,9 @@ export const GET_POST_QUERY = gql`
         }
       }
     }
+    ...LayoutArchiveFragment
   }
-`;
+  ${LayoutArchive.fragment}
+`
 
-export const ArchiveFieldType = () => {
-  const { node } = useFaustQuery(GET_POST_QUERY);
-  const {
-    docsSidebarMenuItems,
-    footerMenuItems,
-    primaryMenuItems,
-    sitewideNotice
-  } = useFaustQuery(GET_LAYOUT_QUERY);
-
-  if (!node) {
-    return null
-  }
-
-  return (
-    <>
-      <Head>
-        <title>{`${node?.label} - WPGraphQL for ACF`}</title>
-      </Head>
-      <LayoutArchive
-        title={node?.label ? node.label : 'WPGraphQL for ACF'}
-        data={{
-          node,
-          docsSidebarMenuItems,
-          footerMenuItems,
-          primaryMenuItems,
-          sitewideNotice
-        }}
-      >
-        <FieldTypesList data={{ node }} />
-      </LayoutArchive>
-    </>
-  )
-}
-
-ArchiveFieldType.queries = [
-  {
-    query: GET_LAYOUT_QUERY,
-  },
-  {
-    query: GET_POST_QUERY,
-    variables: ({ uri }) => ({ uri }),
-  }
-];
+ArchiveFieldType.variables = ({ uri }) => ({ uri })

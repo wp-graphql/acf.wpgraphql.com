@@ -26,16 +26,10 @@ export function FieldTypesList({ data }) {
         {contentNodes.nodes.map((fieldType) => (
           <div
             key={fieldType.uri}
-            className="dark:bg-white/2.5 group relative flex flex-col rounded-2xl bg-zinc-50 transition-shadow hover:shadow-md hover:shadow-zinc-900/5 dark:bg-gray-800 dark:hover:bg-gray-900 dark:hover:shadow-black/5"
+            className="dark:bg-white/2.5 group relative flex rounded-2xl bg-zinc-50 transition-shadow hover:shadow-md hover:shadow-zinc-900/5 dark:bg-gray-800 dark:hover:bg-gray-900 dark:hover:shadow-black/5"
           >
-            <Link
-              href={fieldType.uri}
-              tabIndex={0}
-              className="absolute inset-0 z-20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-zinc-900/75 focus:ring-offset-2"
-              aria-label={`${fieldType.title} field type`}
-            />
             <div className="ring-zinc-900/7.5 absolute inset-0 rounded-2xl ring-1 ring-inset group-hover:ring-zinc-900/10 dark:ring-white/10 dark:group-hover:ring-white/20" />
-            <div className="relative z-10 flex h-full flex-col rounded-2xl px-4 pb-4 pt-16">
+            <div className="relative rounded-2xl px-4 pb-4 pt-16">
               {fieldType?.featuredImage?.node && (
                 <Image
                   src={fieldType?.featuredImage?.node.sourceUrl}
@@ -45,15 +39,14 @@ export function FieldTypesList({ data }) {
                     fieldType?.featuredImage?.node.altText ??
                     'screenshot of the field type'
                   }
-                  layout="responsive"
-                  className="shrink-0"
                 />
               )}
-              <div className="mt-auto">
-                <h3 className="pb-4 pt-6 text-center font-semibold text-gray-900 dark:text-gray-100">
+              <h3 className="mt-6 font-semibold text-gray-900 dark:text-gray-100">
+                <Link href={fieldType.uri}>
+                  <span className="absolute inset-0 rounded-2xl" />
                   {fieldType.title}
-                </h3>
-              </div>
+                </Link>
+              </h3>
             </div>
           </div>
         ))}
