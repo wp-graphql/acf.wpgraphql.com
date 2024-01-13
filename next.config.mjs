@@ -4,7 +4,7 @@ import withSearch from './markdoc/search.mjs'
 
 const getAtlasCacheHandler = async ( config = {} ) => {
     if (process.env.ATLAS_CACHE_HANDLER_ENABLED === undefined || process.env.ATLAS_CACHE_HANDLER_ENABLED !== 'true') {
-        return config;
+        return { ...config };
     }
     
     const { atlasCacheHandler } = await import('./.atlas/atlas-cache-handler.js');
@@ -15,8 +15,7 @@ const getAtlasCacheHandler = async ( config = {} ) => {
     } };
 }
   
-const nextConfig = async () => {
-    return {
+const nextConfig = {
         reactStrictMode: true,
         pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
         experimental: {
@@ -27,14 +26,13 @@ const nextConfig = async () => {
         images: {
             domains: [ getWpHostname() ],
         },
-    }
-};
+    };
 
 
 export default withFaust( 
     withSearch( 
         withMarkdoc({
             schemaPath: './src/markdoc' 
-        })( nextConfig() ) 
+        })( nextConfig ) 
     ) 
 );
