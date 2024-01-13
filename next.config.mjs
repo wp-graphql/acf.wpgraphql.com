@@ -3,7 +3,7 @@ import withMarkdoc from '@markdoc/next.js'
 import withSearch from './markdoc/search.mjs'
 
 const getAtlasCacheHandler = async ( config = {} ) => {
-    if (process.env.ATLAS_CACHE_HANDLER_ENABLED === undefined) {
+    if (process.env.ATLAS_CACHE_HANDLER_ENABLED === undefined || process.env.ATLAS_CACHE_HANDLER_ENABLED !== 'true') {
         return config;
     }
     
@@ -15,13 +15,14 @@ const getAtlasCacheHandler = async ( config = {} ) => {
     } };
 }
   
-const nextConfig = () => {
+const nextConfig = async () => {
     return {
         reactStrictMode: true,
         pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
-        experimental: getAtlasCacheHandler({
+        experimental: {
             scrollRestoration: true,
-        }),
+            ...(await getAtlasCacheHandler()),
+        },
         trailingSlash: true,
         images: {
             domains: [ getWpHostname() ],
