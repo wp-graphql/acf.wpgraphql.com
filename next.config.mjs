@@ -3,7 +3,7 @@ import withMarkdoc from '@markdoc/next.js'
 import withSearch from './markdoc/search.mjs'
 
 const getAtlasCacheHandler = async ( config = {} ) => {
-    if (process?.env?.ATLAS_CACHE_HANDLER_ENABLED && process.env.ATLAS_CACHE_HANDLER_ENABLED !== undefined ) {
+    if (process.env.ATLAS_CACHE_HANDLER_ENABLED === undefined) {
         return config;
     }
     
@@ -25,14 +25,6 @@ const nextConfig = () => {
         trailingSlash: true,
         images: {
             domains: [ getWpHostname() ],
-            remotePatterns: [
-                {
-                    protocol: 'https',
-                    hostname: 'bpacfwpgraphql.wpengine.com',
-                    port: '',
-                    pathname: '/**',
-                  },
-            ]
         },
     }
 };
