@@ -45,7 +45,7 @@ export function FieldTypesList({ data }) {
                     fieldType?.featuredImage?.node.altText ??
                     'screenshot of the field type'
                   }
-                  className="shrink-0 text-center m-auto"
+                  className="m-auto shrink-0 text-center"
                 />
               )}
               <div className="mt-auto">
