@@ -3,14 +3,12 @@ import withMarkdoc from '@markdoc/next.js'
 import withSearch from './markdoc/search.mjs'
 
 const getAtlasCacheHandler = async ( config = {} ) => {
-    if (process.env.ATLAS_CACHE_HANDLER_ENABLED === undefined || process.env.ATLAS_CACHE_HANDLER_ENABLED !== 'true') {
+    if (process.env.ATLAS_CACHE_HANDLER_ENABLED === undefined) {
         return { ...config };
     }
     
-    const { atlasCacheHandler } = await import('./.atlas/atlas-cache-handler.js');
-
     return { ...config, ...{
-        incrementalCacheHandlerPath: atlasCacheHandler,
+        incrementalCacheHandlerPath: '/workspace/.atlas/atlas-cache-handler.js',
         isrMemoryCacheSize: 0,
     } };
 }
