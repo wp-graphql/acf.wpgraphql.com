@@ -1,7 +1,8 @@
 import { withFaust, getWpHostname } from '@faustwp/core';
 import withMarkdoc from '@markdoc/next.js'
 import withSearch from './markdoc/search.mjs'
-mport { createRequire } from "module";
+import { createRequire } from "module";
+
 const require = createRequire(import.meta.url);
 
 const getAtlasCacheHandler = async ( config = {} ) => {
