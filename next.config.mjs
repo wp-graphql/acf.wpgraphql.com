@@ -7,10 +7,8 @@ const getAtlasCacheHandler = async ( config = {} ) => {
         return { ...config };
     }
     
-    const atlasCacheHandler = await import('./.atlas/atlas-cache-handler.js');
-
     return { ...config, ...{
-        incrementalCacheHandlerPath: new atlasCacheHandler(),
+        incrementalCacheHandlerPath: await import('./.atlas/atlas-cache-handler.js'),
         isrMemoryCacheSize: 0,
     } };
 }
