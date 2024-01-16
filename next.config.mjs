@@ -1,6 +1,8 @@
 import { withFaust, getWpHostname } from '@faustwp/core';
 import withMarkdoc from '@markdoc/next.js'
 import withSearch from './markdoc/search.mjs'
+mport { createRequire } from "module";
+const require = createRequire(import.meta.url);
 
 const getAtlasCacheHandler = async ( config = {} ) => {
     if (process.env.ATLAS_CACHE_HANDLER_ENABLED === undefined) {
@@ -8,7 +10,7 @@ const getAtlasCacheHandler = async ( config = {} ) => {
     }
     
     return { ...config, ...{
-        incrementalCacheHandlerPath: '/workspace/.atlas/atlas-cache-handler.js',
+        incrementalCacheHandlerPath: require.resolve('./.atlas/atlas-cache-handler.js'),
         isrMemoryCacheSize: 0,
     } };
 }
