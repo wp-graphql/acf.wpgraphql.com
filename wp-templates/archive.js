@@ -2,10 +2,10 @@ import { gql } from '@apollo/client'
 import { useFaustQuery } from "@faustwp/core";
 import Head from 'next/head'
 
-import { LayoutArchive, GET_LAYOUT_QUERY } from '@/components/LayoutArchive'
+import { LayoutArchive, LAYOUT_ARCHIVE_QUERY } from '@/components/LayoutArchive'
 
-const GET_ARCHIVE_QUERY = gql`
-  query GetArchive($uri: String!) {
+const ARCHIVE_QUERY = gql`
+  query Archive($uri: String!) {
     node: nodeByUri(uri: $uri) {
       __typename
       uri
@@ -27,13 +27,13 @@ const GET_ARCHIVE_QUERY = gql`
 `
 
 export const Archive = () => {
-  const { node } = useFaustQuery(GET_ARCHIVE_QUERY);
+  const { node } = useFaustQuery(ARCHIVE_QUERY);
   const {
     docsSidebarMenuItems,
     footerMenuItems,
     primaryMenuItems,
     sitewideNotice
-  } = useFaustQuery(GET_LAYOUT_QUERY);
+  } = useFaustQuery(LAYOUT_ARCHIVE_QUERY);
 
   return (
     <>
@@ -59,10 +59,10 @@ export const Archive = () => {
 
 Archive.queries = [
   {
-    query: GET_LAYOUT_QUERY,
+    query: LAYOUT_ARCHIVE_QUERY,
   },
   {
-    query: GET_ARCHIVE_QUERY,
+    query: ARCHIVE_QUERY,
     variables: (seedNode) => {
       return {
         uri: seedNode.uri

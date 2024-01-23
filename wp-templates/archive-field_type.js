@@ -3,7 +3,7 @@ import { useFaustQuery } from "@faustwp/core";
 import Head from 'next/head'
 
 import { FieldTypesList } from '@/components/FieldTypesList'
-import { LayoutArchive, GET_LAYOUT_QUERY } from '@/components/LayoutArchive'
+import { LayoutArchive, LAYOUT_ARCHIVE_QUERY } from '@/components/LayoutArchive'
 
 export const GET_POST_QUERY = gql`
   query GetPost($uri: String!) {
@@ -45,7 +45,7 @@ export const ArchiveFieldType = () => {
     footerMenuItems,
     primaryMenuItems,
     sitewideNotice
-  } = useFaustQuery(GET_LAYOUT_QUERY);
+  } = useFaustQuery(LAYOUT_ARCHIVE_QUERY);
 
   if (!node) {
     return null
@@ -74,7 +74,7 @@ export const ArchiveFieldType = () => {
 
 ArchiveFieldType.queries = [
   {
-    query: GET_LAYOUT_QUERY,
+    query: LAYOUT_ARCHIVE_QUERY,
   },
   {
     query: GET_POST_QUERY,
