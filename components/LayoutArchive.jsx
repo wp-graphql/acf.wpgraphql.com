@@ -10,8 +10,8 @@ import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SitewideNotice } from '@/components/SitewideNotice'
 
-LayoutArchive.fragment = gql`
-  fragment LayoutArchiveFragment on RootQuery {
+export const LAYOUT_ARCHIVE_QUERY = gql`
+  query LayoutArchive {
     ...SitewideNoticeFragment
     ...PrimaryNavigationFragment
     ...DocsSidebarNavigationFragment

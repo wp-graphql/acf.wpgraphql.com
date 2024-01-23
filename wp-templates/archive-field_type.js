@@ -1,39 +1,12 @@
 import { gql } from '@apollo/client'
+import { useFaustQuery } from "@faustwp/core";
 import Head from 'next/head'
 
 import { FieldTypesList } from '@/components/FieldTypesList'
-import { LayoutArchive } from '@/components/LayoutArchive'
+import { LayoutArchive, LAYOUT_ARCHIVE_QUERY } from '@/components/LayoutArchive'
 
-export const ArchiveFieldType = (props) => {
-  const { data } = props
-
-  const { node } = data
-
-  if (!node) {
-    return null
-  }
-
-  let toc = []
-
-  return (
-    <>
-      <Head>
-        <title>{`${data?.node?.label} - WPGraphQL for ACF`}</title>
-      </Head>
-      <LayoutArchive
-        title={data?.node?.label ? data.node.label : 'WPGraphQL for ACF'}
-        data={data}
-        navigation={data?.navigation?.nodes}
-        toc={toc}
-      >
-        <FieldTypesList data={data} />
-      </LayoutArchive>
-    </>
-  )
-}
-
-ArchiveFieldType.query = gql`
-  query GetArchiveFieldType($uri: String!) {
+export const GET_POST_QUERY = gql`
+  query GetPost($uri: String!) {
     node: nodeByUri(uri: $uri) {
       __typename
       uri
@@ -62,9 +35,49 @@ ArchiveFieldType.query = gql`
         }
       }
     }
-    ...LayoutArchiveFragment
   }
-  ${LayoutArchive.fragment}
-`
+`;
 
-ArchiveFieldType.variables = ({ uri }) => ({ uri })
+export const ArchiveFieldType = () => {
+  const { node } = useFaustQuery(GET_POST_QUERY);
+  const {
+    docsSidebarMenuItems,
+    footerMenuItems,
+    primaryMenuItems,
+    sitewideNotice
+  } = useFaustQuery(LAYOUT_ARCHIVE_QUERY);
+
+  if (!node) {
+    return null
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{`${node?.label} - WPGraphQL for ACF`}</title>
+      </Head>
+      <LayoutArchive
+        title={node?.label ? node.label : 'WPGraphQL for ACF'}
+        data={{
+          node,
+          docsSidebarMenuItems,
+          footerMenuItems,
+          primaryMenuItems,
+          sitewideNotice
+        }}
+      >
+        <FieldTypesList data={{ node }} />
+      </LayoutArchive>
+    </>
+  )
+}
+
+ArchiveFieldType.queries = [
+  {
+    query: LAYOUT_ARCHIVE_QUERY,
+  },
+  {
+    query: GET_POST_QUERY,
+    variables: ({ uri }) => ({ uri }),
+  }
+];

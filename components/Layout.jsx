@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { flatListToHierarchical } from '@faustwp/core'
+import { flatListToHierarchical, useFaustQuery } from '@faustwp/core'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
@@ -13,8 +13,8 @@ import { SiteHeader } from '@/components/SiteHeader'
 import { SitewideNotice } from '@/components/SitewideNotice'
 import { collectHeadings } from '@/lib/utils'
 
-Layout.fragment = gql`
-  fragment LayoutFragment on RootQuery {
+export const LAYOUT_QUERY = gql`
+  query LayoutFragment {
     ...SitewideNoticeFragment
     ...PrimaryNavigationFragment
     ...DocsSidebarNavigationFragment
@@ -75,10 +75,10 @@ function useTableOfContents(tableOfContents) {
   return currentSection
 }
 
-export function Layout({ data, children, toc, title }) {
+export function Layout({ node, children, toc, title }) {
+  const { sitewideNotice, primaryMenuItems, footerMenuItems, docsSidebarMenuItems } = useFaustQuery(LAYOUT_QUERY);
   let tableOfContents = toc && toc.length ? collectHeadings(toc) : []
 
-  const primaryMenuItems = data?.primaryMenuItems ?? []
   const primaryNavigation = primaryMenuItems?.nodes
     ? flatListToHierarchical(primaryMenuItems.nodes, {
         idKey: 'id',
@@ -86,7 +86,6 @@ export function Layout({ data, children, toc, title }) {
         parentKey: 'parentId',
       })
     : []
-  const footerMenuItems = data?.footerMenuItems ?? []
   const footerNavigation = footerMenuItems?.nodes
     ? flatListToHierarchical(footerMenuItems.nodes, {
         idKey: 'id',
@@ -94,7 +93,6 @@ export function Layout({ data, children, toc, title }) {
         parentKey: 'parentId',
       })
     : []
-  const docsSidebarMenuItems = data?.docsSidebarMenuItems ?? []
   const docsSidebarNavigation = docsSidebarMenuItems?.nodes
     ? flatListToHierarchical(docsSidebarMenuItems.nodes, {
         idKey: 'id',
@@ -105,13 +103,13 @@ export function Layout({ data, children, toc, title }) {
   let docsSidebarAllLinks =
     docsSidebarNavigation?.flatMap((section) => section.links) ?? []
   let linkIndex = docsSidebarAllLinks.findIndex((link) => {
-    return link.href === data?.node?.uri
+    return link.href === node?.uri
   })
   let previousPage = docsSidebarAllLinks[linkIndex - 1]
 
   let nextPage = docsSidebarAllLinks[linkIndex + 1]
   let section = docsSidebarAllLinks.find((section) =>
-    section.links.find((link) => link.href === data?.node?.uri),
+    section.links.find((link) => link.href === node?.uri),
   )
   let currentSection = useTableOfContents(tableOfContents)
 
@@ -127,8 +125,8 @@ export function Layout({ data, children, toc, title }) {
 
   return (
     <>
-      <SitewideNotice displayNotice={data.sitewideNotice.sitewideNoticeFields.displayNotice} message={data.sitewideNotice.sitewideNoticeFields.message} />
-      <SiteHeader navigation={primaryNavigation} isNoticeVisible={data.sitewideNotice.sitewideNoticeFields.displayNotice} />
+      <SitewideNotice displayNotice={sitewideNotice.sitewideNoticeFields.displayNotice} message={sitewideNotice.sitewideNoticeFields.message} />
+      <SiteHeader navigation={primaryNavigation} isNoticeVisible={sitewideNotice.sitewideNoticeFields.displayNotice} />
 
       <main className='content'>
         <div className="relative mx-auto flex max-w-8xl justify-center sm:px-2 lg:px-8 xl:px-12">
@@ -138,7 +136,9 @@ export function Layout({ data, children, toc, title }) {
             <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-slate-800 dark:block" />
             <div className="sticky top-[4.5rem] -ml-0.5 h-[calc(100vh-4.5rem)] w-64 overflow-y-auto overflow-x-hidden py-16 pl-0.5 pr-8 xl:w-72 xl:pr-16">
               <DocsSidebarNavigation
-                data={data}
+                data={{
+                  node
+                }}
                 navigation={docsSidebarNavigation}
               />
             </div>
