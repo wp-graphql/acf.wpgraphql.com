@@ -15,19 +15,34 @@ const getAtlasCacheHandler = async ( config = {} ) => {
         isrMemoryCacheSize: 0,
     } };
 }
-  
+
+const getHeaders = async () => {
+    return [
+        {
+            source: "/:path*",
+            headers: [
+                {
+                    key: "Content-Security-Policy",
+                    value: "frame-ancestors 'self' *.wpgraphql.com",
+                },
+            ],
+        },
+    ];
+}
+
 const nextConfig = {
-        reactStrictMode: true,
-        pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
-        experimental: {
-            scrollRestoration: true,
-            ...(await getAtlasCacheHandler()),
-        },
-        trailingSlash: true,
-        images: {
-            domains: [ getWpHostname() ],
-        },
-    };
+    reactStrictMode: true,
+    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
+    experimental: {
+        scrollRestoration: true,
+        ...(await getAtlasCacheHandler()),
+    },
+    trailingSlash: true,
+    images: {
+        domains: [ getWpHostname() ],
+    },
+    headers: await getHeaders(),
+};
 
 
 export default withFaust( 
