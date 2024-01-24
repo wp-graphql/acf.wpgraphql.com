@@ -41,7 +41,7 @@ const nextConfig = {
     images: {
         domains: [ getWpHostname() ],
     },
-    headers: await getHeaders(),
+    headers: async () => await getHeaders(),
 };
 
 
