@@ -1,4 +1,5 @@
 import { CoreBlocks } from '@faustwp/blocks'
+
 import { AcfFieldTypeConfigurationBlock } from './AcfFieldTypeConfigurationBlock'
 import { AcfFieldTypeSettingsBlock } from './AcfFieldTypeSettingsBlock'
 import { AcfGraphqlQuery } from './AcfGraphqlQuery'
