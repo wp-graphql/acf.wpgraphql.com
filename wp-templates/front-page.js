@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client'
+import { useFaustQuery } from '@faustwp/core'
 
 import HomepageLayoutsLayoutsFaqsLayout from '@/components/HomepageLayoutsLayoutsFaqsLayout'
 import HomepageLayoutsLayoutsFeaturesLayout from '@/components/HomepageLayoutsLayoutsFeaturesLayout'
 import HomepageLayoutsLayoutsHeroLayout from '@/components/HomepageLayoutsLayoutsHeroLayout'
 import HomepageLayoutsLayoutsSupportedFieldTypesLayout from '@/components/HomepageLayoutsLayoutsSupportedFieldTypesLayout'
 import { LayoutFrontPage, LAYOUT_FRONT_PAGE_QUERY } from '@/components/LayoutFrontPage'
-import { useFaustQuery } from '@faustwp/core'
 
 const FRONT_PAGE_QUERY = gql`
   query GetFrontPage($uri: String!) {
