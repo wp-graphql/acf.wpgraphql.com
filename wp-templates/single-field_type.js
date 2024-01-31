@@ -4,6 +4,7 @@ import { flatListToHierarchical, useFaustQuery } from '@faustwp/core'
 import { Separator } from '@radix-ui/react-separator'
 import Head from 'next/head'
 
+import EditPost from '@/components/EditPost'
 import { Layout, LAYOUT_QUERY } from '@/components/Layout'
 import { Badge } from '@/components/ui/badge'
 import blocks from '@/wp-blocks'
@@ -27,7 +28,9 @@ query SingleAcfFieldType($uri: String!) {
     node: nodeByUri(uri: $uri) {
         __typename
         uri
+        id
         ...on FieldType {
+            databaseId
             title
             # content
             modified
@@ -114,7 +117,7 @@ export const SingleFieldType = () => {
         <title>{`${title} - WPGraphQL for ACF`}</title>
       </Head>
       <Layout node={node} toc={toc}>
-        <h1>{title}</h1>
+        <EditPost post={node}><h1>{title}</h1></EditPost>
         {node?.aCFFieldTypeCategories && node?.aCFFieldTypeCategories?.nodes && (
           <div id="field-type-categories" className="my-2">
             {node.aCFFieldTypeCategories.nodes.map((fieldTypeCategory) => (

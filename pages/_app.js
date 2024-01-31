@@ -11,6 +11,8 @@ import { SearchProvider } from '@/components/Search'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import blocks from '@/wp-blocks'
 
+import '@faustwp/core/dist/css/toolbar.css';
+
 export default function MyApp({ Component, pageProps, router }) {
   return (
     <ThemeProvider

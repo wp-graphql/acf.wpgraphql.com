@@ -4,6 +4,8 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 
+import EditPost from './EditPost'
+
 import { DocsSidebarNavigation } from '@/components/DocsSidebarNavigation'
 import { FooterNavigation } from '@/components/FooterNavigation'
 import { PrimaryNavigation } from '@/components/PrimaryNavigation'
@@ -153,9 +155,11 @@ export function Layout({ node, children, toc, title }) {
                     </p>
                   )}
                   {title && (
-                    <h1 className="font-display text-3xl tracking-tight text-slate-900 dark:text-white">
-                      {title}
-                    </h1>
+                     <EditPost post={node}>
+                      <h1 className="font-display text-3xl tracking-tight text-slate-900 dark:text-white">
+                        {title}
+                      </h1>
+                    </EditPost>
                   )}
                 </header>
               )}
