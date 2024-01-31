@@ -12,6 +12,7 @@ import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SitewideNotice } from '@/components/SitewideNotice'
 import { collectHeadings } from '@/lib/utils'
+import EditPost from './EditPost'
 
 export const LAYOUT_QUERY = gql`
   query LayoutFragment {
@@ -153,9 +154,11 @@ export function Layout({ node, children, toc, title }) {
                     </p>
                   )}
                   {title && (
-                    <h1 className="font-display text-3xl tracking-tight text-slate-900 dark:text-white">
-                      {title}
-                    </h1>
+                     <EditPost post={node}>
+                      <h1 className="font-display text-3xl tracking-tight text-slate-900 dark:text-white">
+                        {title}
+                      </h1>
+                    </EditPost>
                   )}
                 </header>
               )}

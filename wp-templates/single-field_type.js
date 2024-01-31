@@ -10,6 +10,7 @@ import blocks from '@/wp-blocks'
 import { AcfFieldTypeConfigurationBlock } from '@/wp-blocks/AcfFieldTypeConfigurationBlock'
 import { AcfFieldTypeSettingsBlock } from '@/wp-blocks/AcfFieldTypeSettingsBlock'
 import { AcfGraphqlQuery } from '@/wp-blocks/AcfGraphqlQuery'
+import EditPost from '@/components/EditPost'
 
 const aCFFieldTypeCategoriesFragment = gql`
   fragment aCFFieldTypeCategoriesFragment on FieldType {
@@ -27,7 +28,9 @@ query SingleAcfFieldType($uri: String!) {
     node: nodeByUri(uri: $uri) {
         __typename
         uri
+        id
         ...on FieldType {
+            databaseId
             title
             # content
             modified
@@ -114,7 +117,7 @@ export const SingleFieldType = () => {
         <title>{`${title} - WPGraphQL for ACF`}</title>
       </Head>
       <Layout node={node} toc={toc}>
-        <h1>{title}</h1>
+        <EditPost post={node}><h1>{title}</h1></EditPost>
         {node?.aCFFieldTypeCategories && node?.aCFFieldTypeCategories?.nodes && (
           <div id="field-type-categories" className="my-2">
             {node.aCFFieldTypeCategories.nodes.map((fieldTypeCategory) => (

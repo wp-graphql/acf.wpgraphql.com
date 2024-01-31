@@ -14,6 +14,9 @@ query IndexTemplate($uri: String!) {
         ...on NodeWithTitle {
             title
         }
+        ...on DatabaseIdentifier {
+            databaseId
+        }
         ...on NodeWithEditorBlocks {
             editorBlocks {
                 __typename
