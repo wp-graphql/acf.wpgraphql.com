@@ -4,6 +4,8 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 
+import EditPost from './EditPost'
+
 import { DocsSidebarNavigation } from '@/components/DocsSidebarNavigation'
 import { FooterNavigation } from '@/components/FooterNavigation'
 import { PrimaryNavigation } from '@/components/PrimaryNavigation'
@@ -12,7 +14,6 @@ import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SitewideNotice } from '@/components/SitewideNotice'
 import { collectHeadings } from '@/lib/utils'
-import EditPost from './EditPost'
 
 export const LAYOUT_QUERY = gql`
   query LayoutFragment {

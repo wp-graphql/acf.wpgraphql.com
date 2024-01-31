@@ -4,13 +4,13 @@ import { flatListToHierarchical, useFaustQuery } from '@faustwp/core'
 import { Separator } from '@radix-ui/react-separator'
 import Head from 'next/head'
 
+import EditPost from '@/components/EditPost'
 import { Layout, LAYOUT_QUERY } from '@/components/Layout'
 import { Badge } from '@/components/ui/badge'
 import blocks from '@/wp-blocks'
 import { AcfFieldTypeConfigurationBlock } from '@/wp-blocks/AcfFieldTypeConfigurationBlock'
 import { AcfFieldTypeSettingsBlock } from '@/wp-blocks/AcfFieldTypeSettingsBlock'
 import { AcfGraphqlQuery } from '@/wp-blocks/AcfGraphqlQuery'
-import EditPost from '@/components/EditPost'
 
 const aCFFieldTypeCategoriesFragment = gql`
   fragment aCFFieldTypeCategoriesFragment on FieldType {

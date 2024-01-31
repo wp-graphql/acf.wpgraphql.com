@@ -1,11 +1,12 @@
+import { getAdminUrl } from "@faustwp/core"
+import Link from 'next/link'
+
 import {
     ContextMenu,
     ContextMenuContent,
     ContextMenuItem,
     ContextMenuTrigger,
   } from "@/components/ui/context-menu"
-import { getAdminUrl } from "@faustwp/core"
-import Link from 'next/link'
 
 const EditPost = ({ post, children }) => {
     console.log({post})
