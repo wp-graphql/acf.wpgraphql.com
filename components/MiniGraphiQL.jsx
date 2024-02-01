@@ -62,7 +62,23 @@ const MiniGraphiQLClient = ({ initialQuery, initialVariables, endpoint, readOnly
         headers: options?.headers,
       });
 
-      return res;
+       // Clone the response to modify it
+       const clonedResponse = res.clone();
+
+       // Read and modify the response
+      const responseData = await clonedResponse.json();
+      if (responseData.extensions) {
+        delete responseData.extensions;
+      }
+
+      // Create a new response with the modified data
+      const newResponse = new Response(JSON.stringify(responseData), {
+        status: res.status,
+        statusText: res.statusText,
+        headers: res.headers,
+      });
+
+      return newResponse;
     }
   });
 
