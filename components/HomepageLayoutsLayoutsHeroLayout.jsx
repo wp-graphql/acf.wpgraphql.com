@@ -32,7 +32,7 @@ const HomepageLayoutsLayoutsHeroLayout = (hero) => {
                 dangerouslySetInnerHTML={{ __html: hero.description }}
               />
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-                <Button href={hero.getStartedLink.contentNode.link}>
+                <Button href={hero.getStartedLink.contentNode.uri}>
                   {hero.getStartedLink.linkText}
                 </Button>
                 <Button href={hero.githubLink.url} variant="secondary">
