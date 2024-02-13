@@ -5,5 +5,5 @@ export default function Page(props) {
 }
 
 export async function getStaticProps(ctx) {
-  return { ...(await getWordPressProps({ ctx })), revalidate: 1 }
+  return { ...(await getWordPressProps({ ctx })), revalidate: 5 }
 }
