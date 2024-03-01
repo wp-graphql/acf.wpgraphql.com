@@ -31,10 +31,11 @@ const nextConfig = {
 };
 
 
-export default withAtlasConfig(withFaust(
-    withSearch(
-        withMarkdoc({
-            schemaPath: './src/markdoc'
-        })( nextConfig )
-    )
+export default withAtlasConfig(
+    withFaust(
+        withSearch(
+            withMarkdoc({
+                schemaPath: './src/markdoc'
+            })( nextConfig )
+        )
 ));
