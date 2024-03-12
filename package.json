@@ -36,6 +36,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@sindresorhus/slugify": "^2.1.1",
     "@tailwindcss/typography": "^0.5.8",
+    "@wpengine/atlas-next": "^1.0.0",
     "acorn": "^8.8.1",
     "algoliasearch": "^4.14.2",
     "allotment": "^1.19.3",
