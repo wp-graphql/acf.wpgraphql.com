@@ -32,7 +32,7 @@
   mask: url("/social-icons/github.svg");
 }
 
-.socialIconLink[href*="discord.com"]::after {
+.socialIconLink[href*="discord.gg"]::after {
   mask: url("/social-icons/discord.svg");
 }
 
