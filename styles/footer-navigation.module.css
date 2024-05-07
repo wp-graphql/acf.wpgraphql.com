@@ -32,8 +32,8 @@
   mask: url("/social-icons/github.svg");
 }
 
-.socialIconLink[href*="slack.com"]::after {
-  mask: url("/social-icons/slack.svg");
+.socialIconLink[href*="discord.com"]::after {
+  mask: url("/social-icons/discord.svg");
 }
 
 .socialIconLink[href*="twitter.com"]::after,
