@@ -58,14 +58,14 @@ export function SiteHeader({ navigation, isNoticeVisible = false }) {
           className="group"
           aria-label="GitHub"
         >
-          <GitHubIcon className="h-6 w-6 fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
+          <GitHubIcon className="size-6 fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
         </Link>
         <Link
           href="https://github.com/wp-graphql/wpgraphql-acf"
           className="group"
           aria-label="GitHub"
         >
-          <WordPressIcon className="h-6 w-6 fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
+          <WordPressIcon className="size-6 fill-slate-400 group-hover:fill-slate-500 dark:group-hover:fill-slate-300" />
         </Link>
       </div>
     </header>
