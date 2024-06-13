@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client"
 import { getApolloClient } from "@faustwp/core/dist/mjs/client"
-import { getServerSideSitemapLegacy } from "next-sitemap"
+import { getServerSideSitemap } from "next-sitemap"
 
 const client = getApolloClient()
 
@@ -67,5 +67,5 @@ export const getServerSideProps = async (ctx) => {
         return acc
     }, [])
 
-    return await getServerSideSitemapLegacy(ctx, allRoutes)
+    return await getServerSideSitemap(ctx, allRoutes)
 }
