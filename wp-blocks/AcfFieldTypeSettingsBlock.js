@@ -4,17 +4,17 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 
-const AccordionItem = ({ title, content, isOpen, onClick }) => { 
+const AccordionItem = ({ title, content, isOpen, onClick }) => {
   return (
     <>
       <Button onClick={onClick} variant="primary" className="flex w-full items-center justify-between py-2 text-left">
         {title}
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          className="h-4 w-4 transition duration-300" 
-          style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} 
-          fill="none" 
-          viewBox="0 0 24 24" 
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="size-4 transition duration-300"
+          style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+          fill="none"
+          viewBox="0 0 24 24"
           stroke="currentColor"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -34,8 +34,8 @@ export function AcfFieldTypeSettingsBlock({ fieldTypeSettingsBlockFields }) {
   const [openItems, setOpenItems] = useState([]);
 
   const toggleItem = (index) => {
-    setOpenItems(current => current.includes(index) 
-      ? current.filter(item => item !== index) 
+    setOpenItems(current => current.includes(index)
+      ? current.filter(item => item !== index)
       : [...current, index]);
   };
 

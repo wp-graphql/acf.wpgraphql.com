@@ -25,7 +25,7 @@ export function DocsSidebarNavigation({ className, data, navigation }) {
     if (!currentNode) {
       return false;
     }
-  
+
     return section.links.some(link => link.href.includes(currentNode.uri));
   };
 
@@ -61,7 +61,7 @@ export function DocsSidebarNavigation({ className, data, navigation }) {
               >
                 <svg
                   className={clsx(
-                    'h-4 w-4 transition-transform',
+                    'size-4 transition-transform',
                     expandedSections[section.title] && 'rotate-180'
                   )}
                   xmlns="http://www.w3.org/2000/svg"

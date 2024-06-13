@@ -64,7 +64,7 @@ export function MobileNavigation({ navigation }) {
         className="relative"
         aria-label="Open navigation"
       >
-        <MenuIcon className="h-6 w-6 stroke-slate-500" />
+        <MenuIcon className="size-6 stroke-slate-500" />
       </button>
       <Dialog
         open={isOpen}
@@ -79,7 +79,7 @@ export function MobileNavigation({ navigation }) {
               onClick={() => setIsOpen(false)}
               aria-label="Close navigation"
             >
-              <CloseIcon className="h-6 w-6 stroke-slate-500" />
+              <CloseIcon className="size-6 stroke-slate-500" />
             </button>
             <Link href="/" className="ml-6" aria-label="Home page">
               <Logo className="h-auto w-9" />
