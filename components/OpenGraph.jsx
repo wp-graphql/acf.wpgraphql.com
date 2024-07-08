@@ -1,33 +1,17 @@
 import Head from 'next/head'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 const OpenGraph = ({ seo } ) => {
 
     const {
-        breadcrumbs = [],
-        canonical = '',
-        cornerstone  = false,
-        focuskw  = '',
-        fullHead = '',
         metaDesc = '',
-        metaKeywords = '',
-        metaRobotsNoindex = false,
-        metaRobotsNofollow   = false,
-        opengraphAuthor  = '',
         opengraphDescription = '',
         opengraphImage       = null,
-        opengraphModifiedTime    = '',
-        opengraphPublishedTime   = '',
-        opengraphPublisher   = '',
-        opengraphSiteName    = '',
         opengraphTitle    = '',
         opengraphType    = '',
         opengraphUrl   = '',
-        readingTime  = '',
-        schema   = '',
         title    = '',
         twitterDescription   = '',
-        twitterImage   = null,
         twitterTitle  = '',
     } = seo
 
@@ -43,8 +27,6 @@ const OpenGraph = ({ seo } ) => {
                 <meta property="og:description" content={opengraphDescription} />
                 <meta property="og:image" content={opengraphImage?.sourceUrl || '/default-og-image.jpg'} />
 
-                {/*<meta name="twitter:card" content={} />*/}
-                {/*<meta property="twitter:domain" content={} />*/}
                 <meta property="twitter:url" content={opengraphUrl} />
                 <meta name="twitter:title" content={twitterTitle} />
                 <meta name="twitter:description" content={twitterDescription} />
