@@ -39,7 +39,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
-        display: ['Lexend', ...defaultTheme.fontFamily.sans],
+        serif: ['Lora', ...defaultTheme.fontFamily.serif],
+        display: ['Lora', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         'wp-primary': 'var(--wp--preset--color--primary)',
@@ -79,7 +80,77 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        teal: {
+          DEFAULT: '#0ECAD4',
+          light: '#5EDCE2',
+          lightest: '#E7FAFB',
+          dark: '#0CA8B1',
+        },
+        blue: {
+          DEFAULT: '#006BD6',
+          dark: '#00366B',
+          light: '#D5E6F8',
+        },
+        navy: {
+          DEFAULT: '#002447',
+        },
+        purple: {
+          DEFAULT: '#7A45E5',
+          light: '#E9E0FB',
+        },
+        green: {
+          DEFAULT: '#039B5C',
+          light: '#D3F3E2',
+        },
+        yellow: {
+          DEFAULT: '#FFC34E',
+          light: '#FFF9ED',
+        },
+        orange: {
+          DEFAULT: '#FF6119',
+          light: '#FFE5D9',
+        },
+        red: {
+          DEFAULT: '#DD1243',
+        },
+        lightGray: {
+          DEFAULT: '#F4F5F6',
+        },
+        mediumGray: {
+          DEFAULT: '#5B6C74',
+        },
+        darkGray: {
+          DEFAULT: '#1F2426',
+        },
+        gradients: {
+          center: ['#5EDCE2', '#0CA8B1'],
+          power: ['#0ECAD4', '#006BD6'],
+          build: ['#0ECAD4', '#7A45E5'],
+          grow: ['#0ECAD4', '#039B5C'],
+          elevate: ['#0ECAD4', '#00366B'],
+          spark: ['#FFC34E', '#FF6119'],
+          centerLight: ['#E7FAFB', '#D7F6F8'],
+          powerLight: ['#E7FAFB', '#D5E6F8'],
+          buildLight: ['#E7FAFB', '#E9E0FB'],
+          growLight: ['#E7FAFB', '#D3F3E2'],
+          elevateLight: ['#E7FAFB', '#F5F6F7'],
+          sparkLight: ['#FFF9ED', '#FFE5D9'],
+        },
       },
+      backgroundImage: theme => ({
+        'gradient-center': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.center[0]')}, ${theme('colors.gradients.center[1]')})`,
+        'gradient-power': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.power[0]')}, ${theme('colors.gradients.power[1]')})`,
+        'gradient-build': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.build[0]')}, ${theme('colors.gradients.build[1]')})`,
+        'gradient-grow': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.grow[0]')}, ${theme('colors.gradients.grow[1]')})`,
+        'gradient-elevate': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.elevate[0]')}, ${theme('colors.gradients.elevate[1]')})`,
+        'gradient-spark': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.spark[0]')}, ${theme('colors.gradients.spark[1]')})`,
+        'gradient-center-light': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.centerLight[0]')}, ${theme('colors.gradients.centerLight[1]')})`,
+        'gradient-power-light': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.powerLight[0]')}, ${theme('colors.gradients.powerLight[1]')})`,
+        'gradient-build-light': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.buildLight[0]')}, ${theme('colors.gradients.buildLight[1]')})`,
+        'gradient-grow-light': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.growLight[0]')}, ${theme('colors.gradients.growLight[1]')})`,
+        'gradient-elevate-light': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.elevateLight[0]')}, ${theme('colors.gradients.elevateLight[1]')})`,
+        'gradient-spark-light': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.sparkLight[0]')}, ${theme('colors.gradients.sparkLight[1]')})`,
+      }),
       fontSize: {
         'wp-small': 'var(--wp--preset--font-size--small)',
         'wp-medium': 'var(--wp--preset--font-size--medium)',

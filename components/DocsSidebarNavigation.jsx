@@ -78,7 +78,7 @@ export function DocsSidebarNavigation({ className, data, navigation }) {
               className={clsx(
                 'mt-2 space-y-2 border-l-2 transition-all duration-300',
                 expandedSections[section.title]
-                  ? 'border-slate-100 dark:border-slate-800'
+                  ? 'border-slate-100 dark:border-slate-700'
                   : 'hidden border-transparent',
                 'lg:mt-4 lg:space-y-4 lg:border-slate-200'
               )}
@@ -87,7 +87,7 @@ export function DocsSidebarNavigation({ className, data, navigation }) {
                 <li key={link.href} className="relative pl-3.5">
                   <Link href={link.href}                       className={clsx(
                         'block',
-                        link.href === data?.node?.uri ? 'font-semibold text-sky-500' : 'text-slate-500 hover:text-slate-600 dark:text-slate-400'
+                        link.href === data?.node?.uri ? 'font-semibold text-sky-400' : 'text-slate-500 hover:text-slate-600 dark:text-slate-300'
                       )}>
                       {link.title}
                   </Link>

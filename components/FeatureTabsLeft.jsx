@@ -30,7 +30,7 @@ const FeatureTabsLeft = (layout) => {
     <section
       id="features"
       aria-label="Features of WPGraphQL for ACF"
-      className="relative overflow-hidden bg-slate-100  pb-28 pt-20 dark:bg-slate-800 sm:py-32"
+      className="relative overflow-hidden bg-slate-100  pb-28 pt-20 dark:bg-blue sm:py-32"
     >
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
@@ -58,8 +58,8 @@ const FeatureTabsLeft = (layout) => {
                       className={clsx(
                         'group relative my-2 rounded-full px-4  py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6',
                         selectedIndex === featureIndex
-                          ? 'bg-slate-600 group-hover:text-white dark:bg-slate-800 lg:ring-1 lg:ring-inset lg:ring-white/10 lg:dark:bg-slate-700 '
-                          : 'bg-gray-100 hover:bg-slate-600 group-hover:text-white dark:hover:bg-slate-800 lg:dark:hover:bg-slate-700',
+                          ? 'bg-gradient-build group-hover:text-white dark:bg-blue-800 lg:ring-1 lg:ring-inset lg:ring-white/10'
+                          : 'bg-gradient-build-light hover:bg-gradient-build group-hover:text-white dark:hover:bg-blue-900',
                       )}
                     >
                       <h3>
@@ -93,7 +93,7 @@ const FeatureTabsLeft = (layout) => {
                 {features.map((feature) => (
                   <Tab.Panel key={feature.name} unmount={false}>
                     <div className="relative sm:px-6 lg:hidden">
-                      <div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] bg-slate-200 ring-1 ring-inset ring-white/10 dark:bg-slate-700 sm:inset-x-0 sm:rounded-t-xl lg:bg-white/10" />
+                      <div className="absolute -inset-x-4 bottom-[-4.25rem] top-[-6.5rem] bg-slate-100 dark:bg-blue sm:inset-x-0 sm:rounded-t-xl lg:bg-white/10" />
                       <p className="relative mx-auto max-w-2xl text-base text-slate-800 dark:text-white sm:text-center">
                         {feature.featureDescription}
                       </p>

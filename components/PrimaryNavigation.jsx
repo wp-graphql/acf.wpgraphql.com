@@ -63,7 +63,7 @@ export function PrimaryNavigation({ navigation }) {
                         <li className="row-span-3" key={sublink.id}>
                           <NavigationMenuLink asChild>
                             <Link
-                              className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                              className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md text-accent-foreground"
                               href={sublink.href}
                               target={sublink?.target ?? null}
                             >
@@ -71,7 +71,7 @@ export function PrimaryNavigation({ navigation }) {
                               <div className="mb-2 mt-4 text-lg font-medium">
                                 {sublink?.label}
                               </div>
-                              <p className="text-sm leading-tight text-muted-foreground">
+                              <p className="text-sm leading-tight text-popover-foreground">
                                 {sublink.menuItemMeta?.description}
                               </p>
                             </Link>
@@ -86,6 +86,7 @@ export function PrimaryNavigation({ navigation }) {
                             href={sublink.href}
                             target={sublink?.target ?? null}
                             title={sublink.label}
+                            className="text-accent-foreground"
                           >
                             {sublink.menuItemMeta?.description}
                           </ListItem>

@@ -13,8 +13,8 @@ function Feature({ feature, isActive, className, ...props }) {
         className,
         'rounded-lg p-5',
         !isActive
-          ? 'opacity-75 hover:bg-slate-50 hover:opacity-100 dark:hover:bg-gray-800'
-          : 'bg-slate-100 dark:bg-slate-800',
+          ? 'opacity-75 hover:bg-slate-50 hover:opacity-100 dark:hover:bg-slate-900'
+          : 'bg-slate-100 dark:bg-slate-900',
       )}
       {...props}
     >
@@ -86,7 +86,7 @@ function FeaturesDesktop({ features }) {
               />
             ))}
           </Tab.List>
-          <Tab.Panels className="relative mt-20 overflow-hidden rounded-xl bg-slate-200 px-14 py-16 dark:bg-slate-700 xl:px-16">
+          <Tab.Panels className="relative mt-20 overflow-hidden rounded-xl bg-slate-200 px-14 py-16 dark:bg-slate-900 xl:px-16">
             <div className="-mx-5 flex">
               {features.map((feature, featureIndex) => (
                 <Tab.Panel
@@ -134,9 +134,7 @@ const FeatureTabsTop = (feature) => {
           <h2 className="font-display text-3xl tracking-tight text-slate-900 dark:text-slate-50 sm:text-4xl">
             {feature.name}
           </h2>
-          <p className="mt-4 text-lg tracking-tight text-slate-700 dark:text-slate-100">
-            {feature.description}
-          </p>
+          <div className="mt-4 text-lg tracking-tight text-slate-700 dark:text-slate-100" dangerouslySetInnerHTML={{__html: feature.description }} />
         </div>
         <FeaturesMobile features={feature.features} />
         <FeaturesDesktop features={feature.features} />

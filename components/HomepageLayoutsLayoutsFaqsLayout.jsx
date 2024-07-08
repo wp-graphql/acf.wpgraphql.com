@@ -28,7 +28,7 @@ const HomepageLayoutsLayoutsFaqsLayout = ({ title, description, questions }) => 
     <section
       id="faq"
       aria-labelledby="faq-title"
-      className="relative overflow-hidden bg-slate-100 py-20 dark:bg-slate-800 sm:py-32"
+      className="relative overflow-hidden bg-white py-20 dark:bg-navy sm:py-32"
     >
       <Container className="relative">
         <div className="prose mx-auto max-w-2xl dark:prose-invert lg:mx-0">
