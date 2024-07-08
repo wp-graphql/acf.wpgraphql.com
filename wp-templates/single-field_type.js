@@ -11,6 +11,7 @@ import blocks from '@/wp-blocks'
 import { AcfFieldTypeConfigurationBlock } from '@/wp-blocks/AcfFieldTypeConfigurationBlock'
 import { AcfFieldTypeSettingsBlock } from '@/wp-blocks/AcfFieldTypeSettingsBlock'
 import { AcfGraphqlQuery } from '@/wp-blocks/AcfGraphqlQuery'
+import OpenGraph from "@/components/OpenGraph";
 
 const aCFFieldTypeCategoriesFragment = gql`
   fragment aCFFieldTypeCategoriesFragment on FieldType {
@@ -57,6 +58,7 @@ query SingleAcfFieldType($uri: String!) {
             }
         }
         ...aCFFieldTypeCategoriesFragment
+        ...OpenGraph
     }
 }
 ${aCFFieldTypeCategoriesFragment}
@@ -75,6 +77,7 @@ ${blocks.CoreImage.fragments.entry}
 ${blocks.CoreSeparator.fragments.entry}
 ${blocks.CoreList.fragments.entry}
 ${blocks.CoreHeading.fragments.entry}
+${OpenGraph.fragments.contentNode}
 `
 
 export const SingleFieldType = () => {
@@ -113,9 +116,7 @@ export const SingleFieldType = () => {
 
   return (
     <>
-      <Head>
-        <title>{`${title} - WPGraphQL for ACF`}</title>
-      </Head>
+      <OpenGraph seo={node?.seo} />
       <Layout node={node} toc={toc}>
         <EditPost post={node}><h1>{title}</h1></EditPost>
         {node?.aCFFieldTypeCategories && node?.aCFFieldTypeCategories?.nodes && (
