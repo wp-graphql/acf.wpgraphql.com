@@ -33,8 +33,8 @@ export function SiteHeader({ navigation, isNoticeVisible = false }) {
         headerTopPosition,
         'z-40 flex flex-wrap items-center justify-between bg-white px-4 py-5 shadow-md shadow-slate-900/5 transition duration-500 dark:shadow-none sm:px-6 lg:px-8',
         isScrolled
-          ? 'dark:bg-slate-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-slate-900/75'
-          : 'dark:bg-slate-900',
+          ? 'dark:bg-navy/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-navy/75'
+          : 'dark:bg-navy',
       )}
     >
       <div className="mr-6 flex lg:hidden">
@@ -42,7 +42,7 @@ export function SiteHeader({ navigation, isNoticeVisible = false }) {
       </div>
       <div className="relative flex grow basis-0 items-center gap-4">
         <Link href="/" aria-label="Home page" className='shrink-0'>
-          <Logo className="h-5 w-auto rounded-md bg-slate-900/95 fill-slate-700 p-1 dark:fill-sky-100 md:block lg:block lg:h-9" />
+          <Logo className="h-5 w-auto rounded-md bg-gradient-power dark:bg-none fill-slate-700 p-1 dark:fill-sky-100 md:block lg:block lg:h-9" />
         </Link>
         <div className="hidden lg:block">
           <PrimaryNavigation navigation={navigation} />

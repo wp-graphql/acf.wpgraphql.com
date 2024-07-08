@@ -140,8 +140,8 @@ function FieldTypeGrid({ fieldTypes }) {
           />
         </>
       )}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gray-50 dark:from-slate-700" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-gray-50 dark:from-slate-700" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-slate-100 dark:from-purple-800" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-100 dark:from-purple-800" />
     </div>
   )
 }
@@ -149,13 +149,13 @@ function FieldTypeGrid({ fieldTypes }) {
 const HomepageLayoutsLayoutsSupportedFieldTypesLayout = (data) => {
   return (
     <section
-      id="reviews"
-      aria-labelledby="reviews-title"
-      className="pb-16 pt-20 dark:bg-slate-700 sm:pb-24 sm:pt-32"
+      id="field-types"
+      aria-labelledby="field-types-title"
+      className="pb-16 pt-20 bg-slate-100 dark:bg-purple-800 sm:pb-24 sm:pt-32"
     >
       <Container>
         <h2
-          id="reviews-title"
+          id="field-types-title"
           className="mb-5 text-3xl font-medium tracking-tight text-gray-900 dark:text-gray-100 sm:text-center"
         >
           {data.title}
