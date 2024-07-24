@@ -2,7 +2,7 @@
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
 
-export default {
+const nextSitemapConfig = {
     siteUrl: SITE_URL,
     generateRobotsTxt: true,
     exclude: ["/docs-sitemap.xml", "/docs/*"],
@@ -22,3 +22,5 @@ export default {
         };
     },
 };
+
+export default nextSitemapConfig;

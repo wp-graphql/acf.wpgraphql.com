@@ -1,6 +1,8 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+import aspectRatio from '@tailwindcss/aspect-ratio';
+import typography from '@tailwindcss/typography';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
-module.exports = {
+const tailwindConfig = {
   content: [
     './components/**/*.{js,mjs,jsx,mdx,tsx,ts}',
     './components/*.{js,mjs,jsx,mdx,tsx,ts}',
@@ -42,8 +44,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
-        serif: ['Lora', { weight: '500' }, ...defaultTheme.fontFamily.serif], // Lora Medium
-        display: ['Lora', { weight: '500' }, ...defaultTheme.fontFamily.sans], // Lora Medium
+        serif: ['Lora', ...defaultTheme.fontFamily.serif],
+        display: ['Lora', ...defaultTheme.fontFamily.sans],
         mono: ['Fira Code VF', ...defaultTheme.fontFamily.mono],
         source: ['Source Sans Pro', ...defaultTheme.fontFamily.sans],
         'ubuntu-mono': ['Ubuntu Mono', ...defaultTheme.fontFamily.mono],
@@ -360,8 +362,7 @@ module.exports = {
       }),
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/aspect-ratio'),
-  ],
+  plugins: [typography, aspectRatio],
 };
+
+export default tailwindConfig;
