@@ -63,7 +63,7 @@ export function PrimaryNavigation({ navigation }) {
                         <li className="row-span-3" key={sublink.id}>
                           <NavigationMenuLink asChild>
                             <Link
-                              className="from-muted/50 to-muted text-accent-foreground flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b p-6 no-underline outline-none focus:shadow-md"
+                              className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 text-accent-foreground no-underline outline-none focus:shadow-md"
                               href={sublink.href}
                               target={sublink?.target ?? null}
                             >
@@ -71,7 +71,7 @@ export function PrimaryNavigation({ navigation }) {
                               <div className="mb-2 mt-4 text-lg font-medium">
                                 {sublink?.label}
                               </div>
-                              <p className="text-popover-foreground text-sm leading-tight">
+                              <p className="text-sm leading-tight text-popover-foreground">
                                 {sublink.menuItemMeta?.description}
                               </p>
                             </Link>
@@ -118,7 +118,7 @@ const ListItem = React.forwardRef(
             {...props}
           >
             <div className="text-sm font-medium leading-none">{title}</div>
-            <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
+            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
               {children}
             </p>
           </Link>
