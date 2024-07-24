@@ -12,9 +12,8 @@ const tailwindConfig = {
     './pages/*.{js,mjs,jsx,mdx,tsx,ts}',
     './wp-templates/**/*.{js,mjs,jsx,mdx,tsx,ts}',
     './wp-templates/*.{js,mjs,jsx,mdx,tsx,ts}',
-    './src/**/*.{js,ts,jsx,tsx,mdx}', // Added from project config
   ],
-  darkMode: ['class', '[data-theme="dark"]'],
+  darkMode: [ 'class', '[data-theme="dark"]'],
   theme: {
     fontSize: {
       xs: ['0.75rem', { lineHeight: '1rem' }],
@@ -30,9 +29,6 @@ const tailwindConfig = {
       '7xl': ['4.5rem', { lineHeight: '1' }],
       '8xl': ['6rem', { lineHeight: '1' }],
       '9xl': ['8rem', { lineHeight: '1' }],
-      'wp-small': 'var(--wp--preset--font-size--small)',
-      'wp-medium': 'var(--wp--preset--font-size--medium)',
-      'wp-large': 'var(--wp--preset--font-size--large)',
     },
     container: {
       center: true,
@@ -49,8 +45,47 @@ const tailwindConfig = {
         mono: ['Fira Code VF', ...defaultTheme.fontFamily.mono],
         source: ['Source Sans Pro', ...defaultTheme.fontFamily.sans],
         'ubuntu-mono': ['Ubuntu Mono', ...defaultTheme.fontFamily.mono],
+        serif: ['Lora', ...defaultTheme.fontFamily.serif],
+        display: ['Lora', ...defaultTheme.fontFamily.sans],
       },
       colors: {
+        'wp-primary': 'var(--wp--preset--color--primary)',
+        'wp-secondary': 'var(--wp--preset--color--secondary)',
+        'wp-base': 'var(--wp--preset--color--base)',
+        'wp-contrast': 'var(--wp--preset--color--contrast)',
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
         'wp-primary': 'var(--wp--preset--color--primary)',
         'wp-secondary': 'var(--wp--preset--color--secondary)',
         'wp-base': 'var(--wp--preset--color--base)',
@@ -159,17 +194,22 @@ const tailwindConfig = {
         'gradient-elevate-light': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.elevateLight[0]')}, ${theme('colors.gradients.elevateLight[1]')})`,
         'gradient-spark-light': `radial-gradient(circle at -100% -200%, ${theme('colors.gradients.sparkLight[0]')}, ${theme('colors.gradients.sparkLight[1]')})`,
       }),
+      fontSize: {
+        'wp-small': 'var(--wp--preset--font-size--small)',
+        'wp-medium': 'var(--wp--preset--font-size--medium)',
+        'wp-large': 'var(--wp--preset--font-size--large)',
+      },
       maxWidth: {
-        '8xl': '90rem',
+        '8xl': '88rem',
       },
       keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
         'fade-in': {
           from: {

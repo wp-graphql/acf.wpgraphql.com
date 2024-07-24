@@ -24,7 +24,7 @@ const HomepageLayoutsLayoutsHeroLayout = (hero) => {
           <div className="relative z-10 md:text-center lg:text-left">
             <div className="relative">
               <div
-                className="inline font-display text-5xl tracking-tight text-slate-900 dark:text-slate-200"
+                className="inline bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 bg-clip-text font-display text-5xl tracking-tight text-transparent dark:from-blue-300 dark:via-blue-600 dark:to-blue-300"
                 dangerouslySetInnerHTML={{ __html: hero.title }}
               />
               <div

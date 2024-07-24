@@ -16,114 +16,131 @@
   --shiki-token-punctuation: theme('colors.zinc.200');
 }
 
+
 @layer base {
   :root {
-    --background: hsl(0, 0%, 100%);
-    --foreground: hsl(222.2, 47.4%, 11.2%);
-    --muted: hsl(210, 40%, 96.1%);
-    --muted-foreground: hsl(215.4, 10%, 45%);
-    --popover: hsl(0, 0%, 100%);
-    --popover-foreground: hsl(222.2, 47.4%, 11.2%);
-    --card: hsl(0, 0%, 100%);
-    --card-foreground: hsl(222.2, 47.4%, 11.2%);
-    --border: hsl(214.3, 31.8%, 91.4%);
-    --input: hsl(214.3, 31.8%, 91.4%);
-    --primary: hsl(222.2, 47.4%, 11.2%);
-    --primary-foreground: hsl(210, 40%, 98%);
-    --secondary: hsl(210, 40%, 96.1%);
-    --secondary-foreground: hsl(222.2, 47.4%, 11.2%);
-    --accent: hsl(210, 40%, 96.1%);
-    --accent-foreground: hsl(222.2, 47.4%, 11.2%);
-    --destructive: hsl(0, 100%, 50%);
-    --destructive-foreground: hsl(210, 40%, 98%);
-    --ring: hsl(215, 20.2%, 65.1%);
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 10% 45%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 215 20.2% 65.1%;
+
     --radius: 0.5rem;
   }
 
-  [data-theme='dark'] {
-    --background: hsl(224, 71%, 4%);
-    --foreground: hsl(213, 31%, 91%);
-    --muted: hsl(223, 47%, 11%);
-    --muted-foreground: hsl(215.4, 10%, 75%);
-    --popover: hsl(222, 47%, 11%);
-    --popover-foreground: hsl(215, 20.2%, 65.1%);
-    --card: hsl(224, 71%, 4%);
-    --card-foreground: hsl(213, 31%, 91%);
-    --border: hsl(216, 34%, 17%);
-    --input: hsl(216, 34%, 17%);
-    --primary: hsl(210, 100%, 14%);
-    --primary-foreground: hsl(222.2, 47.4%, 1.2%);
-    --secondary: hsl(222.2, 47.4%, 11.2%);
-    --secondary-foreground: hsl(210, 40%, 98%);
-    --accent: hsl(210, 100%, 42%);
-    --accent-foreground: hsl(210, 40%, 98%);
-    --destructive: hsl(0, 63%, 31%);
-    --destructive-foreground: hsl(210, 40%, 98%);
-    --ring: hsl(216, 34%, 17%);
+[data-theme='dark'] {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 10% 75%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 215 20.2% 65.1%;
+
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+
+    --primary: 210 100% 14%;
+    --primary-foreground: 222.2 47.4% 1.2%;
+
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
+
+    --accent: 210 100% 42%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 216 34% 17%;
+
     --radius: 0.5rem;
   }
 }
 
 @layer base {
-  /* Global styles using custom properties */
+  * {
+    @apply border-border;
+  }
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-
-  * {
-    border-color: var(--border); /* Applies custom border color */
-  }
-
   [inert] ::-webkit-scrollbar {
     display: none;
   }
 }
 
 @font-face {
-  font-family: 'Lora';
-  src: url('/fonts/lora/Lora-VariableFont_wght.ttf') format('truetype');
-  font-weight: 500; /* Medium weight */
-  font-style: normal;
+    font-family: 'Lora';
+    src: url('/fonts/lora/Lora-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/inter/InterVariable.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Inter';
+    src: url('/fonts/inter/InterVariable.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 h1, h2 {
-  font-family: 'Lora', serif;
+    font-family: 'Lora', serif;
 }
 
 /* Regular buttons */
 .btn-primary {
-  @apply mt-8 bg-blue text-white border border-transparent rounded-full shadow px-5 py-3 inline-flex items-center text-base font-medium hover:bg-blue-500 hover:shadow-lg transition-all duration-300;
+    @apply mt-8 bg-blue text-white border border-transparent rounded-full shadow px-5 py-3 inline-flex items-center text-base font-medium hover:bg-blue-500 hover:shadow-lg transition-all duration-300;
 }
 
 .btn-secondary {
-  @apply mt-8 border-2 dark:text-white dark:border-white border-navy text-navy bg-transparent rounded-full shadow px-5 py-3 inline-flex items-center text-base font-medium hover:bg-navy hover:text-white hover:shadow-lg dark:hover:bg-white dark:hover:text-navy duration-300;
+    @apply mt-8 border-2 dark:text-white dark:border-white border-navy text-navy bg-transparent rounded-full shadow px-5 py-3 inline-flex items-center text-base font-medium hover:bg-navy hover:text-white hover:shadow-lg dark:hover:bg-white dark:hover:text-navy duration-300;
 }
 
 /* Small buttons */
 .btn-primary-sm {
-  @apply mt-8 bg-blue text-white border border-transparent rounded-full shadow px-3 py-2 inline-flex items-center text-sm font-medium hover:bg-blue-600 hover:shadow-lg transition-all duration-300;
+    @apply mt-8 bg-blue text-white border border-transparent rounded-full shadow px-3 py-2 inline-flex items-center text-sm font-medium hover:bg-blue-600 hover:shadow-lg transition-all duration-300;
 }
 
 .btn-secondary-sm {
-  @apply mt-8 border-2 border-navy text-navy bg-transparent rounded-full shadow px-3 py-2 inline-flex items-center text-sm font-medium hover:bg-navy hover:text-white hover:shadow-lg transition-all duration-300;
+    @apply mt-8 border-2 border-navy text-navy bg-transparent rounded-full shadow px-3 py-2 inline-flex items-center text-sm font-medium hover:bg-navy hover:text-white hover:shadow-lg transition-all duration-300;
 }
 
 .subtitle {
-  @apply text-base font-semibold tracking-wider text-purple-600 dark:text-purple-400 uppercase;
+    @apply text-base font-semibold tracking-wider text-purple-600 dark:text-purple-400 uppercase;
 }
 
 /* Apply margin left to all adjacent "buttons", excluding the first button */
 [class*='btn-'] + [class*='btn-'] {
-  @apply ml-4;
+    @apply ml-4;
 }
 
 h1, h2, h3, h4, h5, h6 {

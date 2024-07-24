@@ -1,7 +1,6 @@
 {
   "name": "acf.wpgraphql.com",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "faust dev",
     "build": "faust build",
@@ -38,7 +37,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@sindresorhus/slugify": "^2.1.1",
     "@tailwindcss/typography": "^0.5.8",
-    "@wpengine/atlas-next": "^1.2.0",
+    "@wpengine/atlas-next": "^1.0.0",
     "acorn": "^8.8.1",
     "algoliasearch": "^4.14.2",
     "allotment": "^1.19.3",
@@ -83,7 +82,6 @@
     "@babel/preset-env": "^7.23.2",
     "@babel/preset-react": "^7.22.15",
     "@next/eslint-plugin-next": "^13.5.5",
-    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
     "@typescript-eslint/parser": "^6.7.5",
     "eslint": "^8.51.0",
