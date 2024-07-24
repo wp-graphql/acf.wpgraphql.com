@@ -1,10 +1,10 @@
-import { gql } from '@apollo/client'
-import { Tab } from '@headlessui/react'
-import clsx from 'clsx'
-import Image from 'next/image'
+import { gql } from '@apollo/client';
+import { Tab } from '@headlessui/react';
+import clsx from 'clsx';
+import Image from 'next/image';
 
-import { Container } from '@/components/Container'
-
+import { Container } from '@/components/Container';
+import { preventOrphans } from '@/lib/utils';
 
 function Feature({ feature, isActive, className, ...props }) {
   return (
@@ -21,7 +21,7 @@ function Feature({ feature, isActive, className, ...props }) {
       <h3
         className={clsx(
           'mt-6 text-sm font-medium',
-          isActive ? 'text-orange-500' : 'text-gray-500',
+          isActive ? 'text-blue-500' : 'text-gray-500',
         )}
       >
         {feature.featureSubtitle}
@@ -33,7 +33,7 @@ function Feature({ feature, isActive, className, ...props }) {
         {feature.featureDescription}
       </p>
     </div>
-  )
+  );
 }
 
 function FeaturesMobile({ features }) {
@@ -60,7 +60,7 @@ function FeaturesMobile({ features }) {
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 function FeaturesDesktop({ features }) {
@@ -77,7 +77,7 @@ function FeaturesDesktop({ features }) {
                   name: (
                     <Tab className="text-left [&:not(:focus-visible)]:focus:outline-none">
                       <span className="absolute inset-0" />
-                      {feature.name}
+                      {preventOrphans(feature.name)}
                     </Tab>
                   ),
                 }}
@@ -119,7 +119,7 @@ function FeaturesDesktop({ features }) {
         </>
       )}
     </Tab.Group>
-  )
+  );
 }
 
 const FeatureTabsTop = (feature) => {
@@ -140,7 +140,7 @@ const FeatureTabsTop = (feature) => {
         <FeaturesDesktop features={feature.features} />
       </Container>
     </section>
-  )
+  );
 }
 
 FeatureTabsTop.fragment = gql`
@@ -164,6 +164,6 @@ FeatureTabsTop.fragment = gql`
       }
     }
   }
-`
+`;
 
-export default FeatureTabsTop
+export default FeatureTabsTop;

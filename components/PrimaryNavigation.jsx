@@ -63,7 +63,7 @@ export function PrimaryNavigation({ navigation }) {
                         <li className="row-span-3" key={sublink.id}>
                           <NavigationMenuLink asChild>
                             <Link
-                              className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md text-accent-foreground"
+                              className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 text-accent-foreground no-underline outline-none focus:shadow-md"
                               href={sublink.href}
                               target={sublink?.target ?? null}
                             >

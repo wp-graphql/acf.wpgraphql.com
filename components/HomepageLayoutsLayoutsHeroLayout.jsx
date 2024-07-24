@@ -18,13 +18,13 @@ function TrafficLightsIcon(props) {
 
 const HomepageLayoutsLayoutsHeroLayout = (hero) => {
   return (
-    <div className="overflow-hidden bg-white dark:-mb-32 dark:mt-[-4.5rem] dark:bg-navy dark:pb-32 dark:pt-[4.5rem] dark:lg:mt-[-4.75rem] dark:lg:pt-[4.75rem]">
+    <div className="overflow-hidden bg-white dark:-mb-32 dark:-mt-18 dark:bg-navy dark:pb-32 dark:pt-18 dark:lg:mt-[-4.75rem] dark:lg:pt-[4.75rem]">
       <div className="py-16 sm:px-2 lg:relative lg:px-0 lg:py-20">
         <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 lg:max-w-8xl lg:grid-cols-2 lg:px-8 xl:gap-x-16 xl:px-12">
           <div className="relative z-10 md:text-center lg:text-left">
             <div className="relative">
               <div
-                className="inline bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 bg-clip-text font-display text-5xl tracking-tight text-transparent dark:from-blue-300 dark:via-blue-600 dark:to-blue-300"
+                className="inline font-display text-5xl tracking-tight text-slate-900 dark:text-slate-200"
                 dangerouslySetInnerHTML={{ __html: hero.title }}
               />
               <div
