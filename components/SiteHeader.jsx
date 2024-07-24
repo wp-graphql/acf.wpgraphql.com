@@ -42,7 +42,7 @@ export function SiteHeader({ navigation, isNoticeVisible = false }) {
       </div>
       <div className="relative flex grow basis-0 items-center gap-4">
         <Link href="/" aria-label="Home page" className='shrink-0'>
-          <Logo className="h-5 w-auto rounded-md bg-gradient-power dark:bg-none fill-slate-700 p-1 dark:fill-sky-100 md:block lg:block lg:h-9" />
+          <Logo className="h-5 w-auto rounded-md bg-gradient-power fill-slate-700 p-1 dark:bg-none dark:fill-sky-100 md:block lg:block lg:h-9" />
         </Link>
         <div className="hidden lg:block">
           <PrimaryNavigation navigation={navigation} />

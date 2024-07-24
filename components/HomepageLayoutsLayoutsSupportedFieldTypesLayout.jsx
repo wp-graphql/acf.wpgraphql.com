@@ -151,7 +151,7 @@ const HomepageLayoutsLayoutsSupportedFieldTypesLayout = (data) => {
     <section
       id="field-types"
       aria-labelledby="field-types-title"
-      className="pb-16 pt-20 bg-slate-100 dark:bg-purple-800 sm:pb-24 sm:pt-32"
+      className="bg-slate-100 pb-16 pt-20 dark:bg-purple-800 sm:pb-24 sm:pt-32"
     >
       <Container>
         <h2

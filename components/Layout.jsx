@@ -136,7 +136,7 @@ export function Layout({ node, children, toc, title }) {
             <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:bg-gray-800/25" />
             <div className="absolute bottom-0 right-0 top-16 hidden h-12 w-px bg-gradient-to-t from-slate-800 dark:block" />
             <div className="absolute bottom-0 right-0 top-28 hidden w-px bg-slate-700 dark:block" />
-            <div className="sticky top-[4.5rem] -ml-0.5 h-[calc(100vh-4.5rem)] w-64 overflow-y-auto overflow-x-hidden py-16 pl-0.5 pr-8 xl:w-72 xl:pr-16">
+            <div className="sticky top-18 -ml-0.5 h-[calc(100vh-4.5rem)] w-64 overflow-y-auto overflow-x-hidden py-16 pl-0.5 pr-8 xl:w-72 xl:pr-16">
               <DocsSidebarNavigation
                 data={{
                   node
@@ -198,7 +198,7 @@ export function Layout({ node, children, toc, title }) {
               )}
             </dl>
           </div>
-          <div className="hidden xl:sticky xl:top-[4.5rem] xl:-mr-6 xl:block xl:h-[calc(100vh-4.5rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6">
+          <div className="hidden xl:sticky xl:top-18 xl:-mr-6 xl:block xl:h-[calc(100vh-4.5rem)] xl:flex-none xl:overflow-y-auto xl:py-16 xl:pr-6">
             <nav aria-labelledby="on-this-page-title" className="w-56">
               {tableOfContents && tableOfContents?.length > 0 && (
                 <>

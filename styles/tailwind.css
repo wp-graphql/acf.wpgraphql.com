@@ -142,3 +142,10 @@ h1, h2 {
 [class*='btn-'] + [class*='btn-'] {
     @apply ml-4;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500 !important;
+  > * {
+    font-weight: 500 !important;
+  }
+}
