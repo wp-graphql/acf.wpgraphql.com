@@ -1,11 +1,11 @@
-module.exports = ({ theme }) => ({
+const customTypography = ({ theme }) => ({
   DEFAULT: {
     css: {
       '--tw-prose-body': theme('colors.zinc.700'),
       '--tw-prose-headings': theme('colors.zinc.900'),
-      '--tw-prose-links': theme('colors.emerald.500'),
-      '--tw-prose-links-hover': theme('colors.emerald.600'),
-      '--tw-prose-links-underline': theme('colors.emerald.500 / 0.3'),
+      '--tw-prose-links': theme('colors.blue'),
+      '--tw-prose-links-hover': theme('colors.blue'),
+      '--tw-prose-links-underline': theme('colors.blue'),
       '--tw-prose-bold': theme('colors.zinc.900'),
       '--tw-prose-counters': theme('colors.zinc.500'),
       '--tw-prose-bullets': theme('colors.zinc.300'),
@@ -21,9 +21,9 @@ module.exports = ({ theme }) => ({
 
       '--tw-prose-invert-body': theme('colors.zinc.400'),
       '--tw-prose-invert-headings': theme('colors.white'),
-      '--tw-prose-invert-links': theme('colors.emerald.400'),
-      '--tw-prose-invert-links-hover': theme('colors.emerald.500'),
-      '--tw-prose-invert-links-underline': theme('colors.emerald.500 / 0.3'),
+      '--tw-prose-invert-links': theme('colors.white'),
+      '--tw-prose-invert-links-hover': theme('colors.white'),
+      '--tw-prose-invert-links-underline': theme('colors.white'),
       '--tw-prose-invert-bold': theme('colors.white'),
       '--tw-prose-invert-counters': theme('colors.zinc.400'),
       '--tw-prose-invert-bullets': theme('colors.zinc.600'),
@@ -278,7 +278,7 @@ module.exports = ({ theme }) => ({
       // Inline elements
       a: {
         color: 'var(--tw-prose-links)',
-        textDecoration: 'underline transparent',
+        textDecoration: 'underline',
         fontWeight: '500',
         transitionProperty: 'color, text-decoration-color',
         transitionDuration: theme('transitionDuration.DEFAULT'),
@@ -354,4 +354,6 @@ module.exports = ({ theme }) => ({
       '--tw-prose-td-borders': 'var(--tw-prose-invert-td-borders)',
     },
   },
-})
+});
+
+export default customTypography;
