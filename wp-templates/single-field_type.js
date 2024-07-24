@@ -2,16 +2,15 @@ import { gql } from '@apollo/client'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
 import { flatListToHierarchical, useFaustQuery } from '@faustwp/core'
 import { Separator } from '@radix-ui/react-separator'
-import Head from 'next/head'
 
 import EditPost from '@/components/EditPost'
 import { Layout, LAYOUT_QUERY } from '@/components/Layout'
+import OpenGraph from "@/components/OpenGraph";
 import { Badge } from '@/components/ui/badge'
 import blocks from '@/wp-blocks'
 import { AcfFieldTypeConfigurationBlock } from '@/wp-blocks/AcfFieldTypeConfigurationBlock'
 import { AcfFieldTypeSettingsBlock } from '@/wp-blocks/AcfFieldTypeSettingsBlock'
 import { AcfGraphqlQuery } from '@/wp-blocks/AcfGraphqlQuery'
-import OpenGraph from "@/components/OpenGraph";
 
 const aCFFieldTypeCategoriesFragment = gql`
   fragment aCFFieldTypeCategoriesFragment on FieldType {

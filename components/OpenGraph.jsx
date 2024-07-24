@@ -1,5 +1,5 @@
-import Head from 'next/head'
 import { gql } from '@apollo/client'
+import Head from 'next/head'
 
 const OpenGraph = ({ seo } ) => {
 
