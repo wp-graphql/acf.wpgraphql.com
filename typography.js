@@ -41,6 +41,7 @@ module.exports = ({ theme }) => ({
       color: 'var(--tw-prose-body)',
       fontSize: theme('fontSize.sm')[0],
       lineHeight: theme('lineHeight.7'),
+      fontFamily: ['Lora', 'serif'], // Lora font with Medium weight
 
       // Layout
       '> *': {
@@ -195,9 +196,10 @@ module.exports = ({ theme }) => ({
       },
       h3: {
         color: 'var(--tw-prose-headings)',
+        fontFamily: ['Lora', 'serif'], // Ensure Lora is used
+        fontWeight: '500', // Set to 500 for Medium weight
         fontSize: theme('fontSize.base')[0],
         ...theme('fontSize.base')[1],
-        fontWeight: '600',
         marginTop: theme('spacing.10'),
         marginBottom: theme('spacing.2'),
       },
