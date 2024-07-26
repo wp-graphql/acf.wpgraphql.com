@@ -1,7 +1,8 @@
-import { gql } from '@apollo/client'
-import Head from 'next/head'
+import { gql } from '@apollo/client';
+import Head from 'next/head';
 
-const OpenGraph = ({ seo } ) => {
+const OpenGraph = ({ seo }) => {
+  if (!seo) return null;
 
   const {
     metaDesc = '',
@@ -13,74 +14,44 @@ const OpenGraph = ({ seo } ) => {
     title = '',
     twitterDescription = '',
     twitterTitle = '',
-  } = seo || {}; // Ensure seo is not null or undefined
-  
+  } = seo;
 
   return (
-    <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={metaDesc} />
-
-        <meta property="og:url" content={opengraphUrl} />
-        <meta property="og:type" content={opengraphType} />
-        <meta property="og:title" content={opengraphTitle} />
-        <meta property="og:description" content={opengraphDescription} />
-        <meta property="og:image" content={opengraphImage?.sourceUrl} />
-
-        <meta property="twitter:url" content={opengraphUrl} />
-        <meta name="twitter:title" content={twitterTitle} />
-        <meta name="twitter:description" content={twitterDescription} />
-        <meta name="twitter:image" content={opengraphImage?.sourceUrl} />
-      </Head>
-    </>
-  )
-}
+    <Head>
+      <title>{title}</title>
+      <meta name="description" content={metaDesc} />
+      <meta property="og:url" content={opengraphUrl} />
+      <meta property="og:type" content={opengraphType} />
+      <meta property="og:title" content={opengraphTitle} />
+      <meta property="og:description" content={opengraphDescription} />
+      <meta property="og:image" content={opengraphImage?.sourceUrl} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content={opengraphUrl} />
+      <meta name="twitter:title" content={twitterTitle} />
+      <meta name="twitter:description" content={twitterDescription} />
+      <meta name="twitter:image" content={opengraphImage?.sourceUrl} />
+    </Head>
+  );
+};
 
 OpenGraph.fragments = {
-    contentNode: gql`
-        fragment OpenGraph on ContentNode {
-          seo {
-            breadcrumbs {
-              __typename
-              url
-            }
-            canonical
-            cornerstone
-            focuskw
-            fullHead
-            metaDesc
-            metaKeywords
-            metaRobotsNoindex
-            metaRobotsNofollow
-            opengraphAuthor
-            opengraphDescription
-            opengraphImage {
-              sourceUrl
-            }
-            opengraphModifiedTime
-            opengraphPublishedTime
-            opengraphPublisher
-            opengraphSiteName
-            opengraphTitle
-            opengraphType
-            opengraphUrl
-            readingTime
-            schema {
-              articleType
-              pageType
-              raw
-            }
-            title
-            twitterDescription
-            twitterImage {
-              sourceUrl
-            }
-            twitterTitle
-          }
+  contentNode: gql`
+    fragment OpenGraph on ContentNode {
+      seo {
+        metaDesc
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
         }
-    `
-}
+        opengraphTitle
+        opengraphType
+        opengraphUrl
+        title
+        twitterDescription
+        twitterTitle
+      }
+    }
+  `
+};
 
-export default OpenGraph
-
+export default OpenGraph;
