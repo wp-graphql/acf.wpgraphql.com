@@ -105,7 +105,7 @@ export const SingleFieldType = (props) => {
   return (
     <>
       <OpenGraph seo={node?.seo} />
-      <Layout node={node} toc={toc}>
+      <Layout node={node} toc={toc} __FAUST_QUERIES__={props.__FAUST_QUERIES__}>
         <EditPost post={node}>
           <h1>{title}</h1>
         </EditPost>
