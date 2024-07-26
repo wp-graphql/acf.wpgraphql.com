@@ -1,9 +1,10 @@
 import { gql } from '@apollo/client'
 import { WordPressBlocksViewer } from '@faustwp/blocks'
-import { flatListToHierarchical, useFaustQuery } from '@faustwp/core'
+import { flatListToHierarchical } from '@faustwp/core'
 import Head from 'next/head'
 
 import { LAYOUT_QUERY, Layout } from '@/components/Layout'
+import { useFaustQuery } from '@/lib/getFaustQueryResponse'
 import blocks from '@/wp-blocks'
 
 const INDEX_TEMPLATE_QUERY = gql`
@@ -58,8 +59,9 @@ ${blocks.CoreList.fragments.entry}
 ${blocks.CoreHeading.fragments.entry}
 `
 
-export const IndexTemplate = () => {
-  const { node } = useFaustQuery(INDEX_TEMPLATE_QUERY)
+export const IndexTemplate = (props) => {
+  console.log('IndexTemplate', {props});
+  const { node } = useFaustQuery(INDEX_TEMPLATE_QUERY, props)
 
   if (!node) {
     return null
@@ -94,10 +96,10 @@ export const IndexTemplate = () => {
   })
 
   // eslint-disable-next-line no-console
-  console.log({
-    editorBlocks,
-    blockList,
-  })
+  // console.log({
+  //   editorBlocks,
+  //   blockList,
+  // })
 
   return (
     <>
@@ -108,6 +110,7 @@ export const IndexTemplate = () => {
         title={node?.title ? node.title : 'WPGraphQL for ACF'}
         toc={toc}
         node={node}
+        __FAUST_QUERIES__={props.__FAUST_QUERIES__}
       >
         {node?.modified && (
           <div id="last-updated" className="text-sm text-gray-500">

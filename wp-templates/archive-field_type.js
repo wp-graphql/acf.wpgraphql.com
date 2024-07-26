@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
-import { useFaustQuery } from "@faustwp/core";
 import Head from 'next/head'
 
 import { FieldTypesList } from '@/components/FieldTypesList'
 import { LayoutArchive, LAYOUT_ARCHIVE_QUERY } from '@/components/LayoutArchive'
+import { useFaustQuery } from '@/lib/getFaustQueryResponse';
 
 export const GET_POST_QUERY = gql`
   query GetPost($uri: String!) {
@@ -38,14 +38,16 @@ export const GET_POST_QUERY = gql`
   }
 `;
 
-export const ArchiveFieldType = () => {
-  const { node } = useFaustQuery(GET_POST_QUERY);
+export const ArchiveFieldType = (props) => {
+  const response = useFaustQuery(GET_POST_QUERY, props);
+  const node = response?.node;
+
   const {
     docsSidebarMenuItems,
     footerMenuItems,
     primaryMenuItems,
     sitewideNotice
-  } = useFaustQuery(LAYOUT_ARCHIVE_QUERY);
+  } = useFaustQuery(LAYOUT_ARCHIVE_QUERY, props);
 
   if (!node) {
     return null
@@ -65,6 +67,7 @@ export const ArchiveFieldType = () => {
           primaryMenuItems,
           sitewideNotice
         }}
+        __FAUST_QUERIES__={props.__FAUST_QUERIES__}
       >
         <FieldTypesList data={{ node }} />
       </LayoutArchive>

@@ -9,7 +9,6 @@ import {
   } from "@/components/ui/context-menu"
 
 const EditPost = ({ post, children }) => {
-    console.log({post})
     return(
         <ContextMenu>
         <ContextMenuTrigger>{children}</ContextMenuTrigger>

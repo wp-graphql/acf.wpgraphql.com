@@ -1,6 +1,7 @@
 import aspectRatio from '@tailwindcss/aspect-ratio';
 import typography from '@tailwindcss/typography';
 import defaultTheme from 'tailwindcss/defaultTheme';
+
 import customTypography from './typography.js';
 
 const tailwindConfig = {

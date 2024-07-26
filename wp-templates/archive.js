@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
-import { useFaustQuery } from "@faustwp/core";
 import Head from 'next/head'
 
 import { LayoutArchive, LAYOUT_ARCHIVE_QUERY } from '@/components/LayoutArchive'
+import { useFaustQuery } from '@/lib/getFaustQueryResponse';
 
 const ARCHIVE_QUERY = gql`
   query Archive($uri: String!) {
@@ -26,14 +26,14 @@ const ARCHIVE_QUERY = gql`
   }
 `
 
-export const Archive = () => {
-  const { node } = useFaustQuery(ARCHIVE_QUERY);
+export const Archive = (props) => {
+  const { node } = useFaustQuery(ARCHIVE_QUERY, props);
   const {
     docsSidebarMenuItems,
     footerMenuItems,
     primaryMenuItems,
     sitewideNotice
-  } = useFaustQuery(LAYOUT_ARCHIVE_QUERY);
+  } = useFaustQuery(LAYOUT_ARCHIVE_QUERY, props);
 
   return (
     <>
@@ -49,6 +49,7 @@ export const Archive = () => {
           primaryMenuItems,
           sitewideNotice
         }}
+        __FAUST_QUERIES__={props.__FAUST_QUERIES__}
       >
         {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}
       </LayoutArchive>

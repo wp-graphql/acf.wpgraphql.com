@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
-import { flatListToHierarchical, useFaustQuery } from '@faustwp/core'
+import { flatListToHierarchical } from '@faustwp/core'
+
 
 import { FooterNavigation } from './FooterNavigation'
 import { SiteFooter } from './SiteFooter'
@@ -7,6 +8,7 @@ import { SiteFooter } from './SiteFooter'
 import { PrimaryNavigation } from '@/components/PrimaryNavigation'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SitewideNotice } from '@/components/SitewideNotice'
+import { useFaustQuery } from '@/lib/getFaustQueryResponse'
 
 
 export const LAYOUT_FRONT_PAGE_QUERY = gql`
@@ -20,9 +22,10 @@ export const LAYOUT_FRONT_PAGE_QUERY = gql`
   ${FooterNavigation.fragment}
 `
 
-export function LayoutFrontPage({ children }) {
+export function LayoutFrontPage(props) {
+  const { children } = props;
 
-  const { sitewideNotice, primaryMenuItems, footerMenuItems } = useFaustQuery(LAYOUT_FRONT_PAGE_QUERY);
+  const { sitewideNotice, primaryMenuItems, footerMenuItems } = useFaustQuery(LAYOUT_FRONT_PAGE_QUERY, props);
 
   const primaryNavigation = primaryMenuItems?.nodes
     ? flatListToHierarchical(primaryMenuItems.nodes, {

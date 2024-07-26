@@ -1,12 +1,13 @@
 import { gql } from '@apollo/client';
 import { WordPressBlocksViewer } from '@faustwp/blocks';
-import { flatListToHierarchical, useFaustQuery } from '@faustwp/core';
+import { flatListToHierarchical } from '@faustwp/core';
 import { Separator } from '@radix-ui/react-separator';
 
 import EditPost from '@/components/EditPost';
 import { Layout, LAYOUT_QUERY } from '@/components/Layout';
 import OpenGraph from '@/components/OpenGraph';
 import { Badge } from '@/components/ui/badge';
+import { useFaustQuery } from '@/lib/getFaustQueryResponse';
 import blocks from '@/wp-blocks';
 import { AcfFieldTypeConfigurationBlock } from '@/wp-blocks/AcfFieldTypeConfigurationBlock';
 import { AcfFieldTypeSettingsBlock } from '@/wp-blocks/AcfFieldTypeSettingsBlock';
@@ -77,8 +78,9 @@ const SINGLE_ACF_FIELD_TYPE_QUERY = gql`
   ${OpenGraph.fragments.contentNode}
 `;
 
-export const SingleFieldType = () => {
-  const { node } = useFaustQuery(SINGLE_ACF_FIELD_TYPE_QUERY);
+export const SingleFieldType = (props) => {
+  const response = useFaustQuery(SINGLE_ACF_FIELD_TYPE_QUERY, props);
+  const node = response?.node;
 
   if (!node) return null;
 
@@ -103,7 +105,7 @@ export const SingleFieldType = () => {
   return (
     <>
       <OpenGraph seo={node?.seo} />
-      <Layout node={node} toc={toc}>
+      <Layout node={node} toc={toc} __FAUST_QUERIES__={props.__FAUST_QUERIES__}>
         <EditPost post={node}>
           <h1>{title}</h1>
         </EditPost>
