@@ -37,7 +37,6 @@ async function getAllWPContent(after = null, acc = []) {
         },
     })
 
-    console.log(data.contentNodes.nodes)
     acc = [...acc, ...data.contentNodes.nodes]
 
     if (data.contentNodes.pageInfo.hasNextPage) {

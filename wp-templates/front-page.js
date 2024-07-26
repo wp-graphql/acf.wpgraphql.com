@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client'
-import { useFaustQuery } from '@faustwp/core'
 
 import HomepageLayoutsLayoutsFaqsLayout from '@/components/HomepageLayoutsLayoutsFaqsLayout'
 import HomepageLayoutsLayoutsFeaturesLayout from '@/components/HomepageLayoutsLayoutsFeaturesLayout'
 import HomepageLayoutsLayoutsHeroLayout from '@/components/HomepageLayoutsLayoutsHeroLayout'
 import HomepageLayoutsLayoutsSupportedFieldTypesLayout from '@/components/HomepageLayoutsLayoutsSupportedFieldTypesLayout'
 import { LayoutFrontPage, LAYOUT_FRONT_PAGE_QUERY } from '@/components/LayoutFrontPage'
+import { useFaustQuery } from '@/lib/getFaustQueryResponse'
 
 const FRONT_PAGE_QUERY = gql`
   query GetFrontPage($uri: String!) {
@@ -38,12 +38,11 @@ const FRONT_PAGE_QUERY = gql`
   ${HomepageLayoutsLayoutsFaqsLayout.fragment}
 `;
 
-export const FrontPage = () => {
-
-  const { frontPage } = useFaustQuery(FRONT_PAGE_QUERY);
+export const FrontPage = (props) => {
+  const { frontPage } = useFaustQuery(FRONT_PAGE_QUERY, props);
 
   return (
-    <LayoutFrontPage>
+    <LayoutFrontPage __FAUST_QUERIES__={props.__FAUST_QUERIES__}>
       {frontPage?.homepageLayouts?.layouts?.map((layout, i) => {
         switch (layout.__typename) {
           case 'HomepageLayoutsLayoutsHeroLayout':

@@ -12,7 +12,6 @@ export function CoreCode(props) {
       ? slugify(attributes.content)
       : attributes.anchor,
   }
-  console.log({attributes, customAttributes});
 
   return (
     <>

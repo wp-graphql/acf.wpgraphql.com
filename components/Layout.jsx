@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { flatListToHierarchical, useFaustQuery } from '@faustwp/core'
+import { flatListToHierarchical } from '@faustwp/core'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
@@ -13,6 +13,7 @@ import { Prose } from '@/components/Prose'
 import { SiteFooter } from '@/components/SiteFooter'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SitewideNotice } from '@/components/SitewideNotice'
+import { useFaustQuery } from '@/lib/getFaustQueryResponse'
 import { collectHeadings } from '@/lib/utils'
 
 export const LAYOUT_QUERY = gql`
@@ -77,8 +78,13 @@ function useTableOfContents(tableOfContents) {
   return currentSection
 }
 
-export function Layout({ node, children, toc, title }) {
-  const { sitewideNotice, primaryMenuItems, footerMenuItems, docsSidebarMenuItems } = useFaustQuery(LAYOUT_QUERY);
+export function Layout(props) {
+  const { node, children, toc, title } = props;
+
+  const response = useFaustQuery(LAYOUT_QUERY, props);
+
+  const { sitewideNotice, primaryMenuItems, footerMenuItems, docsSidebarMenuItems } = response;
+
   let tableOfContents = toc && toc.length ? collectHeadings(toc) : []
 
   const primaryNavigation = primaryMenuItems?.nodes
