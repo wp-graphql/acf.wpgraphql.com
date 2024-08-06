@@ -68,12 +68,14 @@ export function PrimaryNavigation({ navigation }) {
                               target={sublink?.target ?? null}
                             >
                               {/* <Icons.logo className="h-6 w-6" /> */}
-                              <div className="mb-2 mt-4 text-lg font-medium">
-                                {sublink?.label}
-                              </div>
-                              <p className="text-sm leading-tight text-popover-foreground">
-                                {sublink.menuItemMeta?.description}
-                              </p>
+                              <>
+                                <div className="mb-2 mt-4 text-lg font-medium">
+                                  {sublink?.label}
+                                </div>
+                                <p className="text-sm leading-tight text-popover-foreground">
+                                  {sublink.menuItemMeta?.description}
+                                </p>
+                              </>
                             </Link>
                           </NavigationMenuLink>
                         </li>
@@ -117,10 +119,12 @@ const ListItem = React.forwardRef(
             )}
             {...props}
           >
-            <div className="text-sm font-medium leading-none">{title}</div>
-            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-              {children}
-            </p>
+            <>
+              <div className="text-sm font-medium leading-none">{title}</div>
+              <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                {children}
+              </p>
+            </>
           </Link>
         </NavigationMenuLink>
       </li>

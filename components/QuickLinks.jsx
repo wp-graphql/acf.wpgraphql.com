@@ -18,8 +18,10 @@ export function QuickLink({ title, description, href, icon }) {
         <Icon icon={icon} className="size-8" />
         <h2 className="mt-4 font-display text-base text-slate-900 dark:text-white">
           <Link href={href}>
-            <span className="absolute -inset-px rounded-xl" />
-            {title}
+            <>
+              <span className="absolute -inset-px rounded-xl" />
+              {title}
+            </>
           </Link>
         </h2>
         <p className="mt-1 text-sm text-slate-700 dark:text-slate-400">

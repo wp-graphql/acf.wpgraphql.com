@@ -176,7 +176,7 @@ export function Layout({ node, children, toc, title }) {
                       href={previousPage.href}
                       className="text-base font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
                     >
-                      <span aria-hidden="true">&larr;</span> {previousPage.title}
+                      <><span aria-hidden="true">&larr;</span> {previousPage.title}</>
                     </Link>
                   </dd>
                 </div>
@@ -191,7 +191,7 @@ export function Layout({ node, children, toc, title }) {
                       href={nextPage.href}
                       className="text-base font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
                     >
-                      {nextPage.title} <span aria-hidden="true">&rarr;</span>
+                      <>{nextPage.title} <span aria-hidden="true">&rarr;</span></>
                     </Link>
                   </dd>
                 </div>
