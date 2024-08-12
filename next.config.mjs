@@ -1,6 +1,6 @@
 import { withFaust, getWpHostname } from '@faustwp/core';
 import withMarkdoc from '@markdoc/next.js'
-import withSearch from './markdoc/search.mjs'
+import withSearch from './src/markdoc/search.mjs'
 import { withAtlasConfig } from "@wpengine/atlas-next"
 
 const getHeaders = async () => {
@@ -18,11 +18,11 @@ const getHeaders = async () => {
 }
 
 const nextConfig = {
+    swcMinify: true,
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
     experimental: {
         scrollRestoration: true,
     },
-    trailingSlash: true,
     images: {
         domains: [ getWpHostname() ],
     },
@@ -31,7 +31,7 @@ const nextConfig = {
 };
 
 
-export default withAtlasConfig(
+const finalConfig = withAtlasConfig(
     withFaust(
         withSearch(
             withMarkdoc({
@@ -39,3 +39,10 @@ export default withAtlasConfig(
             })( nextConfig )
         )
 ));
+
+// Log the final configuration to debug
+console.log("Final Next.js Configuration:", finalConfig);
+
+
+
+export default finalConfig;

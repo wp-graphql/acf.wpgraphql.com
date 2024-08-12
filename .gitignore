@@ -39,7 +39,7 @@ logs
 
 # faust
 .faust
-globalStylesheet.css
+src/styles/globalStylesheet.css
 possibleTypes.json
 
 ## Build artifacts for sitemaps

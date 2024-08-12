@@ -1,3 +1,4 @@
+import { gql } from '@apollo/client'
 import { CoreBlocks } from '@faustwp/blocks'
 
 import { AcfFieldTypeConfigurationBlock } from './AcfFieldTypeConfigurationBlock'
@@ -5,7 +6,7 @@ import { AcfFieldTypeSettingsBlock } from './AcfFieldTypeSettingsBlock'
 import { AcfGraphqlQuery } from './AcfGraphqlQuery'
 import { CoreCode } from './CoreCode'
 import { CoreHeading } from './CoreHeading'
-import { gql } from '@apollo/client'
+
 
 const blocks = {
   ...CoreBlocks,
@@ -13,9 +14,9 @@ const blocks = {
     ...CoreBlocks.CoreQuote,
     fragments: {
       ...CoreBlocks.CoreQuote.fragments,
-      key: 'CoreQuoteBlockFragment',
+      key: 'CustomCoreQuoteBlockFragment',
       entry: gql`
-      fragment CoreQuoteBlockFragment on CoreQuote {
+      fragment CustomCoreQuoteBlockFragment on CoreQuote {
         attributes {
           textAlign
           anchor

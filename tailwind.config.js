@@ -4,14 +4,14 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 
 const tailwindConfig = {
   content: [
-    './components/**/*.{js,mjs,jsx,mdx,tsx,ts}',
-    './components/*.{js,mjs,jsx,mdx,tsx,ts}',
-    './components/ui/**/*.{js,mjs,jsx,mdx,tsx,ts}',
-    './components/ui/*.{js,mjs,jsx,mdx,tsx,ts}',
-    './pages/**/*.{js,mjs,jsx,mdx,tsx,ts}',
-    './pages/*.{js,mjs,jsx,mdx,tsx,ts}',
-    './wp-templates/**/*.{js,mjs,jsx,mdx,tsx,ts}',
-    './wp-templates/*.{js,mjs,jsx,mdx,tsx,ts}',
+    './src/components/**/*.{js,mjs,jsx,mdx,tsx,ts}',
+    './src/components/*.{js,mjs,jsx,mdx,tsx,ts}',
+    './src/components/ui/**/*.{js,mjs,jsx,mdx,tsx,ts}',
+    './src/components/ui/*.{js,mjs,jsx,mdx,tsx,ts}',
+    './src/pages/**/*.{js,mjs,jsx,mdx,tsx,ts}',
+    './src/pages/*.{js,mjs,jsx,mdx,tsx,ts}',
+    './src/wp-templates/**/*.{js,mjs,jsx,mdx,tsx,ts}',
+    './src/wp-templates/*.{js,mjs,jsx,mdx,tsx,ts}',
   ],
   darkMode: [ 'class', '[data-theme="dark"]'],
   theme: {
