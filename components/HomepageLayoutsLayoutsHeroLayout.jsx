@@ -97,16 +97,29 @@ const HomepageLayoutsLayoutsHeroLayout = (hero) => {
                           style={style}
                         >
                           <code className="px-4">
-                            {tokens.map((line, lineIndex) => (
-                              <div key={lineIndex} {...getLineProps({ line })}>
-                                {line.map((token, tokenIndex) => (
-                                  <span
-                                    key={tokenIndex}
-                                    {...getTokenProps({ token })}
-                                  />
-                                ))}
-                              </div>
-                            ))}
+                            {tokens.map((line, lineIndex) => {
+
+                                const lineProps = getLineProps({ line }) || {};
+                                const linePropsKey = lineProps.key || lineIndex;
+                                delete lineProps.key; // delete key to prevent React warning
+                                return  (
+                                <div {...lineProps} key={linePropsKey}>
+                                  {line.map((token, tokenIndex) => {
+
+                                    const tokenProps = getTokenProps({ token }) || {};
+                                    const tokenPropsKey = tokenProps.key || tokenIndex;
+                                    delete tokenProps.key; // delete key to prevent React warning
+
+                                    return (
+                                      <span
+                                          key={tokenPropsKey}
+                                          {...tokenProps}
+                                      />
+                                    )
+                                  })}
+                                </div>
+                              )}
+                            )}
                           </code>
                         </pre>
                       )}
