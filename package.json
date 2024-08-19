@@ -109,5 +109,9 @@
     "prettier-plugin-tailwindcss": "^0.5.5",
     "typescript": "^5.5.4"
   },
-  "packageManager": "yarn@4.4.0"
+  "packageManager": "yarn@4.4.0",
+  "resolutions": {
+    "@faustwp/cli": "portal:/Users/jason.bahl/Sites/libs/faustjs/packages/faustwp-cli",
+    "@faustwp/core": "portal:/Users/jason.bahl/Sites/libs/faustjs/packages/faustwp-core"
+  }
 }
