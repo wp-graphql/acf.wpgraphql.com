@@ -18,7 +18,7 @@
     "@docsearch/css": "^3.5.2",
     "@docsearch/react": "^3.5.2",
     "@faustwp/blocks": "^4.0.0",
-    "@faustwp/cli": "^3.0.3",
+    "@faustwp/cli": "^3.0.2",
     "@faustwp/core": "^3.0.3",
     "@graphiql/react": "^0.20.2",
     "@graphiql/toolkit": "^0.9.1",
@@ -53,7 +53,7 @@
     "focus-visible": "^5.2.0",
     "framer-motion": "7.8.1",
     "glob": "^11.0.0",
-    "glob-promise": "^6.0.7",
+    "glob-promise": "^8.0.3",
     "graphiql": "^3.0.9",
     "graphql": "^16.6.0",
     "graphql-ws": "^5.14.2",
@@ -109,9 +109,5 @@
     "prettier-plugin-tailwindcss": "^0.5.5",
     "typescript": "^5.5.4"
   },
-  "packageManager": "yarn@4.4.0",
-  "resolutions": {
-    "@faustwp/cli": "portal:/Users/jason.bahl/Sites/libs/faustjs/packages/faustwp-cli",
-    "@faustwp/core": "portal:/Users/jason.bahl/Sites/libs/faustjs/packages/faustwp-core"
-  }
+  "packageManager": "yarn@4.4.0"
 }

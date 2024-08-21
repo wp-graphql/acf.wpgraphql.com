@@ -1,8 +1,9 @@
 import '@/faust.config'
+import React from 'react'
+
 import { WordPressBlocksProvider } from '@faustwp/blocks'
 import { FaustProvider } from '@faustwp/core'
 import Head from 'next/head'
-import React from 'react'
 
 import 'focus-visible'
 import '@/styles/tailwind.css'

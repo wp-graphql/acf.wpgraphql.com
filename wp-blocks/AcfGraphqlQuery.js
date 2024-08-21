@@ -1,7 +1,8 @@
+import React from 'react';
+
 import { gql } from '@apollo/client';
 import { getGraphqlEndpoint } from '@faustwp/core';
 import dynamic from 'next/dynamic';
-import React from 'react';
 
 const MiniGraphiQL = dynamic(
   () => import('@/components/MiniGraphiQL'),

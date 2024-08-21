@@ -1,9 +1,10 @@
-import { DocSearchModal } from "@docsearch/react";
 import clsx from 'clsx'
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+
+import { DocSearchModal } from "@docsearch/react";
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from "next/router";
-import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { SearchIcon } from '@/components/icons/SearchIcon';

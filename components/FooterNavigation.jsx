@@ -1,7 +1,9 @@
-import { gql } from '@apollo/client'
 import clsx from 'clsx'
-import Link from 'next/link'
 import * as React from 'react'
+
+import { gql } from '@apollo/client'
+import Link from 'next/link'
+
 
 import styles from '@/styles/footer-navigation.module.css';
 

@@ -1,7 +1,9 @@
-import { gql } from '@apollo/client';
 import clsx from 'clsx';
-import Link from 'next/link';
 import { useState } from 'react';
+
+import { gql } from '@apollo/client';
+import Link from 'next/link';
+
 
 DocsSidebarNavigation.fragment = gql`
   fragment DocsSidebarNavigationFragment on RootQuery {

@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react'
+
 import { Dialog } from '@headlessui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 
 import { DocsSidebarNavigation } from '@/components/DocsSidebarNavigation'
 import { Logo } from '@/components/Logo'
