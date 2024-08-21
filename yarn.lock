@@ -1827,9 +1827,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@faustwp/cli@portal:/Users/jason.bahl/Sites/libs/faustjs/packages/faustwp-cli::locator=acf.wpgraphql.com%40workspace%3A.":
+"@faustwp/cli@portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-cli::locator=acf.wpgraphql.com%40workspace%3A.":
   version: 0.0.0-use.local
-  resolution: "@faustwp/cli@portal:/Users/jason.bahl/Sites/libs/faustjs/packages/faustwp-cli::locator=acf.wpgraphql.com%40workspace%3A."
+  resolution: "@faustwp/cli@portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-cli::locator=acf.wpgraphql.com%40workspace%3A."
   dependencies:
     archiver: "npm:^6.0.1"
     chalk: "npm:^4.1.2"
@@ -1845,9 +1845,9 @@ __metadata:
   languageName: node
   linkType: soft
 
-"@faustwp/core@portal:/Users/jason.bahl/Sites/libs/faustjs/packages/faustwp-core::locator=acf.wpgraphql.com%40workspace%3A.":
+"@faustwp/core@portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-core::locator=acf.wpgraphql.com%40workspace%3A.":
   version: 0.0.0-use.local
-  resolution: "@faustwp/core@portal:/Users/jason.bahl/Sites/libs/faustjs/packages/faustwp-core::locator=acf.wpgraphql.com%40workspace%3A."
+  resolution: "@faustwp/core@portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-core::locator=acf.wpgraphql.com%40workspace%3A."
   dependencies:
     "@wordpress/hooks": "npm:^3.14.0"
     chalk: "npm:^4.1.2"
@@ -4026,7 +4026,7 @@ __metadata:
     "@docsearch/css": "npm:^3.5.2"
     "@docsearch/react": "npm:^3.5.2"
     "@faustwp/blocks": "npm:^4.0.0"
-    "@faustwp/cli": "npm:^3.0.3"
+    "@faustwp/cli": "npm:^3.0.2"
     "@faustwp/core": "npm:^3.0.3"
     "@graphiql/react": "npm:^0.20.2"
     "@graphiql/toolkit": "npm:^0.9.1"
@@ -4081,6 +4081,7 @@ __metadata:
     graphql: "npm:^16.6.0"
     graphql-ws: "npm:^5.14.2"
     highlight.js: "npm:^11.9.0"
+    husky: "npm:^9.1.5"
     jest: "npm:^29.7.0"
     lucide-react: "npm:^0.216.0"
     mdast-util-to-string: "npm:^3.1.0"
@@ -6993,6 +6994,15 @@ __metadata:
   version: 2.1.0
   resolution: "human-signals@npm:2.1.0"
   checksum: 10c0/695edb3edfcfe9c8b52a76926cd31b36978782062c0ed9b1192b36bebc75c4c87c82e178dfcb0ed0fc27ca59d434198aac0bd0be18f5781ded775604db22304a
+  languageName: node
+  linkType: hard
+
+"husky@npm:^9.1.5":
+  version: 9.1.5
+  resolution: "husky@npm:9.1.5"
+  bin:
+    husky: bin.js
+  checksum: 10c0/f42efb95a026303eb880898760f802d88409780dd72f17781d2dfc302177d4f80b641cf1f1694f53f6d97c536c7397684133d8c8fe4a4426f7460186a7d1c6b8
   languageName: node
   linkType: hard
 
