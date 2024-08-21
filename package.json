@@ -114,8 +114,6 @@
   },
   "packageManager": "yarn@4.4.0",
   "resolutions": {
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
     "@faustwp/core": "portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-core",
     "@faustwp/cli": "portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-cli"
   }
