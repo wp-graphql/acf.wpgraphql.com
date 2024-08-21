@@ -113,8 +113,5 @@
     "typescript": "^5.5.4"
   },
   "packageManager": "yarn@4.4.0",
-  "resolutions": {
-    "@faustwp/cli": "portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-cli",
-    "@faustwp/core": "portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-core"
-  }
+  "resolutions": {}
 }
