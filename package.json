@@ -10,9 +10,7 @@
     "lint:fix": "eslint . --ext js,jsx,ts,tsx --fix",
     "predev": "yarn run generate",
     "prebuild": "yarn run generate",
-    "postbuild": "next-sitemap",
-    "clean-resolutions": "node bin/cleanResolutions.js",
-    "prepare": "husky"
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@algolia/autocomplete-core": "^1.9.2",
@@ -105,16 +103,11 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-tailwindcss": "^3.13.0",
-    "husky": "^9.1.5",
     "jest": "^29.7.0",
     "postcss": "^8.4.41",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.5",
     "typescript": "^5.5.4"
   },
-  "packageManager": "yarn@4.4.0",
-  "resolutions": {
-    "@faustwp/core": "portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-core",
-    "@faustwp/cli": "portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-cli"
-  }
+  "packageManager": "yarn@4.4.0"
 }

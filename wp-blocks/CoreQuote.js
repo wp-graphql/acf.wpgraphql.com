@@ -1,5 +1,5 @@
-import { CoreBlocks } from "@faustwp/blocks";
 import {gql} from "@apollo/client";
+import { CoreBlocks } from "@faustwp/blocks";
 const { CoreQuote: FaustCoreQuote } = CoreBlocks;
 
 export function CoreQuote(props) {

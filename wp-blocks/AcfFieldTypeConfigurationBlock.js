@@ -1,5 +1,6 @@
-import { gql } from '@apollo/client';
 import React, { useState, useEffect } from 'react';
+
+import { gql } from '@apollo/client';
 
 import { Card, CardHeader } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';

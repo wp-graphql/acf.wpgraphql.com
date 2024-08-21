@@ -1827,9 +1827,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@faustwp/cli@portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-cli::locator=acf.wpgraphql.com%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@faustwp/cli@portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-cli::locator=acf.wpgraphql.com%40workspace%3A."
+"@faustwp/cli@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@faustwp/cli@npm:3.0.2"
   dependencies:
     archiver: "npm:^6.0.1"
     chalk: "npm:^4.1.2"
@@ -1842,19 +1842,20 @@ __metadata:
     webpack-cli: "npm:5.1.4"
   bin:
     faust: dist/index.js
+  checksum: 10c0/a0acb970a9d2d6c9816e92f3ace5df86785f1d1230e885f197d3a9b82572017a7badca97d948e09ca9f01841171d4dca92a54dff5512518803bdd84dd6556293
   languageName: node
-  linkType: soft
+  linkType: hard
 
-"@faustwp/core@portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-core::locator=acf.wpgraphql.com%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@faustwp/core@portal:/Users/joefusco/Documents/GitHub/faustjs/packages/faustwp-core::locator=acf.wpgraphql.com%40workspace%3A."
+"@faustwp/core@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "@faustwp/core@npm:3.0.3"
   dependencies:
     "@wordpress/hooks": "npm:^3.14.0"
     chalk: "npm:^4.1.2"
     classnames: "npm:^2.3.2"
     cookie: "npm:^0.5.0"
     deepmerge: "npm:^4.2.2"
-    fast-xml-parser: "npm:^4.4.1"
+    fast-xml-parser: "npm:^4.2.5"
     isomorphic-fetch: "npm:^3.0.0"
     js-cookie: "npm:^3.0.5"
     js-sha256: "npm:^0.9.0"
@@ -1864,8 +1865,9 @@ __metadata:
     next: ">=12.1.6"
     react: ">=17.0.2"
     react-dom: ">=17.0.2"
+  checksum: 10c0/4a1be1c57bded09051048d0ea1e75851d37601d83fd2dd0a13781698b2949dd6f0b67898ecbfd207c7409c16e9709d75848f5bc3ae6edbd09cdd59db1095c3eb
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "@floating-ui/core@npm:^1.6.0":
   version: 1.6.7
@@ -4081,7 +4083,6 @@ __metadata:
     graphql: "npm:^16.6.0"
     graphql-ws: "npm:^5.14.2"
     highlight.js: "npm:^11.9.0"
-    husky: "npm:^9.1.5"
     jest: "npm:^29.7.0"
     lucide-react: "npm:^0.216.0"
     mdast-util-to-string: "npm:^3.1.0"
@@ -6271,7 +6272,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-xml-parser@npm:^4.4.1":
+"fast-xml-parser@npm:^4.2.5":
   version: 4.4.1
   resolution: "fast-xml-parser@npm:4.4.1"
   dependencies:
@@ -6994,15 +6995,6 @@ __metadata:
   version: 2.1.0
   resolution: "human-signals@npm:2.1.0"
   checksum: 10c0/695edb3edfcfe9c8b52a76926cd31b36978782062c0ed9b1192b36bebc75c4c87c82e178dfcb0ed0fc27ca59d434198aac0bd0be18f5781ded775604db22304a
-  languageName: node
-  linkType: hard
-
-"husky@npm:^9.1.5":
-  version: 9.1.5
-  resolution: "husky@npm:9.1.5"
-  bin:
-    husky: bin.js
-  checksum: 10c0/f42efb95a026303eb880898760f802d88409780dd72f17781d2dfc302177d4f80b641cf1f1694f53f6d97c536c7397684133d8c8fe4a4426f7460186a7d1c6b8
   languageName: node
   linkType: hard
 
@@ -10112,15 +10104,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:18.2.0":
-  version: 18.2.0
-  resolution: "react-dom@npm:18.2.0"
+"react-dom@npm:^18.2.0":
+  version: 18.3.1
+  resolution: "react-dom@npm:18.3.1"
   dependencies:
     loose-envify: "npm:^1.1.0"
-    scheduler: "npm:^0.23.0"
+    scheduler: "npm:^0.23.2"
   peerDependencies:
-    react: ^18.2.0
-  checksum: 10c0/66dfc5f93e13d0674e78ef41f92ed21dfb80f9c4ac4ac25a4b51046d41d4d2186abc915b897f69d3d0ebbffe6184e7c5876f2af26bfa956f179225d921be713a
+    react: ^18.3.1
+  checksum: 10c0/a752496c1941f958f2e8ac56239172296fcddce1365ce45222d04a1947e0cc5547df3e8447f855a81d6d39f008d7c32eab43db3712077f09e3f67c4874973e85
   languageName: node
   linkType: hard
 
@@ -10203,12 +10195,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.2.0":
-  version: 18.2.0
-  resolution: "react@npm:18.2.0"
+"react@npm:^18.2.0":
+  version: 18.3.1
+  resolution: "react@npm:18.3.1"
   dependencies:
     loose-envify: "npm:^1.1.0"
-  checksum: 10c0/b562d9b569b0cb315e44b48099f7712283d93df36b19a39a67c254c6686479d3980b7f013dc931f4a5a3ae7645eae6386b4aa5eea933baa54ecd0f9acb0902b8
+  checksum: 10c0/283e8c5efcf37802c9d1ce767f302dd569dd97a70d9bb8c7be79a789b9902451e0d16334b05d73299b20f048cbc3c7d288bbbde10b701fa194e2089c237dbea3
   languageName: node
   linkType: hard
 
@@ -10586,7 +10578,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.23.0":
+"scheduler@npm:^0.23.2":
   version: 0.23.2
   resolution: "scheduler@npm:0.23.2"
   dependencies:

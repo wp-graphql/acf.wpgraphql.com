@@ -1,8 +1,10 @@
+import clsx from 'clsx'
+import { useCallback, useEffect, useState } from 'react'
+
 import { gql } from '@apollo/client'
 import { flatListToHierarchical, useFaustQuery } from '@faustwp/core'
-import clsx from 'clsx'
 import Link from 'next/link'
-import { useCallback, useEffect, useState } from 'react'
+
 
 import EditPost from './EditPost'
 

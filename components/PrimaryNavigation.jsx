@@ -1,6 +1,7 @@
+import * as React from 'react'
+
 import { gql } from '@apollo/client'
 import Link from 'next/link'
-import * as React from 'react'
 
 import {
   NavigationMenu,

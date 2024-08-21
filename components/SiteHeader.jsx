@@ -1,6 +1,7 @@
 import clsx from 'clsx'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
+
+import Link from 'next/link'
 
 import { GitHubIcon } from '@/components/icons/GitHubIcon'
 import { WordPressIcon } from '@/components/icons/WordPressIcon'
