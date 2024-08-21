@@ -1827,9 +1827,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@faustwp/cli@portal:/Users/jason.bahl/Sites/libs/faustjs/packages/faustwp-cli::locator=acf.wpgraphql.com%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@faustwp/cli@portal:/Users/jason.bahl/Sites/libs/faustjs/packages/faustwp-cli::locator=acf.wpgraphql.com%40workspace%3A."
+"@faustwp/cli@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@faustwp/cli@npm:3.0.2"
   dependencies:
     archiver: "npm:^6.0.1"
     chalk: "npm:^4.1.2"
@@ -1842,19 +1842,20 @@ __metadata:
     webpack-cli: "npm:5.1.4"
   bin:
     faust: dist/index.js
+  checksum: 10c0/a0acb970a9d2d6c9816e92f3ace5df86785f1d1230e885f197d3a9b82572017a7badca97d948e09ca9f01841171d4dca92a54dff5512518803bdd84dd6556293
   languageName: node
-  linkType: soft
+  linkType: hard
 
-"@faustwp/core@portal:/Users/jason.bahl/Sites/libs/faustjs/packages/faustwp-core::locator=acf.wpgraphql.com%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@faustwp/core@portal:/Users/jason.bahl/Sites/libs/faustjs/packages/faustwp-core::locator=acf.wpgraphql.com%40workspace%3A."
+"@faustwp/core@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "@faustwp/core@npm:3.0.3"
   dependencies:
     "@wordpress/hooks": "npm:^3.14.0"
     chalk: "npm:^4.1.2"
     classnames: "npm:^2.3.2"
     cookie: "npm:^0.5.0"
     deepmerge: "npm:^4.2.2"
-    fast-xml-parser: "npm:^4.4.1"
+    fast-xml-parser: "npm:^4.2.5"
     isomorphic-fetch: "npm:^3.0.0"
     js-cookie: "npm:^3.0.5"
     js-sha256: "npm:^0.9.0"
@@ -1864,8 +1865,9 @@ __metadata:
     next: ">=12.1.6"
     react: ">=17.0.2"
     react-dom: ">=17.0.2"
+  checksum: 10c0/4a1be1c57bded09051048d0ea1e75851d37601d83fd2dd0a13781698b2949dd6f0b67898ecbfd207c7409c16e9709d75848f5bc3ae6edbd09cdd59db1095c3eb
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "@floating-ui/core@npm:^1.6.0":
   version: 1.6.7
@@ -4026,7 +4028,7 @@ __metadata:
     "@docsearch/css": "npm:^3.5.2"
     "@docsearch/react": "npm:^3.5.2"
     "@faustwp/blocks": "npm:^4.0.0"
-    "@faustwp/cli": "npm:^3.0.3"
+    "@faustwp/cli": "npm:^3.0.2"
     "@faustwp/core": "npm:^3.0.3"
     "@graphiql/react": "npm:^0.20.2"
     "@graphiql/toolkit": "npm:^0.9.1"
@@ -6270,7 +6272,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-xml-parser@npm:^4.4.1":
+"fast-xml-parser@npm:^4.2.5":
   version: 4.4.1
   resolution: "fast-xml-parser@npm:4.4.1"
   dependencies:
