@@ -117,7 +117,7 @@ export const SingleFieldType = () => {
         <title>{`${title} - WPGraphQL for ACF`}</title>
       </Head>
       <Layout node={node} toc={toc}>
-        <EditPost post={node}><h1>{title}</h1></EditPost>
+        <h1><EditPost post={node}>{title}</EditPost></h1>
         {node?.aCFFieldTypeCategories && node?.aCFFieldTypeCategories?.nodes && (
           <div id="field-type-categories" className="my-2">
             {node.aCFFieldTypeCategories.nodes.map((fieldTypeCategory) => (
