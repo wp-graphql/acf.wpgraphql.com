@@ -12,5 +12,5 @@ export default setConfig({
   experimentalPlugins: [],
   usePersistedQueries: true,
   possibleTypes,
-  experimentalToolbar: true,
+  experimentalToolbar: false,
 })
