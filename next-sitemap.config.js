@@ -23,4 +23,4 @@ const nextSitemapConfig = {
     },
 };
 
-export default nextSitemapConfig;
+module.exports = nextSitemapConfig;
