@@ -1,3 +1,4 @@
+
 import { gql } from '@apollo/client';
 import { getGraphqlEndpoint } from '@faustwp/core';
 import dynamic from 'next/dynamic';

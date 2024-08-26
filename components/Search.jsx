@@ -1,3 +1,4 @@
+
 import { DocSearchModal } from "@docsearch/react";
 import clsx from 'clsx'
 import Head from 'next/head'
@@ -100,7 +101,10 @@ function Hit({ hit, children }) {
 export function Search({ ...props }) {
   let [modifierKey, setModifierKey] = useState()
   let searchButtonRef = useRef()
-  let { onOpen, onInput } = useContext(SearchContext)
+  let searchContext = useContext(SearchContext)
+
+  const onOpen = searchContext.onOpen || (() => {})
+  const onInput = searchContext.onInput || (() => {})
 
   useEffect(() => {
     function onKeyDown(event) {

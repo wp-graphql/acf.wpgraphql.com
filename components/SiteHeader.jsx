@@ -2,12 +2,12 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
+
 import { GitHubIcon } from '@/components/icons/GitHubIcon'
 import { WordPressIcon } from '@/components/icons/WordPressIcon'
 import { Logo } from '@/components/Logo'
 import { MobileNavigation } from '@/components/MobileNavigation'
 import { PrimaryNavigation } from '@/components/PrimaryNavigation'
-import { Search } from '@/components/Search'
 import { ModeToggle } from '@/components/ThemeSelector'
 
 export function SiteHeader({ navigation, isNoticeVisible = false }) {
@@ -49,7 +49,7 @@ export function SiteHeader({ navigation, isNoticeVisible = false }) {
         </div>
       </div>
       <div className="-my-5 mr-6 sm:mr-8 md:mr-0">
-        <Search />
+        {/*<Search />*/}
       </div>
       <div className="relative flex basis-0 justify-end gap-4 sm:gap-8 md:grow">
         <ModeToggle className="relative z-10" />

@@ -1,4 +1,5 @@
 import '@/faust.config'
+
 import { WordPressBlocksProvider } from '@faustwp/blocks'
 import { FaustProvider } from '@faustwp/core'
 import Head from 'next/head'

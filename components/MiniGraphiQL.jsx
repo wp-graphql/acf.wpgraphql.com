@@ -3,6 +3,7 @@ import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
+
 const MiniGraphiQLClient = ({ initialQuery, initialVariables, endpoint, readOnly }) => {
   const [GraphiQL, setGraphiQL] = useState(null);
   const { theme, resolvedTheme } = useTheme();

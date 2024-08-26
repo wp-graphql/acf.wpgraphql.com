@@ -1,5 +1,6 @@
 import { CoreBlocks } from '@faustwp/blocks'
 import slugify from '@sindresorhus/slugify'
+
 const { CoreHeading: FaustCoreHeading } = CoreBlocks
 
 export function CoreHeading(props) {

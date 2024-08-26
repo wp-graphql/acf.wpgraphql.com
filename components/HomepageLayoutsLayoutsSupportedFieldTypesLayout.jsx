@@ -1,9 +1,11 @@
+
 import { gql } from '@apollo/client'
 import clsx from 'clsx'
 import { useInView } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useMemo, useRef, useState } from 'react'
+
 
 import { Container } from '@/components/Container'
 
