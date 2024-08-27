@@ -8,6 +8,8 @@ import { snakeToPascalCase } from '@/lib/snakeToPascalCase';
 import { stringToHash } from '@/lib/stringToHash';
 
 function generateData(uniqueId, acfFieldType) {
+  if (!uniqueId || !acfFieldType) return {}; // Defensive check
+
   return {
     key: `my_field_group_${uniqueId}`,
     title: `My Field Group with ${acfFieldType}`,
@@ -32,6 +34,8 @@ function generateData(uniqueId, acfFieldType) {
 }
 
 function generatePHPTabContent(data) {
+  if (!data || Object.keys(data).length === 0) return ''; // Defensive check
+
   const phpString = `<?php
 add_action( 'acf/include_fields', function() {
   if ( ! function_exists( 'acf_add_local_field_group' ) ) {
@@ -47,34 +51,41 @@ add_action( 'acf/include_fields', function() {
 }
 
 function generateJSONTabContent(data) {
+  if (!data || Object.keys(data).length === 0) return ''; // Defensive check
+
   const jsonString = JSON.stringify(data, null, 2);
   return HighlightCode(jsonString, "json", [4, 5, 6, 7, 8, 9, 16, 17]);
 }
 
 function TabContent({ fieldTypeConfigurationBlockFields, uniqueId, format }) {
-  const { acfFieldType } = fieldTypeConfigurationBlockFields;
-  
+  const acfFieldType = fieldTypeConfigurationBlockFields?.acfFieldType; // Defensive check
+
+  if (!acfFieldType || !uniqueId) return null; // Defensive check
+
   const data = generateData(uniqueId, acfFieldType);
 
   return format === 'php' ? generatePHPTabContent(data) : generateJSONTabContent(data);
 }
 
 export function AcfFieldTypeConfigurationBlock({ fieldTypeConfigurationBlockFields }) {
-  const { acfFieldType } = fieldTypeConfigurationBlockFields;
+  const acfFieldType = fieldTypeConfigurationBlockFields?.acfFieldType; // Defensive check
   const [uniqueId, setUniqueId] = useState('');
+
   useEffect(() => {
-    setUniqueId(stringToHash(acfFieldType));
+    if (acfFieldType) {
+      setUniqueId(stringToHash(acfFieldType));
+    }
   }, [acfFieldType]);
-  
-  if ( ! acfFieldType ) {
+
+  if (!acfFieldType) {
     return (
-      <Card>
-        <CardHeader className="grid grid-cols-[1fr_110px] items-start space-y-2">
-          Field Type Config has not been configured for this field type
-        </CardHeader>
-      </Card>
+        <Card>
+          <CardHeader className="grid grid-cols-[1fr_110px] items-start space-y-2">
+            Field Type Config has not been configured for this field type
+          </CardHeader>
+        </Card>
     );
-  };
+  }
 
   const tabData = [
     { key: 'php', name: 'PHP' },
@@ -82,24 +93,24 @@ export function AcfFieldTypeConfigurationBlock({ fieldTypeConfigurationBlockFiel
   ];
 
   return (
-    <Card>
-      <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0 overflow-x-auto">
-        <Tabs defaultValue={tabData[0].key}>
-          <TabsList aria-label="Dynamic Tabs">
+      <Card>
+        <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0 overflow-x-auto">
+          <Tabs defaultValue={tabData[0].key}>
+            <TabsList aria-label="Dynamic Tabs">
+              {tabData.map(tab => (
+                  <TabsTrigger key={tab.key} value={tab.key}>
+                    {tab.name}
+                  </TabsTrigger>
+              ))}
+            </TabsList>
             {tabData.map(tab => (
-              <TabsTrigger key={tab.key} value={tab.key}>
-                {tab.name}
-              </TabsTrigger>
+                <TabsContent key={tab.key} value={tab.key}>
+                  <TabContent fieldTypeConfigurationBlockFields={fieldTypeConfigurationBlockFields} uniqueId={uniqueId} format={tab.key} />
+                </TabsContent>
             ))}
-          </TabsList>
-          {tabData.map(tab => (
-            <TabsContent key={tab.key} value={tab.key}>
-              <TabContent fieldTypeConfigurationBlockFields={fieldTypeConfigurationBlockFields} uniqueId={uniqueId} format={tab.key} />
-            </TabsContent>
-          ))}
-        </Tabs>
-      </CardHeader>
-    </Card>
+          </Tabs>
+        </CardHeader>
+      </Card>
   );
 }
 

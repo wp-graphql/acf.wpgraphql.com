@@ -40,7 +40,13 @@ const FRONT_PAGE_QUERY = gql`
 
 export const FrontPage = () => {
 
-  const { frontPage } = useFaustQuery(FRONT_PAGE_QUERY);
+  const faustData = useFaustQuery(FRONT_PAGE_QUERY)
+
+  if (!faustData?.frontPage) {
+    return null
+  }
+
+  const frontPage = faustData.frontPage;
 
   return (
     <LayoutFrontPage>

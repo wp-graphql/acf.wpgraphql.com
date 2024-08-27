@@ -59,11 +59,14 @@ ${blocks.CoreHeading.fragments.entry}
 `
 
 export const IndexTemplate = () => {
-  const { node } = useFaustQuery(INDEX_TEMPLATE_QUERY)
+  const faustData = useFaustQuery(INDEX_TEMPLATE_QUERY)
+  const layoutData = useFaustQuery(LAYOUT_QUERY);
 
-  if (!node) {
+  if (!faustData?.node || !layoutData) {
     return null
   }
+
+  const node = faustData?.node;
 
   const { editorBlocks } = node
 
@@ -108,6 +111,7 @@ export const IndexTemplate = () => {
         title={node?.title ? node.title : 'WPGraphQL for ACF'}
         toc={toc}
         node={node}
+        {...layoutData}
       >
         {node?.modified && (
           <div id="last-updated" className="text-sm text-gray-500">

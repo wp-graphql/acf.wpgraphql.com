@@ -27,13 +27,18 @@ const ARCHIVE_QUERY = gql`
 `
 
 export const Archive = () => {
-  const { node } = useFaustQuery(ARCHIVE_QUERY);
-  const {
-    docsSidebarMenuItems,
-    footerMenuItems,
-    primaryMenuItems,
-    sitewideNotice
-  } = useFaustQuery(LAYOUT_ARCHIVE_QUERY);
+  const archiveData = useFaustQuery(ARCHIVE_QUERY);
+  const arciveLayoutData = useFaustQuery(LAYOUT_ARCHIVE_QUERY);
+
+  if ( !archiveData?.node ) {
+    return null
+  }
+
+  if ( ! arciveLayoutData ) {
+    return null
+  }
+
+  const { node } = archiveData;
 
   return (
     <>
@@ -44,10 +49,7 @@ export const Archive = () => {
         title={node?.name ? node.name : 'Archive'}
         data={{
           node,
-          docsSidebarMenuItems,
-          footerMenuItems,
-          primaryMenuItems,
-          sitewideNotice
+          ...arciveLayoutData
         }}
       >
         {/* <pre>{JSON.stringify(props, null, 2)}</pre> */}

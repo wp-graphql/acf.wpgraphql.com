@@ -39,17 +39,18 @@ export const GET_POST_QUERY = gql`
 `;
 
 export const ArchiveFieldType = () => {
-  const { node } = useFaustQuery(GET_POST_QUERY);
-  const {
-    docsSidebarMenuItems,
-    footerMenuItems,
-    primaryMenuItems,
-    sitewideNotice
-  } = useFaustQuery(LAYOUT_ARCHIVE_QUERY);
+  const postData = useFaustQuery(GET_POST_QUERY);
+  const layoutData = useFaustQuery(LAYOUT_ARCHIVE_QUERY);
 
-  if (!node) {
+  if (!postData?.node) {
     return null
   }
+
+  if (!layoutData) {
+    return null
+  }
+
+  const { node } = postData;
 
   return (
     <>
@@ -60,10 +61,7 @@ export const ArchiveFieldType = () => {
         title={node?.label ? node.label : 'WPGraphQL for ACF'}
         data={{
           node,
-          docsSidebarMenuItems,
-          footerMenuItems,
-          primaryMenuItems,
-          sitewideNotice
+          ...layoutData
         }}
       >
         <FieldTypesList data={{ node }} />
