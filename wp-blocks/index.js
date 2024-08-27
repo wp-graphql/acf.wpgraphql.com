@@ -5,7 +5,7 @@ import { AcfFieldTypeSettingsBlock } from './AcfFieldTypeSettingsBlock'
 import { AcfGraphqlQuery } from './AcfGraphqlQuery'
 import { CoreCode } from './CoreCode'
 import { CoreHeading } from './CoreHeading'
-import { CoreQuote } from './CoreQuote'
+import { CoreQuote } from './CoreQuote.js'
 
 const blocks = {
   ...CoreBlocks,

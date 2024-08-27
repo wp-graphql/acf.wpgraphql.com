@@ -78,11 +78,18 @@ ${blocks.CoreHeading.fragments.entry}
 `
 
 export const SingleFieldType = () => {
-  const { node } = useFaustQuery(SINGLE_ACF_FIELD_TYPE_QUERY)
 
-  if (!node) {
+  const acfFieldData = useFaustQuery(SINGLE_ACF_FIELD_TYPE_QUERY)
+  const layoutData = useFaustQuery(LAYOUT_QUERY);
+  if (!acfFieldData?.node) {
     return null
   }
+
+  if (!layoutData) {
+    return null
+  }
+
+  const { node } = acfFieldData;
 
   const { title, editorBlocks } = node
   let toc = []
@@ -111,13 +118,21 @@ export const SingleFieldType = () => {
     childrenKey: 'innerBlocks',
   })
 
+  console.log(  {
+    blockList
+  })
+
   return (
     <>
       <Head>
         <title>{`${title} - WPGraphQL for ACF`}</title>
       </Head>
-      <Layout node={node} toc={toc}>
-        <h1><EditPost post={node}>{title}</EditPost></h1>
+      <Layout
+          node={node}
+          toc={toc}
+          {...layoutData}
+      >
+        <EditPost post={node}><h1>{title}</h1></EditPost>
         {node?.aCFFieldTypeCategories && node?.aCFFieldTypeCategories?.nodes && (
           <div id="field-type-categories" className="my-2">
             {node.aCFFieldTypeCategories.nodes.map((fieldTypeCategory) => (

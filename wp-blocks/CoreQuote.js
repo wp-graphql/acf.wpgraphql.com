@@ -3,7 +3,7 @@ import { CoreBlocks } from "@faustwp/blocks";
 const { CoreQuote: FaustCoreQuote } = CoreBlocks;
 
 export function CoreQuote(props) {
-  return <FaustCoreQuote {...props} />;
+    return <FaustCoreQuote {...props} />;
 }
 
 CoreQuote.displayName = { ...FaustCoreQuote.displayName };
