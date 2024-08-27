@@ -10,7 +10,7 @@
     "lint": "eslint . --ext js,jsx,ts,tsx",
     "lint:fix": "eslint . --ext js,jsx,ts,tsx --fix",
     "predev": "npm run generate",
-    "prebuild": "npm run generate",
+    "prebuild": "npm run generate && rm -rf public/sitemap* public/robots.txt",
     "postbuild": "next-sitemap"
   },
   "dependencies": {
